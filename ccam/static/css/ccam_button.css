@@ -1,0 +1,9 @@
+.ccam-button {
+    border: none;
+    background-color: var(--element-dark);
+    display: flex;
+    width: 15.625rem;
+    border-radius: 8px;
+    padding: 0.625rem 0;
+    justify-content: center;
+}

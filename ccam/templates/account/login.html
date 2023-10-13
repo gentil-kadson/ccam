@@ -1,14 +1,26 @@
 {% extends "account/base.html" %}
 
 {% load i18n %}
+{% load static %}
 {% load account socialaccount %}
 {% load crispy_forms_tags %}
 
 {% block head_title %}
-  {% translate "Sign In" %}
+  {% translate "Entrar" %}
 {% endblock head_title %}
 {% block inner %}
-  <h1>{% translate "Sign In" %}</h1>
+  <header id="login-form-header">
+    <img src="{% static 'images/icons/logoNav.svg' %}"
+         alt="CCAM Logo"
+         width="391" />
+    <p>
+      Protocolar <span>Certificação de Conhecimentos</span> e <span>Aprovetiamento de Disciplinas do IFRN</span>
+    </p>
+  </header>
+  <img src="{% static 'images/icons/FilingSystem.svg' %}"
+       alt="Woman browsing through files in a folder"
+       id="filing-system-img"
+       width="559" />
   {% get_providers as socialaccount_providers %}
   {% if socialaccount_providers %}
     <p>
@@ -37,16 +49,43 @@
       </p>
     {% endif %}
   {% endif %}
-  <form class="login" method="post" action="{% url 'account_login' %}">
+  <form class="login"
+        method="post"
+        action="{% url 'account_login' %}"
+        id="login-form">
     {% csrf_token %}
-    {{ form|crispy }}
+    <div class="ccam-input">
+      <label for="registration">
+        Matrícula
+        <img src="{% static 'images/icons/info.svg' %}"
+             class="green-svg"
+             alt="Letter 'i' in a circumference" />
+      </label>
+      <input type="text"
+             name="login"
+             id="registration"
+             placeholder="20221094040009" />
+    </div>
+    <div class="ccam-input">
+      <label for="password">
+        Senha
+        <img src="{% static 'images/icons/info.svg' %}"
+             class="green-svg"
+             alt="Letter 'i' in a circumference" />
+      </label>
+      <input type="password"
+             name="password"
+             id="password"
+             placeholder="****************" />
+    </div>
     {% if redirect_field_value %}
       <input type="hidden"
              name="{{ redirect_field_name }}"
              value="{{ redirect_field_value }}" />
     {% endif %}
-    <a class="button secondaryAction"
-       href="{% url 'account_reset_password' %}">{% translate "Forgot Password?" %}</a>
-    <button class="primaryAction btn btn-primary" type="submit">{% translate "Sign In" %}</button>
+    <button class="ccam-button" type="submit">
+      Entrar
+      <img class="green-svg" src="{% static 'images/icons/login.svg' %}" alt="" />
+    </button>
   </form>
 {% endblock inner %}
