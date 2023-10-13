@@ -1,0 +1,31 @@
+.ccam-input {
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+}
+
+.ccam-input > label {
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--green);
+}
+
+.ccam-input > input:placeholder-shown {
+    color: var(--placeholder-text-color);
+}
+
+.ccam-input > input {
+    display: flex;
+    align-items: center;
+    background-color: var(--element-dark);
+    font-size: 1.5rem;
+    padding: 0.5rem 1.625rem;
+    width: 24.4375rem;
+    border-radius: 0.5rem;
+    border: none;
+}
+
+.ccam-input > input:focus {
+    outline: solid 2px var(--green);
+}

@@ -7,10 +7,8 @@
 {% block header %}
 {% endblock header %}
 {% block content %}
-  <div class="row">
-    <div class="col-md-6 offset-md-3">
-      {% block inner %}
-      {% endblock inner %}
-    </div>
-  </div>
+  <main id="container" class="centered-content">
+    {% block inner %}
+    {% endblock inner %}
+  </main>
 {% endblock content %}
