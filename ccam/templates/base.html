@@ -47,7 +47,9 @@
     {% endblock javascript %}
   </head>
   <body>
-    {% include '_header.html' %}
+    {% block header %}
+      {% include '_header.html' %}
+    {% endblock header %}
     <main id="container">
       {% if messages %}
         {% for message in messages %}
