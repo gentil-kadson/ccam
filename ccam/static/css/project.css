@@ -36,9 +36,22 @@ address, ul {
   margin-bottom: 0;
 }
 
-main#container {
+html, body {
+  height: 100%;
+}
+
+body {
   background-color: var(--bg-color);
-  max-width: 1240px;
+  display: flex;
+  flex-direction: column;
+}
+
+main#container {
+  width: 100%;
+  padding: 0 6.25rem;
+  flex-grow: 1;
+  margin: auto;
+  background-color: var(--bg-color);
 }
 
 #main-footer {
