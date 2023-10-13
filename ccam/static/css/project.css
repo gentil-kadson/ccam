@@ -1,4 +1,24 @@
 /* These styles are generated from project.scss. */
+:root {
+  --bg-color: #202020;
+  --green: #0BDA51;
+  --white: #FFF;
+  --red : #EE4B2B;
+  --element-dark: #353935;
+  --black-border: #000000;
+  --palceholder-text-color: #B5B5B5;
+  --table-cell-colour: #28282B;
+  --status-analysis: #E8D848;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  color: var(--white);
+  font-family: 'Inter', sans-serif;
+  box-sizing: border-box;
+}
+
 
 .alert-debug {
   color: black;
@@ -10,4 +30,62 @@
   color: #b94a48;
   background-color: #f2dede;
   border-color: #eed3d7;
+}
+
+address, ul {
+  margin-bottom: 0;
+}
+
+#main-footer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: var(--element-dark);
+  /* border: solid 2px var(--black-border); */
+}
+
+#ifrn-contact {
+  display: flex;
+  align-items: center;
+  /* border: solid 2px white; */
+}
+
+#ifrn-contact > ul {
+  list-style: none;
+  font-weight: 500;
+}
+
+#ifrn-contact > ul > li > span {
+  color: var(--green);
+  font-weight: bold;
+}
+
+#devs-contact {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 13px;
+  padding: 24px 0;
+  /* border: solid 2px purple; */
+}
+
+#devs-contact > p:first-child {
+  font-size: 1.25rem;
+}
+
+#devs-contact > p:not(p:first-child) {
+  font-size: 10px;
+}
+
+#devs-contact > p:first-child {
+  font-weight: bold;
+}
+
+#devs-contact > p:first-child > img {
+  padding-right: 12px;
+}
+
+#devs-contact > p:not(p:first-child) > img {
+  padding-right: 3px;
+  filter: invert(99%) sepia(100%) saturate(0%) hue-rotate(286deg) brightness(111%) contrast(100%);
 }
