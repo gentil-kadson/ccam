@@ -1,0 +1,8 @@
+{% load static %}
+
+<a class="ccam-button anchor-button d-flex justify-content-center">
+  {{ anchor_text }}
+  <img class="{{ color_class }} px-2"
+       src="{% static icon_path %}"
+       alt="{{ alt_text }}" />
+</a>

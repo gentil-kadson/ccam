@@ -49,9 +49,9 @@ body {
 main#container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   width: 100%;
-  padding: 0 6.25rem;
+  padding: 0 6.25rem 6.25rem;
   flex-grow: 1;
   background-color: var(--bg-color);
 }
@@ -66,4 +66,8 @@ main#container {
 
 .green-svg {
   filter: invert(51%) sepia(100%) saturate(602%) hue-rotate(93deg) brightness(104%) contrast(91%);
+}
+
+.green-text {
+  color: var(--green);
 }
