@@ -1,0 +1,8 @@
+{% load static %}
+
+<button class="ccam-button" type="submit">
+  {{ button_text }}
+  <img class="{{ color_class }}"
+       src="{% static icon_path %}"
+       alt="{{ alt_text }}" />
+</button>

@@ -93,7 +93,8 @@ LOCAL_APPS = [
     "ccam.users",
     "ccam.people",
     "ccam.academics",
-    "ccam.core"
+    "ccam.core",
+    "ccam.people.students",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

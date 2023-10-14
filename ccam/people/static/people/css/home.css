@@ -1,0 +1,17 @@
+.home-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-card h2 {
+    font-size: 20px;
+}
+
+#home-nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 97px;
+}
