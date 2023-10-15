@@ -15,7 +15,7 @@
     color: var(--placeholder-text-color);
 }
 
-.ccam-input > input {
+.ccam-input > input, .ccam-input > select {
     display: flex;
     align-items: center;
     background-color: var(--element-dark);
