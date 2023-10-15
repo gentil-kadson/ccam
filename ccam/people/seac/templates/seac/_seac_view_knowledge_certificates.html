@@ -1,0 +1,31 @@
+{% load static %}
+
+<main class="view-table-section">
+  <div class="header-with-icon">
+    <img src="{% static 'people/images/icons/filter.svg' %}"
+         alt="A classic, green filter icon"
+         width="35"
+         height="35"
+         class="green-svg" />
+    <h2>Filtros</h2>
+  </div>
+  <section class="filter-section">
+    <div class="fields-container">
+      <div class="ccam-input">
+        <label for="student-id">Matrícula</label>
+        <input type="text" name="student-id" id="student-id" />
+      </div>
+      <div class="ccam-input">
+        <label for="request-submission-date">Data de Submissão</label>
+        <input type="date"
+               name="request-submission-date"
+               id="request-submission-date" />
+      </div>
+      <div class="ccam-input">
+        <label for="student-name">Nome do aluno</label>
+        <input type="text" name="student-name" id="student-name" />
+      </div>
+    </div>
+    {% include 'core/_button.html' with button_text="Filtrar" color_class="green-svg" icon_path='people/images/icons/filter.svg' alt_text="A classic green filter object" %}
+  </section>
+</main>
