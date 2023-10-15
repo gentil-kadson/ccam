@@ -2,16 +2,6 @@
     width: 100%;
 }
 
-.header-with-icon {
-    display: flex;
-    align-items: center;
-}
-
-.header-with-icon > h2 {
-    font-weight: bold;
-    font-size: 24px;
-}
-
 .filter-section {
     margin-top: 1.25rem;
     display: flex;
