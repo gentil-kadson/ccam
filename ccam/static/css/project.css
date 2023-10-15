@@ -9,6 +9,7 @@
   --palceholder-text-color: #B5B5B5;
   --table-cell-colour: #28282B;
   --status-analysis: #E8D848;
+  --green-svg: invert(51%) sepia(100%) saturate(602%) hue-rotate(93deg) brightness(104%) contrast(91%);
 }
 
 * {
@@ -49,7 +50,6 @@ body {
 main#container {
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   width: 100%;
   padding: 0 6.25rem 6.25rem;
   flex-grow: 1;
@@ -65,7 +65,7 @@ main#container {
 }
 
 .green-svg {
-  filter: invert(51%) sepia(100%) saturate(602%) hue-rotate(93deg) brightness(104%) contrast(91%);
+  filter: var(--green-svg);
 }
 
 .green-text {

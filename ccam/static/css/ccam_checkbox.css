@@ -1,0 +1,23 @@
+.ccam-checkbox {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1rem;
+    gap: 0.625rem;
+}
+
+.ccam-checkbox > input {
+    appearance: none;
+    cursor: pointer;
+    width: 2rem;
+    height: 2rem;
+    content: url("../images/icons/checkboxOutline.svg");
+    filter: var(--green-svg);
+}
+
+.ccam-checkbox > input:checked {
+    width: 2rem;
+    height: 2rem;
+    filter: var(--green-svg);
+    content: url("../images/icons/checkboxTicked.svg");
+}
