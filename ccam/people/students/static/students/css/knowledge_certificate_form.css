@@ -1,0 +1,10 @@
+#knowledge-certificate-form {
+    display: flex;
+    justify-content: space-between;
+    /* border: solid 2px green; */
+    height: 100%;
+}
+
+#student-data {
+    gap: 20px;
+}

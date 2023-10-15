@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+  <main id="container">
+    <h1 class="green-text fw-bold">Certificação de Conhecimentos</h1>
+    <header class="d-flex justify-content-between">
+      <h2 class="d-inline">
+        <img src="{% static 'people/images/icons/database.svg' %}"
+             alt="Disks stacked on top of each other"
+             class="green-svg"
+             width="35"
+             height="35" />
+        Preencha os dados:
+      </h2>
+      <h2 class="d-inline">
+        <img src="{% static 'students/images/icons/book.svg' %}"
+             alt="A book"
+             class="green-svg"
+             width="35"
+             height="35" />
+        Escolha as disciplinas:
+      </h2>
+    </header>
+    <form method="post" id="knowledge-certificate-form">
+      <fieldset id="student-data" class="d-flex flex-wrap align-items-center">
+        <div class="ccam-input">
+          <label for="registration">Matrícula</label>
+          <input type="text"
+                 name="registration"
+                 id="registration"
+                 placeholder="20221094040009" />
+        </div>
+        <div class="ccam-input">
+          <label for="name">Nome</label>
+          <input type="text" name="name" id="name" placeholder="Donkus" />
+        </div>
+        <div class="ccam-input">
+          <label for="phone">Fone</label>
+          <input type="text" name="phone" id="phone" placeholder="(84) 98172-3452" />
+        </div>
+        <div class="ccam-input">
+          <label for="course">Curso</label>
+          <select name="course" id="course">
+            <option value="------">------</option>
+                                        </select>
+                                </div>
+                                <div class="ccam-input">
+                                    <label for="school_term">Período Letivo</label>
+                              <select name="school_term" id="school_term">
+      <option value="------">------</option>
+    </select>
+  </div>
+  <div class="ccam-input">
+    <label for="email">Email</label>
+    <input type="email"
+           name="email"
+           id="email"
+           placeholder="jkl1231918@gmail.com" />
+  </div>
+</fieldset>
+<fieldset>
+  <input type="checkbox" name="courses" id="courses" />
+  <input type="checkbox" name="courses" id="courses" />
+  <input type="checkbox" name="courses" id="courses" />
+  <input type="checkbox" name="courses" id="courses" />
+  <input type="checkbox" name="courses" id="courses" />
+</fieldset>
+</form>
+</main>
+{% endblock content %}
