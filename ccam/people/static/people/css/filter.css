@@ -1,0 +1,27 @@
+.view-table-section {
+    width: 100%;
+}
+
+.header-with-icon {
+    display: flex;
+    align-items: center;
+}
+
+.header-with-icon > h2 {
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.filter-section {
+    margin-top: 1.25rem;
+    display: flex;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.fields-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.165rem;
+}

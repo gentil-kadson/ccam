@@ -6,3 +6,7 @@ from django.views.generic import TemplateView
 
 class SeacHomeView(TemplateView):
     template_name = "seac/home.html"
+
+
+class SeacViewKnowledgeCertificates(TemplateView):
+    template_name = "seac/seac_view_knowledge_certificates.html"
