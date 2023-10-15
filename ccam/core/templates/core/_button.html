@@ -1,6 +1,8 @@
 {% load static %}
 
-<button class="ccam-button" type="submit">
+<button class="ccam-button {{ custom_class }}"
+        type="submit"
+        {% if form_id %}form="{{ form_id }}"{% endif %}>
   {{ button_text }}
   <img class="{{ color_class }}"
        src="{% static icon_path %}"
