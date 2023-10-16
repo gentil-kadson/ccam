@@ -94,6 +94,7 @@ LOCAL_APPS = [
     "ccam.people",
     "ccam.academics",
     "ccam.core",
+    "ccam.people.seac",
     "ccam.people.students",
     # Your stuff: custom apps go here
 ]
