@@ -1,0 +1,67 @@
+#knowledge-certificate-form {
+    display: grid;
+    grid-template-rows: 0.2fr 1fr;
+    grid-template-columns: 0.6fr 0.4fr;
+    grid-template-areas:
+        "leftheader rightheader"
+        "studentdata subjectdata"
+    ;
+    gap: 1.5625rem;
+    height: 100%;
+}
+
+#course-progress-form {
+    display: grid;
+    grid-template-rows: 0.2fr 1fr 1fr;
+    grid-template-columns: 0.6fr 0.4fr;
+    grid-template-areas:
+        "leftheader rightheader"
+        "studentdata subjectdata"
+        "filesdata filesdata"
+    ;
+    gap: 1.5625rem;
+    height: 100%;
+}
+
+#knowledge-certificate-form header > h2:nth-of-type(1),
+#course-progress-form header > h2:nth-of-type(1)
+{
+    grid-area: leftheader;
+}
+
+#knowledge-certificate-form header > h2:nth-of-type(2),
+#course-progress-form header > h2:nth-of-type(2)
+{
+    grid-area: rightheader;
+}
+
+#student-data {
+    gap: 1.5625rem;
+    grid-area: studentdata;
+}
+
+#subject-data {
+    grid-area: subjectdata;
+}
+
+#attach-files-data {
+    grid-area: filesdata;
+}
+
+#course-progress-file-inputs {
+    gap: 6.25rem;
+}
+
+.ccam-table-input {
+    width: 70%;
+    border: none;
+}
+
+.ccam-table-input:focus {
+    outline: none;
+}
+
+.ccam-table .ccam-table-input {
+    background-color: inherit;
+    text-align: center;
+}
