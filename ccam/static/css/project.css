@@ -10,6 +10,7 @@
   --table-cell-colour: #28282B;
   --status-analysis: #E8D848;
   --green-svg: invert(51%) sepia(100%) saturate(602%) hue-rotate(93deg) brightness(104%) contrast(91%);
+  --red-svg: brightness(0) saturate(100%) invert(36%) sepia(98%) saturate(2331%) hue-rotate(345deg) brightness(96%) contrast(94%);
 }
 
 * {
@@ -66,6 +67,10 @@ main#container {
 
 .green-svg {
   filter: var(--green-svg);
+}
+
+.red-svg {
+  filter: var(--red-svg);
 }
 
 .green-text {

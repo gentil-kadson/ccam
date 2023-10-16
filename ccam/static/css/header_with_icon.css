@@ -1,0 +1,13 @@
+.header-with-icon {
+    display: flex;
+    align-items: center;
+}
+
+.padding-from-content {
+    margin-top: 80px;
+}
+
+.header-with-icon > h2 {
+    font-weight: bold;
+    font-size: 24px;
+}
