@@ -1,0 +1,12 @@
+.ccam-file-input-button {
+    pointer-events: none;
+}
+
+.ccam-file-input-label {
+    cursor: pointer;
+}
+
+.ccam-file-input-label p {
+    font-weight: bold;
+    font-size: 20px;
+}
