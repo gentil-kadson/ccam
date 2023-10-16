@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+  <main id="container">
+    <h1 class="green-text fw-bold">Aproveitamento de Disciplina</h1>
+    <form method="post" id="course-progress-form" class="pt-4">
+      <h2 class="fw-bold">
+        <img src="{% static 'academics/images/icons/database.svg' %}"
+             alt="Disks stacked on top of each other"
+             class="green-svg"
+             width="35"
+             height="35" />
+        Preencha os dados:
+      </h2>
+      <h2 class="text-start fw-bold">
+        <img src="{% static 'academics/images/icons/book.svg' %}"
+             alt="A book"
+             class="green-svg"
+             width="35"
+             height="35" />
+        Escolha as disciplinas:
+      </h2>
+      <fieldset id="student-data"
+                class="d-flex flex-wrap flex-shrink-1 align-items-center pt-2">
+        <div class="ccam-input">
+          <label for="registration">Matrícula</label>
+          <input type="text"
+                 name="registration"
+                 id="registration"
+                 placeholder="20221094040009" />
+        </div>
+        <div class="ccam-input">
+          <label for="name">Nome</label>
+          <input type="text" name="name" id="name" placeholder="Donkus" />
+        </div>
+        <div class="ccam-input">
+          <label for="phone">Fone</label>
+          <input type="text" name="phone" id="phone" placeholder="(84) 98172-3452" />
+        </div>
+        <div class="ccam-input">
+          <label for="course">Curso</label>
+          <div class="ccam-select">
+            <select name="course" id="course">
+              <option value="------">------</option>
+                                                                                              </select>
+                                                                                </div>
+                                                                </div>
+                                                                <div class="ccam-input">
+                                                                  <label for="school_term">Período Letivo</label>
+                                                      <div class="ccam-select">
+                                                        <select name="school_term" id="school_term">
+      <option value="------">------</option>
+    </select>
+  </div>
+</div>
+<div class="ccam-input">
+  <label for="email">Email</label>
+  <input type="email"
+         name="email"
+         id="email"
+         placeholder="jkl1231918@gmail.com" />
+</div>
+</fieldset>
+<fieldset id="subject-data" class="d-flex flex-column w-100 pt-4">
+  <table class="ccam-table">
+    <thead>
+      <tr>
+        <th>Disciplina IFRN</th>
+        <th>Disciplina Para Aprov.</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <input type="text"
+                 class="ccam-table-input"
+                 name="subject"
+                 id="subject"
+                 placeholder="Nome matéria" />
+        </td>
+        <td>
+          <input type="text"
+                 class="ccam-table-input"
+                 name="subject"
+                 id="subject"
+                 placeholder="Nome matéria" />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="text"
+                 class="ccam-table-input"
+                 name="subject"
+                 id="subject"
+                 placeholder="Nome matéria" />
+        </td>
+        <td>
+          <input type="text"
+                 class="ccam-table-input"
+                 name="subject"
+                 id="subject"
+                 placeholder="Nome matéria" />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="text"
+                 class="ccam-table-input"
+                 name="subject"
+                 id="subject"
+                 placeholder="Nome matéria" />
+        </td>
+        <td>
+          <input type="text"
+                 class="ccam-table-input"
+                 name="subject"
+                 id="subject"
+                 placeholder="Nome matéria" />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="text"
+                 class="ccam-table-input"
+                 name="subject"
+                 id="subject"
+                 placeholder="Nome matéria" />
+        </td>
+        <td>
+          <input type="text"
+                 class="ccam-table-input"
+                 name="subject"
+                 id="subject"
+                 placeholder="Nome matéria" />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</fieldset>
+<fieldset class="d-flex flex-column w-100" id="attach-files-data">
+  <h2 class="fw-bold">
+    <img width="35"
+         height="35"
+         src="{% static 'images/icons/attachFile.svg' %}"
+         alt="Green paperclip"
+         class="green-svg" />
+    Anexe os <span class="green-text">documentos</span>
+  </h2>
+  <div class="d-flex w-100" id="course-progress-file-inputs">
+    <div class="d-flex flex-column ccam-file-input">
+      <label for="old" class="ccam-file-input-label">
+        <p>Histórico escolar da antiga universidade:</p>
+        <button class="d-block ccam-button ccam-file-input-button">
+          Carregar
+          <img src="{% static 'images/icons/fileUpload.svg' %}"
+               alt="Green file being uploaded"
+               class="green-svg" />
+        </button>
+      </label>
+      <input class="d-none" type="file" name="old" id="old" />
+    </div>
+    <div class="d-flex flex-column ccam-file-input">
+      <label for="new" class="ccam-file-input-label">
+        <p>PPC da antiga universidade:</p>
+        <button class="d-block ccam-button ccam-file-input-button">
+          Carregar
+          <img src="{% static 'images/icons/fileUpload.svg' %}"
+               alt="Green file being uploaded"
+               class="green-svg" />
+        </button>
+      </label>
+      <input class="d-none" type="file" name="new" id="new" />
+    </div>
+  </div>
+</fieldset>
+</form>
+{% include "core/_button.html" with button_text="Enviar" custom_class="align-self-end" color_class="green-svg" icon_path='people/images/icons/doubleTick.svg' alt_text="Double overlapping greent ticks" form_id="course-progress-form" %}
+</main>
+{% endblock content %}
