@@ -18,3 +18,7 @@ class SeacViewCoursesDispensal(TemplateView):
 
 class SeacKnowledgeCertificatesStudentDetails(TemplateView):
     template_name = "seac/knowledge_certifiactes_student_details.html"
+
+
+class SeacCoursesDispensalStudentDetails(TemplateView):
+    template_name = "seac/courses_dispensal_student_details.html"

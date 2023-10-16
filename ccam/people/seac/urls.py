@@ -10,7 +10,12 @@ urlpatterns = [
     path("courses-dispensal/", views.SeacViewCoursesDispensal.as_view(), name="courses-dispensal"),
     path(
         "knowledge-certificates/student-details/",
-        views.SeacStudentDetails.as_view(),
+        views.SeacKnowledgeCertificatesStudentDetails.as_view(),
         name="knowledge-certificate-student-details",
+    ),
+    path(
+        "courses-dispensal/student-details/",
+        views.SeacCoursesDispensalStudentDetails.as_view(),
+        name="courses-dispensal-studnet-details",
     ),
 ]
