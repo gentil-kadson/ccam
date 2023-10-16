@@ -15,17 +15,29 @@
     color: var(--placeholder-text-color);
 }
 
-.ccam-input > input, .ccam-input > select {
+.ccam-input > input, .ccam-input select {
     display: flex;
     align-items: center;
     background-color: var(--element-dark);
     font-size: 1rem;
-    padding: 7px 10px;
-    width: 300px;
+    padding: 0.4375rem 0.625rem;
+    width: 18.75rem;
     border-radius: 0.5rem;
     border: none;
 }
 
+.ccam-input select {
+    appearance: none;
+    position: relative;
+}
+
+.ccam-input > .ccam-select::after {
+    position: absolute;
+    transform: translateY(-100%) translateX(1100%);
+    content: url("../images/icons/checkBoxArrowDown.svg");
+    filter: var(--green-svg);
+}
+
 .ccam-input > input:focus {
-    outline: solid 2px var(--green);
+    outline: solid 0.125rem var(--green);
 }
