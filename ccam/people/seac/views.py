@@ -10,3 +10,7 @@ class SeacHomeView(TemplateView):
 
 class SeacViewKnowledgeCertificates(TemplateView):
     template_name = "seac/seac_view_knowledge_certificates.html"
+
+
+class SeacViewCoursesDispensal(TemplateView):
+    template_name = "seac/seac_view_courses_dispensal.html"
