@@ -1,3 +1,5 @@
-from django.shortcuts import render
+from django.views.generic import TemplateView
 
-# Create your views here.
+
+class KnowledgeCertificateCreateView(TemplateView):
+    template_name = "academics/knowledge_certificate_form.html"
