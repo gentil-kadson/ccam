@@ -3,7 +3,22 @@
     background-color: var(--element-dark);
     display: flex;
     width: 15.625rem;
+    gap: 5px;
     border-radius: 0.5rem;
     padding: 0.625rem 0;
     justify-content: center;
+    align-items: center;
+}
+
+.ccam-table-button {
+    border: 2px solid var(--green);
+    background-color: var(--element-dark);
+    display: flex;
+    width: 15rem;
+    height: 2.5rem;
+    border-radius: 8px;
+    padding: 0.625rem 0;
+    justify-content: center;
+    gap: 1rem;
+    align-items: center;
 }
