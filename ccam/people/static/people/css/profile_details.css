@@ -17,3 +17,22 @@
     font-size: 34px;
     font-weight: bold;
 }
+
+.student-info {
+    border-radius: 10px;
+    background-color: var(--element-dark);
+    margin-top: 5rem;
+    width: 100%;
+    border: 1px solid white;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 40px 35px;
+}
+
+.left-side {
+    grid-column: 0 / 1;
+}
+
+.right-side {
+    grid-column: 1 / 2;
+}

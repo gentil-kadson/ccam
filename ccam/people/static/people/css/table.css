@@ -14,11 +14,11 @@
     border-radius: 0px 15px 0px 0px;
 }
 
-.ccam-table tr:last-of-type td:first-of-type {
+.ccam-table tbody tr:last-of-type td:first-of-type {
     border-radius: 0px 0px 0px 15px;
 }
 
-.ccam-table tr:last-of-type td:last-of-type {
+.ccam-table tbody tr:last-of-type td:last-of-type {
     border-radius: 0px 0px 15px 0px;
 }
 
