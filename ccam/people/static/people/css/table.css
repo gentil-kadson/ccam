@@ -44,5 +44,7 @@
 }
 
 .ccam-table thead img {
+    background-color: transparent;
+    filter: var(--green-svg);
     margin-right: 13px;
 }
