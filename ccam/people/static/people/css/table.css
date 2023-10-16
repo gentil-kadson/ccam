@@ -1,0 +1,50 @@
+.ccam-table tr:nth-child(odd) {
+    background-color: var(--table-cell-colour);
+}
+
+.ccam-table tr:nth-child(even) {
+    background-color: var(--element-dark);
+}
+
+.ccam-table th:first-of-type {
+    border-radius: 15px 0px 0px 0px;
+}
+
+.ccam-table th:last-of-type {
+    border-radius: 0px 15px 0px 0px;
+}
+
+.ccam-table tbody tr:last-of-type td:first-of-type {
+    border-radius: 0px 0px 0px 15px;
+}
+
+.ccam-table tbody tr:last-of-type td:last-of-type {
+    border-radius: 0px 0px 15px 0px;
+}
+
+.ccam-table {
+    margin-top: 2.5rem;
+    width: 100%;
+    text-align: center;
+    vertical-align: middle;
+    padding: 10px 20px;
+}
+
+.ccam-table button {
+    margin: auto;
+}
+
+.ccam-table th, .ccam-table td {
+    padding: 10px 20px;
+}
+
+.ccam-table thead * {
+    background-color: var(--element-dark);
+    margin: auto;
+}
+
+.ccam-table thead img {
+    background-color: transparent;
+    filter: var(--green-svg);
+    margin-right: 13px;
+}
