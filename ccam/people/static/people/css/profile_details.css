@@ -1,0 +1,19 @@
+.prof-pic-and-name {
+    align-self: flex-start;
+    display: flex;
+    justify-content: flex-start;
+    gap: 1.43rem;
+    align-items: center;
+    border: 1px solid white;
+}
+
+.prof-pic-and-name img {
+    border-radius: 50%;
+    border: 2px solid var(--green);
+    object-fit: cover;
+}
+
+.prof-pic-and-name span {
+    font-size: 34px;
+    font-weight: bold;
+}
