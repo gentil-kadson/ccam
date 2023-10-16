@@ -1,6 +1,7 @@
 {% load static %}
 
-<a class="ccam-button anchor-button d-flex justify-content-center">
+<a class="ccam-button anchor-button d-flex justify-content-center"
+   href="{% url href %}">
   {{ anchor_text }}
   <img class="{{ color_class }} px-2"
        src="{% static icon_path %}"
