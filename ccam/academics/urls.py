@@ -26,6 +26,6 @@ urlpatterns = [
     path(
         "courses-dispensal/detail/",
         SeacCoursesDispensalStudentDetails.as_view(),
-        name="courses_dispensal_studnet_details",
+        name="courses_dispensal_detail",
     ),
 ]
