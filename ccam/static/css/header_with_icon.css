@@ -10,4 +10,5 @@
 .header-with-icon > h2 {
     font-weight: bold;
     font-size: 24px;
+    padding-left: 16px;
 }
