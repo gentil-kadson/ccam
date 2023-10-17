@@ -6,4 +6,5 @@ app_name = "seac"
 
 urlpatterns = [
     path("", views.SeacHomeView.as_view(), name="home"),
+    path("list/", views.SeacStaffListView.as_view(), name="list"),
 ]
