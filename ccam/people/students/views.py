@@ -7,3 +7,7 @@ class StudentHomeView(TemplateView):
 
 class RequestKnowledgeCertificateView(TemplateView):
     template_name = "students/knowledge_certificate_form.html"
+
+
+class StudentListView(TemplateView):
+    template_name = "students/students_list.html"

@@ -22,3 +22,10 @@
     gap: 1rem;
     align-items: center;
 }
+
+.ccam-simple-table-button {
+    border: 2px solid var(--green);
+    background-color: var(--element-dark);
+    border-radius: 8px;
+    padding: 7px 12px;
+}
