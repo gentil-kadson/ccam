@@ -6,5 +6,5 @@ app_name = "students"
 
 urlpatterns = [
     path("", views.StudentHomeView.as_view(), name="home"),
-    path("list/", views.StudentListView.as_view(), name="list"),
+    path("knowledge-certificate/", views.RequestKnowledgeCertificateView.as_view(), name="knowledge_certificate"),
 ]

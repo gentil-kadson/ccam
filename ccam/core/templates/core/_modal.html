@@ -1,14 +1,34 @@
 {% load static %}
 
 <dialog>
-  <div>
-    <h1>Escreva o motivo da reprovação</h1>
-    <span>Reprovar a solicitação irá enviar um e-mail para o estudante para que ele possa fazer uma nova solicitação com os dados corrigidos.</span>
-  </div>
-  <textarea name="detail" id="detail" cols="30" rows="10" placeholder="O fone está incorreto...">
+  <dialog id="feedback-dialog">
+    <div>
+      <h1>Escreva o motivo da reprovação</h1>
+      <span>Reprovar a solicitação irá enviar um e-mail para o estudante para que ele possa fazer uma nova solicitação com os dados corrigidos.</span>
+    </div>
+    <textarea name="detail" id="detail" cols="30" rows="10" placeholder="O fone está incorreto...">
     </textarea>
-  <div>
-    {% include "core/_button.html" with button_text="Aprovar" color_class="green-svg" icon_path='core/images/icons/doneAllIcon.svg' alt_text="A double tick symbol used for approval of something." %}
-    {% include "core/_button.html" with button_text="Reprovar" color_class="red-svg" icon_path='core/images/icons/cancel.svg' alt_text="A red circle with the letter x on it." %}
-  </div>
+    <div>
+      {% include "core/_button.html" with button_text="Aprovar" color_class="green-svg" icon_path='core/images/icons/doneAllIcon.svg' alt_text="A double tick symbol used for approval of something." %}
+      {% include "core/_button.html" with button_text="Reprovar" color_class="red-svg" icon_path='core/images/icons/cancel.svg' alt_text="A red circle with the letter x on it." %}
+    </div>
+    <form method="dialog">
+      <textarea name="detail" id="detail" cols="30" rows="10" placeholder="O fone está incorreto...">
+    </textarea>
+      <div>
+        <button class="ccam-button">
+          Enviar
+          <img src="{% static core/images/icons/doneAllIcon.svg %}"
+               class="green-svg"
+               alt="A double tick symbol used for approval of something." />
+        </button>
+        <button id="cancel" class="ccam-button">
+          Cancelar
+          <img class="red-svg"
+               src="{% core/images/icons/cancel.svg %}"
+               alt="A red circle with the letter x on it." />
+        </button>
+      </div>
+    </form>
+  </dialog>
 </dialog>
