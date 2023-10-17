@@ -10,3 +10,7 @@
     font-weight: bold;
     font-size: 20px;
 }
+
+.ccam-file-input {
+    width: fit-content;
+}
