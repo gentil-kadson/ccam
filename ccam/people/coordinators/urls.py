@@ -1,0 +1,7 @@
+from django.urls import path
+
+from ccam.people.coordinators import views
+
+app_name = "coordinators"
+
+urlpatterns = [path("", views.CoordinatorsHomeView.as_view(), name="home")]
