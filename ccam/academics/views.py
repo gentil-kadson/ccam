@@ -43,3 +43,7 @@ class CoordinatorsKCCoursesToAssembleCommittees(TemplateView):
 
 class CoordinatorsCDCoursesToAssembleCommittees(TemplateView):
     template_name = "academics/coordinators_academics/cd_courses_to_assemble_committee.html"
+
+
+class SubjectListView(TemplateView):
+    template_name = "academics/teacher_academics/subject_list.html"
