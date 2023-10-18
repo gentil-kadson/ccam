@@ -7,3 +7,7 @@ class SeacHomeView(TemplateView):
 
 class SeacStaffListView(TemplateView):
     template_name = "seac/seac_staff_list.html"
+
+
+class SeacStaffCreateView(TemplateView):
+    template_name = "seac/seac_form.html"
