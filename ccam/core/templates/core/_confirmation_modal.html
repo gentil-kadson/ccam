@@ -1,6 +1,6 @@
 <dialog id="confirmation-modal">
     <p>
-        Tem certeza que deseja excluir o discente <span class="green-text">Ernie and Bert (123.456.789-10)?</span>
+        {{ text }} <span class="green-text">{{ highlighted_text }}</span>
     </p>
     <footer class="d-flex w-100 close-modal-buttons-container">
         {% include "core/_button.html" with button_text="Sim" color_class="green-svg" icon_path='core/images/icons/like.svg' id="submit-modal-button" %}
