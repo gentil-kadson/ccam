@@ -46,43 +46,34 @@
           <div class="ccam-select">
             <select name="sex" id="sex">
               <option value="------">------</option>
-                                                </select>
-                                        </div>
-                                </div>
-                        </fieldset>
-                        <fieldset class="row align-items-center mt-4">
-                          <legend class="fw-bold">
-                  Selecione as <span class="green-text">matérias</span> que ele irá lecionar:
-            </legend>
-
-                    <div class="ccam-input">
-                        <label for="course">
-            Curso
-            <img src="{% static 'images/icons/info.svg' %}"
+            </select>
+          </div>
+        </div>
+        </fieldset>
+        <fieldset class="row align-items-center mt-4">
+        <legend class="fw-bold">Selecione as <span class="green-text">matérias</span> que ele irá lecionar:</legend>
+            <div class="ccam-input">
+                <label for="course">Curso<img src="{% static 'images/icons/info.svg' %}"
                  class="green-svg"
                  alt="Letter 'i' in a circumference" />
-      </label>
-                  <div class="ccam-select">
-                      <select name="course" id="course">
-  <option value="-------">------</option>
-                </select>
+                </label>
+                <div class="ccam-select">
+                    <select name="course" id="course">
+                        <option value="-------">------</option>
+                    </select>
+                </div>
             </div>
-        </div>
 
-        <div class="ccam-input">
-            <label for="subject">
-Matéria
-<img src="{% static 'images/icons/info.svg' %}"
-     class="green-svg"
-     alt="Letter 'i' in a circumference" />
-            </label>
-            <div class="ccam-select">
-                <select name="subject" id="subject">
-<option value="------">-------</option>
-</select>
-</div>
-</div>
-</fieldset>
+            <div class="ccam-input">
+                <label for="subject">Matéria<img src="{% static 'images/icons/info.svg' %}" class="green-svg" alt="Letter 'i' in a circumference" />
+                </label>
+                <div class="ccam-select">
+                    <select name="subject" id="subject">
+                        <option value="------">-------</option>
+                    </select>
+                </div>
+            </div>
+        </fieldset>
 </form>
 {% include "core/_button.html" with button_text="Enviar" color_class="green-svg" icon_path='people/images/icons/doubleTick.svg' alt_text="A green double tick" custom_class="align-self-end" form_id="teachers-form" %}
 </main>
