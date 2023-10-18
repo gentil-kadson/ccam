@@ -7,3 +7,7 @@ class DirectorListView(TemplateView):
 
 class DirectorCreateView(TemplateView):
     template_name = "directors/directors_form.html"
+
+
+class DirectorDetailView(TemplateView):
+    template_name = "directors/directors_detail.html"
