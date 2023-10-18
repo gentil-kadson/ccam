@@ -1,6 +1,10 @@
 from django.views.generic import TemplateView
 
 
+class TeacherHomeView(TemplateView):
+    template_name = "teachers/home.html"
+
+
 class TeacherListView(TemplateView):
     template_name = "teachers/teachers_list.html"
 
