@@ -1,0 +1,37 @@
+{% load static %}
+
+<section id="coordinators-section">
+  <div class="coordinators-action-container">
+    <div>
+      <img class="green-svg"
+           src="{% static 'people/images/icons/diploma.svg' %}"
+           alt="A green coloured diploma."
+           width="35"
+           height="35" />
+      <h2>Certificação de Conhecimentos</h2>
+    </div>
+    {% include "core/_anchor.html" with anchor_text="Bancas" color_class="green-svg" icon_path='people/images/icons/gavelIcon.svg' alt_text="A green gavel" href='academics:knowledge_certificates_committees' %}
+  </div>
+  <div class="coordinators-action-container">
+    <div>
+      <img class="green-svg"
+           src="{% static 'people/images/icons/exportNote.svg' %}"
+           alt="A green green note with an outgoing arrow inside a box located at the note's lower right."
+           width="35"
+           height="35" />
+      <h2>Aproveitamento de Disciplinas</h2>
+    </div>
+    {% include "core/_anchor.html" with anchor_text="Bancas" color_class="green-svg" icon_path='people/images/icons/gavelIcon.svg' alt_text="A green gavel" href='academics:courses_dispensal_committees' %}
+  </div>
+  <div class="coordinators-action-container">
+    <div>
+      <img class="green-svg"
+           src="{% static 'people/images/icons/moreIcon.svg' %}"
+           alt="A green sticker-like arrow with three dots inside it."
+           width="35"
+           height="35" />
+      <h2>Outros</h2>
+    </div>
+    {% include "core/_anchor.html" with anchor_text="Cadastrar Disciplina" color_class="green-svg" icon_path='people/images/icons/plus.svg' alt_text="A green plus icon inside a circle" href='academics:add_course' %}
+  </div>
+</section>

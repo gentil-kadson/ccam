@@ -1,6 +1,9 @@
 from django.urls import path
 
 from ccam.academics.views import (
+    CoordinatorsAddCourse,
+    CoordinatorsCoursesDispensalCommittees,
+    CoordinatorsKnowledgeCertificateCommittees,
     CourseProgressCreateView,
     KnowledgeCertificateCreateView,
     SeacCoursesDispensalStudentDetails,
@@ -28,4 +31,15 @@ urlpatterns = [
         SeacCoursesDispensalStudentDetails.as_view(),
         name="courses_dispensal_detail",
     ),
+    path(
+        "knowledge-certificates-committees/",
+        CoordinatorsKnowledgeCertificateCommittees.as_view(),
+        name="knowledge_certificates_committees",
+    ),
+    path(
+        "courses-dispensal-committeess/",
+        CoordinatorsCoursesDispensalCommittees.as_view(),
+        name="courses_dispensal_committees",
+    ),
+    path("add-course/", CoordinatorsAddCourse.as_view(), name="add_course"),
 ]

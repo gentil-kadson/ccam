@@ -23,3 +23,15 @@ class SeacKnowledgeCertificatesStudentDetails(TemplateView):
 
 class SeacCoursesDispensalStudentDetails(TemplateView):
     template_name = "academics/seac_academics/courses_dispensal_student_details.html"
+
+
+class CoordinatorsKnowledgeCertificateCommittees(TemplateView):
+    template_name = "academics/coordinators_academics/knowledge_certificate_committees.html"
+
+
+class CoordinatorsCoursesDispensalCommittees(TemplateView):
+    template_name = "academics/coordinators_academics/courses_dispensal_committees.html"
+
+
+class CoordinatorsAddCourse(TemplateView):
+    template_name = "academics/coordinators_academics/add_course.html"
