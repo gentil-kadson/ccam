@@ -4,4 +4,8 @@ from ccam.people.directors import views
 
 app_name = "directors"
 
-urlpatterns = [path("list/", views.DirectorListView.as_view(), name="list")]
+urlpatterns = [
+    path("list/", views.DirectorListView.as_view(), name="list"),
+    path("create/", views.DirectorCreateView.as_view(), name="create"),
+    path("detail/", views.DirectorDetailView.as_view(), name="detail"),
+]

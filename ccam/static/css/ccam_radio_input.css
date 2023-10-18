@@ -1,0 +1,38 @@
+.ccam-radio-input {
+    width: max-content;
+}
+
+.ccam-radio-input input {
+    display: grid;
+    place-content: center;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: var(--bg-dark);
+    border: solid 2px var(--green);
+}
+
+.ccam-radio-input label {
+    padding-left: 10px;
+}
+
+.ccam-radio-input input:before {
+    content: "";
+    width: 14px;
+    height: 14px;
+    box-shadow: inset 1em 1em var(--green);
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    border-radius: 50%;
+}
+
+.ccam-radio-input input:checked::before {
+    transform: scale(1);
+}
+
+#radio-group {
+    gap: 20px;
+    padding-top: 10px;
+}

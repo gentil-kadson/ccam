@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+  <main id="container">
+    <header>
+      <h1 class="fw-bold green-text">Cadastrar Aluno</h1>
+    </header>
+    <form method="post"
+          class="w-100 d-flex flex-column justify-content-evenly"
+          id="students-form">
+      <fieldset class="row align-items-center">
+        <div class="ccam-input">
+          <label for="registration">Matrícula</label>
+          <input type="text" name="registration" id="registration" />
+        </div>
+        <div class="ccam-input">
+          <label for="student-cpf">CPF</label>
+          <input type="text" name="student-cpf" id="student-cpf" />
+        </div>
+        <div class="ccam-file-input">
+          <label for="new" class="ccam-file-input-label">
+            <p class="m-0 p-0 green-text fs-6">Foto de perfil</p>
+            <button class="ccam-button ccam-file-input-button">
+              Carregar
+              <img src="{% static 'images/icons/fileUpload.svg' %}"
+                   alt="Green file being uploaded"
+                   class="green-svg" />
+            </button>
+          </label>
+          <input class="d-none" type="file" name="new" id="new" />
+        </div>
+      </fieldset>
+      <fieldset class="row align-items-center">
+        <div class="ccam-input">
+          <label for="phone-number">Fone</label>
+          <input type="text" name="phone-number" id="phone-number" />
+        </div>
+        <div class="ccam-input">
+          <label for="email">Email</label>
+          <input type="email" name="email" id="email" />
+        </div>
+        <div class="ccam-input">
+          <label for="sex">Sexo</label>
+          <div class="ccam-select">
+            <select name="sex" id="sex">
+              <option value="------">------</option>
+            </select>
+          </div>
+        </div>
+      </fieldset>
+      <fieldset class="row align-items-center">
+        <div class="ccam-input">
+          <label for="school-term">Ano/Período</label>
+          <input type="number" name="school-term" id="school-term" />
+        </div>
+        <div class="ccam-radio-input d-flex flex-column">
+          <p class="m-0 p-0 green-text fw-bold">Nível Educacional</p>
+          <div class="d-flex" id="radio-group">
+            <div class="d-flex">
+              <input type="radio" name="educational-level" id="high-school" value="1" />
+              <label class="fw-bold" for="high-school">Técnico Médio</label>
+            </div>
+            <div class="d-flex">
+              <input type="radio" name="educational-level" id="university" value="2" />
+              <label class="fw-bold" for="university">Superior</label>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+    {% include "core/_button.html" with button_text="Enviar" color_class="green-svg" icon_path='people/images/icons/doubleTick.svg' alt_text="A green double tick" custom_class="align-self-end" form_id="students-form" %}
+  </main>
+{% endblock content %}

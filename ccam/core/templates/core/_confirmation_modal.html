@@ -1,0 +1,9 @@
+<dialog id="confirmation-modal">
+    <p>
+        {{ text }} <span class="green-text">{{ highlighted_text }}</span>
+    </p>
+    <footer class="d-flex w-100 close-modal-buttons-container">
+        {% include "core/_button.html" with button_text="Sim" color_class="green-svg" icon_path='core/images/icons/like.svg' id="submit-modal-button" %}
+        {% include "core/_button.html" with button_text="Não" color_class="red-svg" icon_path='core/images/icons/dislike.svg' id="close-modal-button" type="button" %}
+    </footer>
+</dialog>
