@@ -37,5 +37,9 @@ class CoordinatorsSubjectList(TemplateView):
     template_name = "academics/coordinators_academics/subjects_list.html"
 
 
+class AddCourseView(TemplateView):
+    template_name = "academics/coordinators_academics/add_course.html"
+
+
 class SubjectListView(TemplateView):
     template_name = "academics/teacher_academics/subject_list.html"

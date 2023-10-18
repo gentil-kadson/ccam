@@ -1,6 +1,7 @@
 from django.urls import path
 
 from ccam.academics.views import (
+    AddCourseView,
     CoordinatorsAddCourse,
     CoordinatorsCommittee,
     CoordinatorsSubjectList,
@@ -54,4 +55,5 @@ urlpatterns = [
         name="cd_coordinators_subjects_list",
     ),
     path("subjects/list/", SubjectListView.as_view(), name="subject_list"),
+    path("add-courses/", AddCourseView.as_view(), name="add_courses"),
 ]
