@@ -7,3 +7,7 @@ class TeacherListView(TemplateView):
 
 class TeacherCreateView(TemplateView):
     template_name = "teachers/teachers_form.html"
+
+
+class TeacherDetailView(TemplateView):
+    template_name = "teachers/teachers_detail.html"
