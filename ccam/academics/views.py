@@ -25,24 +25,16 @@ class SeacCoursesDispensalStudentDetails(TemplateView):
     template_name = "academics/seac_academics/courses_dispensal_student_details.html"
 
 
-class CoordinatorsKnowledgeCertificateCommittees(TemplateView):
-    template_name = "academics/coordinators_academics/knowledge_certificate_committees.html"
-
-
-class CoordinatorsCoursesDispensalCommittees(TemplateView):
-    template_name = "academics/coordinators_academics/courses_dispensal_committees.html"
+class CoordinatorsCommittee(TemplateView):
+    template_name = "academics/coordinators_academics/committee.html"
 
 
 class CoordinatorsAddCourse(TemplateView):
     template_name = "academics/coordinators_academics/add_course.html"
 
 
-class CoordinatorsKCCoursesToAssembleCommittees(TemplateView):
-    template_name = "academics/coordinators_academics/kc_courses_to_assemble_committee.html"
-
-
-class CoordinatorsCDCoursesToAssembleCommittees(TemplateView):
-    template_name = "academics/coordinators_academics/cd_courses_to_assemble_committee.html"
+class CoordinatorsSubjectList(TemplateView):
+    template_name = "academics/coordinators_academics/subjects_list.html"
 
 
 class SubjectListView(TemplateView):
