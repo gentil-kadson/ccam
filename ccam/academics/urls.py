@@ -7,6 +7,7 @@ from ccam.academics.views import (
     SeacKnowledgeCertificatesStudentDetails,
     SeacViewCoursesDispensal,
     SeacViewKnowledgeCertificates,
+    SubjectListView,
 )
 
 app_name = "academics"
@@ -28,4 +29,5 @@ urlpatterns = [
         SeacCoursesDispensalStudentDetails.as_view(),
         name="courses_dispensal_detail",
     ),
+    path("subjects/list/", SubjectListView.as_view(), name="subject_list"),
 ]
