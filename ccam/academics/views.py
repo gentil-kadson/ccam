@@ -35,3 +35,11 @@ class CoordinatorsCoursesDispensalCommittees(TemplateView):
 
 class CoordinatorsAddCourse(TemplateView):
     template_name = "academics/coordinators_academics/add_course.html"
+
+
+class CoordinatorsKCCoursesToAssembleCommittees(TemplateView):
+    template_name = "academics/coordinators_academics/kc_courses_to_assemble_committee.html"
+
+
+class CoordinatorsCDCoursesToAssembleCommittees(TemplateView):
+    template_name = "academics/coordinators_academics/cd_courses_to_assemble_committee.html"
