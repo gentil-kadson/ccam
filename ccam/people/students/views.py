@@ -11,3 +11,7 @@ class StudentListView(TemplateView):
 
 class StudentCreateView(TemplateView):
     template_name = "students/students_form.html"
+
+
+class StudentDetailView(TemplateView):
+    template_name = "students/students_detail.html"

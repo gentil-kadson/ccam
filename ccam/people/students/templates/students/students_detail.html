@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <main id="container" class="centered-content student-details-center-vertical">
+        <section class="prof-pic-and-name">
+          <img src="{% static 'images/ernieAndBert.jpg' %}"
+               alt="Ernie and Bert from Sesame Street"
+               width="150"
+               height="151" />
+          <span>Ernie and Bert</span>
+        </section>
+        <section class="student-info">
+          <div>
+            <span><b>Matrícula:</b> 20231094030008</span>
+            <span><b>Curso:</b> Identid@des.com</span>
+            <span><b>Período:</b> 4º</span>
+          </div>
+          <div>
+            <span><b>Fone: </b>(84) 99999-9999</span>
+            <span><b>E-mail: </b>ernie.and.bert@sesame.com</span>
+            <span><b>CPF: </b>123.456.789-10</span>
+          </div>
+        </section>
+    </main>
+{% endblock content %}
