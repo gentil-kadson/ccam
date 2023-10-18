@@ -1,3 +1,5 @@
-from django.shortcuts import render
+from django.views.generic import TemplateView
 
-# Create your views here.
+
+class ModalView(TemplateView):
+    template_name = "core/_confirmation_modal.html"

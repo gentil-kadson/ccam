@@ -1,6 +1,6 @@
 {% load static %}
 
-<a class="ccam-simple-table-button" href="{% url href %}">
+<a class="ccam-simple-table-button {{ custom_class }}" {% if href %}href="{% url href %}"{% endif %} {% if id %}id="{{ id }}"{% endif %}>
   <img class="{{ color_class }}"
        src="{% static icon_path %}"
        alt="{{ alt_text }}" />

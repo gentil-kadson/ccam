@@ -12,3 +12,7 @@
 .anchor-button:visited {
     color: var(--white);
 }
+
+.ccam-simple-table-button {
+    cursor: pointer;
+}

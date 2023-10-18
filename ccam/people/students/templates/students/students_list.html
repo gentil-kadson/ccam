@@ -96,7 +96,7 @@
               <div class="d-flex justify-content-around">
                 {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='people/images/icons/detailsIcon.svg' alt_text="A green eye" href='people:students:detail' %}
                 {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='images/icons/editIcon.svg' alt_text="A green pen" href='people:students:create' %}
-                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='images/icons/deleteIcon.svg' alt_text="A green recycle bin" href='academics:create_knowledge_certificate' %}
+                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='images/icons/deleteIcon.svg' alt_text="A green recycle bin" custom_class="confirmation-modal-trigger" %}
               </div>
             </td>
           </tr>
@@ -110,7 +110,7 @@
               <div class="d-flex justify-content-around">
                 {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='people/images/icons/detailsIcon.svg' alt_text="A green eye" href='people:students:detail' %}
                 {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='images/icons/editIcon.svg' alt_text="A green pen" href='people:students:create' %}
-                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='images/icons/deleteIcon.svg' alt_text="A green recycle bin" href='academics:create_knowledge_certificate' %}
+                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='images/icons/deleteIcon.svg' alt_text="A green recycle bin" custom_class="confirmation-modal-trigger" %}
               </div>
             </td>
           </tr>
@@ -124,7 +124,7 @@
               <div class="d-flex justify-content-around">
                 {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='people/images/icons/detailsIcon.svg' alt_text="A green eye" href='people:students:detail' %}
                 {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='images/icons/editIcon.svg' alt_text="A green pen" href='people:students:create' %}
-                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='images/icons/deleteIcon.svg' alt_text="A green recycle bin" href='academics:create_knowledge_certificate' %}
+                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='images/icons/deleteIcon.svg' alt_text="A green recycle bin" custom_class="confirmation-modal-trigger" %}
               </div>
             </td>
           </tr>
@@ -138,12 +138,13 @@
               <div class="d-flex justify-content-around">
                 {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='people/images/icons/detailsIcon.svg' alt_text="A green eye" href='people:students:detail' %}
                 {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='images/icons/editIcon.svg' alt_text="A green pen" href='people:students:create' %}
-                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='images/icons/deleteIcon.svg' alt_text="A green recycle bin" href='academics:create_knowledge_certificate' %}
+                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='images/icons/deleteIcon.svg' alt_text="A green recycle bin" custom_class="confirmation-modal-trigger" %}
               </div>
             </td>
           </tr>
         </tbody>
       </table>
     </section>
+    {% include "core/_confirmation_modal.html" %}
   </main>
 {% endblock content %}
