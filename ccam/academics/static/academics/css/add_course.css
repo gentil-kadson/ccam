@@ -1,0 +1,19 @@
+#add-course-section {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+#add-course-section button {
+    align-self: flex-end;
+}
+
+#course-data {
+    display: grid;
+    grid-template-columns: 1fr 7fr;
+    column-gap: 3.5rem;
+
+}

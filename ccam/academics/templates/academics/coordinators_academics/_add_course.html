@@ -1,0 +1,47 @@
+{% load static %}
+
+<h1 class="green-text fw-bold">Cadastrar Disciplina</h1>
+<section id="add-course-section">
+    <form action="" id="course-form">
+      <h2 class="fw-bold">
+        <img
+          src="{% static 'academics/images/icons/database.svg' %}"
+          alt="Disks stacked on top of each other"
+          class="green-svg"
+          width="35"
+          height="35"
+        />
+        Preencha os dados:
+      </h2>
+      <fieldset id="course-data">
+        <div class="ccam-input">
+            <label for="course-name">Nome da disciplina</label>
+            <input type="text" name="course-name" id="course-name" />
+        </div>
+        <div class="ccam-input">
+            <label for="graduation-course">Nome da disciplina</label>
+            <select name="graduation-course" id="graduation-course">
+                <option value="------">------</option>
+            </select>
+        </div>
+        <div class="ccam-radio-input d-flex flex-column">
+            <p class="m-0 p-0 green-text fw-bold">Nível Educacional</p>
+            <div class="d-flex" id="radio-group">
+              <div class="d-flex">
+                <input type="radio" name="educational-level" id="high-school" value="1" />
+                <label class="fw-bold" for="high-school">Técnico Médio</label>
+              </div>
+              <div class="d-flex">
+                <input type="radio" name="educational-level" id="university" value="2" />
+                <label class="fw-bold" for="university">Superior</label>
+              </div>
+            </div>
+        </div>
+        <div class="ccam-input">
+            <label for="grade-semester">Ano/Período</label>
+            <input type="number" name="grade-semester" id="grade-semester" />
+        </div>
+      </fieldset>
+    </form>
+    {% include "core/_button.html" with button_text="Enviar" color_class="green-svg" icon_path='people/images/icons/doubleTick.svg' alt_text="Double overlapping greent ticks" form_id="course-form" %}
+</section>

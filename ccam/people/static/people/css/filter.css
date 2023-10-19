@@ -9,8 +9,14 @@
     justify-content: space-between;
 }
 
+
 .fields-container {
     display: flex;
+    align-items: flex-end;
     flex-wrap: wrap;
     gap: 1.165rem;
+}
+
+.fields-container button {
+    margin-left: auto;
 }

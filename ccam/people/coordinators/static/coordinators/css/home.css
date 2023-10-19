@@ -1,0 +1,30 @@
+#coordinators-section {
+    width: 1240px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    column-gap: 200px;
+    row-gap: 77px;
+
+    margin-top: 36px;
+}
+
+.coordinators-action-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.coordinators-action-container div:first-of-type {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5px;
+}
+
+.coordinators-action-container h2 {
+    color: var(--green);
+    font-weight: bold;
+    font-size: 1.5rem;
+}
