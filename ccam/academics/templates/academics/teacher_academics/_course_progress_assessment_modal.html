@@ -1,0 +1,19 @@
+{% extends "academics/teacher_academics/base_assessment_modal.html" %}
+
+{% block message_input %}
+    <section class="d-flex flex-column justify-content-center align-items-center">
+        <p class="fw-bold">Após análise, a disciplina é <span class="green-text">aproveitável</span>?</p>
+        <div class="ccam-radio-input d-flex flex-column">
+            <div class="d-flex" id="radio-group">
+              <div class="d-flex">
+                <input type="radio" name="course_progress_possible" id="yes" value="1" />
+                <label class="fw-bold" for="yes">Sim</label>
+              </div>
+              <div class="d-flex">
+                <input type="radio" name="course_progress_possible" id="no" value="2" />
+                <label class="fw-bold" for="no">Não</label>
+              </div>
+            </div>
+          </div>
+    </section>
+{% endblock message_input %}

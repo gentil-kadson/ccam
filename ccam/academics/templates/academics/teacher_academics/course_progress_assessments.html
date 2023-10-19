@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+  <main id="container" class="view-table-section">
+    <header class="header-with-icon">
+      <img src="{% static 'people/images/icons/filter.svg' %}"
+           alt="A classic, green filter icon"
+           width="35"
+           height="35"
+           class="green-svg" />
+      <h2>Filtros</h2>
+    </header>
+    <section class="filter-section">
+      <div class="fields-container">
+        <div class="ccam-input">
+          <label for="student-id">Matrícula</label>
+          <input type="text" name="student-id" id="student-id" />
+        </div>
+      </div>
+      {% include "core/_button.html" with button_text="Filtrar" color_class="green-svg" icon_path='people/images/icons/filter.svg' alt_text="A classic green filter object" %}
+    </section>
+    <header class="header-with-icon padding-from-content">
+      <img src="{% static 'people/images/icons/dataTable.svg' %}"
+           alt="A green school backpack"
+           width="35"
+           height="35"
+           class="green-svg" />
+      <h2>Alunos Para Avaliar</h2>
+    </header>
+    <section>
+      <table class="ccam-table">
+        <thead>
+          <tr>
+            <th>
+              <img src="{% static 'people/images/icons/signatureIcon.svg' %}"
+                   alt="A handwritten signature" />
+              Nome
+            </th>
+            <th>
+              <img src="{% static 'people/images/icons/personVCard.svg' %}"
+                   alt="A VCard" />
+              CPF
+            </th>
+            <th>
+              <img src="{% static 'people/images/icons/badge.svg' %}"
+                   alt="A badge containing ID information" />
+              Matrícula
+            </th>
+            <th>
+              <img src="{% static 'images/icons/email.svg' %}"
+                   alt="A mail letter envelope" />
+              Email
+            </th>
+            <th>
+              <img src="{% static 'images/icons/course.svg' %}"
+                   alt="A feather pen writing on a scroll" />
+              Curso
+            </th>
+            <th>
+              <img src="{% static 'people/images/icons/actionIcon.svg' %}"
+                   alt="A green settings icon indicating actions you can take on a specific table" />
+              Ações
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Ernie & Bert</td>
+            <td>123.456.789-10</td>
+            <td>20221094040191</td>
+            <td>ernie.bert@sesame.com</td>
+            <td>TADS</td>
+            <td>
+                {% include 'core/_table_button.html' with button_text="Avaliar" color_class="green-svg" icon_path='core/images/icons/approval.svg' alt_text="A green eye icon" href='academics:knowledge_certificate_detail' custom_class="assessment-dialog-trigger" %}
+            </td>
+          </tr>
+          <tr>
+            <td>Ernie & Bert</td>
+            <td>123.456.789-10</td>
+            <td>20221094040191</td>
+            <td>ernie.bert@sesame.com</td>
+            <td>TADS</td>
+            <td>
+                {% include 'core/_table_button.html' with button_text="Avaliar" color_class="green-svg" icon_path='core/images/icons/approval.svg' alt_text="A green eye icon" href='academics:knowledge_certificate_detail' custom_class="assessment-dialog-trigger" %}
+            </td>
+          </tr>
+          <tr>
+            <td>Ernie & Bert</td>
+            <td>123.456.789-10</td>
+            <td>20221094040191</td>
+            <td>ernie.bert@sesame.com</td>
+            <td>TADS</td>
+            <td>
+                {% include 'core/_table_button.html' with button_text="Avaliar" color_class="green-svg" icon_path='core/images/icons/approval.svg' alt_text="A green eye icon" href='academics:knowledge_certificate_detail' custom_class="assessment-dialog-trigger" %}
+            </td>
+          </tr>
+          <tr>
+            <td>Ernie & Bert</td>
+            <td>123.456.789-10</td>
+            <td>20221094040191</td>
+            <td>ernie.bert@sesame.com</td>
+            <td>TADS</td>
+            <td>
+                {% include 'core/_table_button.html' with button_text="Avaliar" color_class="green-svg" icon_path='core/images/icons/approval.svg' alt_text="A green eye icon" href='academics:knowledge_certificate_detail' custom_class="assessment-dialog-trigger" %}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    {% include "core/_table_pagination.html" %}
+    {% include "academics/teacher_academics/_course_progress_assessment_modal.html" %}
+  </main>
+{% endblock content %}

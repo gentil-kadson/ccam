@@ -7,6 +7,7 @@ from ccam.academics.views import (
     SeacKnowledgeCertificatesStudentDetails,
     SeacViewCoursesDispensal,
     SeacViewKnowledgeCertificates,
+    SubjectCourseProgressAssessView,
     SubjectKnowledgeCertificateAssessView,
     SubjectListView,
 )
@@ -35,5 +36,10 @@ urlpatterns = [
         "subjects/<int:id>/knowledge-certificate-assessments/",
         SubjectKnowledgeCertificateAssessView.as_view(),
         name="knowledge_certificate_assessments",
+    ),
+    path(
+        "subjects/<int:id>/course-progress-assessments/",
+        SubjectCourseProgressAssessView.as_view(),
+        name="course_progress_assessments",
     ),
 ]
