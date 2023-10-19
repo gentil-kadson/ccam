@@ -1,6 +1,6 @@
 {% load static %}
 
-<a href="{% url href %}" class="button-with-link">
+<a {% if href %} href="{% url href %}" {% endif %} class="button-with-link">
   <button class="ccam-table-button {{ custom_class }}" type="submit">
     {{ button_text }}
     <img class="{{ color_class }}"
