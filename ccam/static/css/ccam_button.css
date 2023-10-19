@@ -4,10 +4,16 @@
     display: flex;
     width: 15.625rem;
     gap: 5px;
+    height: 3rem;
     border-radius: 0.5rem;
     padding: 0.625rem 0;
     justify-content: center;
     align-items: center;
+}
+
+.button-with-link {
+    text-decoration: none;
+    color: var(--white);
 }
 
 .ccam-table-button {
