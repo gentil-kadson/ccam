@@ -1,0 +1,8 @@
+<dialog id="assessment-dialog" class="m-auto w-50">
+    {% block message_input %}
+    {% endblock message_input %}
+    <section class="w-100 d-flex justify-content-evenly pt-4">
+        {% include "core/_button.html" with button_text="Avaliar" icon_path='core/images/icons/approval.svg' alt="Green approval tool" color_class="green-svg" custom_class="w-25" %}
+        {% include "core/_button.html" with button_text="Cancelar" icon_path='core/images/icons/approval.svg' alt="Green approval tool" color_class="red-svg" id="assessment-dialog-cancel" custom_class="w-25" %}
+    </section>
+</dialog>

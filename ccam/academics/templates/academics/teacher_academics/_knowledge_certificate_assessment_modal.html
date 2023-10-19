@@ -1,0 +1,10 @@
+{% extends "academics/teacher_academics/base_assessment_modal.html" %}
+
+{% block message_input %}
+    <section class="d-flex flex-column justify-content-center align-items-center">
+        <p class="fw-bold">Digite a <span class="green-text">nota</span> obtida pelo aluno na prova de certiciação de conhecimento</p>
+        <div class="ccam-input align-items-center">
+            <input class="text-center w-50" type="number" name="grade" id="grade" />
+        </div>
+    </section>
+{% endblock message_input %}
