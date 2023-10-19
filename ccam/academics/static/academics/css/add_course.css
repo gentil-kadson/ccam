@@ -1,5 +1,4 @@
 #add-course-section {
-    border: 1px solid white;
     width: 100%;
 
     display: flex;
@@ -13,6 +12,8 @@
 }
 
 #course-data {
-    display: flex;
-    border: 1px solid white;
+    display: grid;
+    grid-template-columns: 1fr 7fr;
+    column-gap: 3.5rem;
+
 }
