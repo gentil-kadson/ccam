@@ -75,3 +75,6 @@ celery -A config.celery_app worker -B -l info
 ## Deployment
 
 The following details how to deploy this application.
+
+## Material Symbols and Bootstrap Icons
+Install [material-symbols](https://github.com/marella/material-symbols/tree/main) npm module in **base 'static'** folder
