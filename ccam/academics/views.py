@@ -51,3 +51,7 @@ class SubjectKnowledgeCertificateAssessView(TemplateView):
 
 class SubjectCourseProgressAssessView(TemplateView):
     template_name = "academics/teacher_academics/course_progress_assessments.html"
+
+
+class TrackProcessesListView(TemplateView):
+    template_name = "academics/student_academics/processes_list.html"

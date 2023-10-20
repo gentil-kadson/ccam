@@ -14,6 +14,7 @@ from ccam.academics.views import (
     SubjectCourseProgressAssessView,
     SubjectKnowledgeCertificateAssessView,
     SubjectListView,
+    TrackProcessesListView,
 )
 
 app_name = "academics"
@@ -68,4 +69,5 @@ urlpatterns = [
         name="course_progress_assessments",
     ),
     path("add-courses/", AddCourseView.as_view(), name="add_courses"),
+    path("processes/list/", TrackProcessesListView.as_view(), name="processes_list"),
 ]
