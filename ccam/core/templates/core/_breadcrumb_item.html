@@ -1,4 +1,7 @@
-<a href="{% url 'people:teachers:list' %}" class="d-flex align-items-center fw-bold {% if active %} green-text {% endif %} breadcrumb-item" >
+<a
+    {% if href %} href="{% url href %}" {% endif %}
+    class="d-flex align-items-center fw-bold {% if active %} green-text {% endif %} breadcrumb-item" >
+
     {% if bootstrap_icon %}
         <i class="{{ icon }}"></i>
     {% else %}
