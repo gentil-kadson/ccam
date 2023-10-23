@@ -1,0 +1,8 @@
+.breadcrumb-item {
+    text-decoration: none;
+}
+
+.breadcrumb-item:hover, .breadcrumb-item:visited {
+    text-decoration: none;
+    color: var(--green);
+}

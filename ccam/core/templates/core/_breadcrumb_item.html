@@ -1,0 +1,11 @@
+<a href="{% url 'people:teachers:list' %}" class="d-flex align-items-center fw-bold {% if active %} green-text {% endif %} breadcrumb-item" >
+    {% if bootstrap_icon %}
+        <i class="{{ icon }}"></i>
+    {% else %}
+        <span class="material-symbols-{{ icon_style }} green-svg">{{ icon }}</span>
+    {% endif %}
+    {{ text }}
+    {% if not last_item %}
+        <span class="material-symbols-{{ icon_style }} px-2">chevron_right</span>
+    {% endif %}
+</a>
