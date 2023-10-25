@@ -1,4 +1,11 @@
 {% extends 'base.html' %}
+{% load breadcrumb_item %}
+
+{% block breadcrumb_items %}
+  {% breadcrumb_item text="Home" icon="home" href='people:seac:home' %}
+  {% breadcrumb_item text="Certificação de Conhecimentos" image_icon=True icon_path='people/images/icons/diploma.svg' href='academics:knowledge_certificates' %}
+  {% breadcrumb_item text="Visualizar Solicitação" icon="visibility" active=True last_item=True %}
+{% endblock breadcrumb_items %}
 
 {% block content %}
   <main id="container"

@@ -1,4 +1,10 @@
 {% extends 'base.html' %}
+{% load breadcrumb_item %}
+
+{% block breadcrumb_items %}
+  {% breadcrumb_item text="Home" icon="home" href='people:seac:home' %}
+  {% breadcrumb_item text="Aproveitamento de Disciplinas" icon="export_notes" active=True last_item=True %}
+{% endblock breadcrumb_items %}
 
 {% block content %}
   <main id="container" class="left-aligned-content">
