@@ -76,3 +76,8 @@ main#container {
 .green-text {
   color: var(--green);
 }
+
+header.breadcrumbs {
+  padding-left: 100px;
+  padding-right: 100px;
+}

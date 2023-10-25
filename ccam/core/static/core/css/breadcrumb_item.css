@@ -1,8 +1,26 @@
-.breadcrumb-item {
+.ccam-breadcrumb-item {
     text-decoration: none;
 }
 
-.breadcrumb-item:hover, .breadcrumb-item:visited {
+.ccam-breadcrumb-item:not(.active) {
+    color: var(--white);
+}
+
+.ccam-breadcrumb-item:hover {
+    cursor: pointer;
+    color: inherit;
+}
+
+.ccam-breadcrumb-item.active:hover {
+    cursor: text;
+    color: var(--green);
+}
+
+.ccam-breadcrumb-item:visited {
     text-decoration: none;
+    color: inherit;
+}
+
+.ccam-breadcrumb-item.active:visited {
     color: var(--green);
 }

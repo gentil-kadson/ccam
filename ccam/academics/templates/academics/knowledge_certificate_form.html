@@ -1,4 +1,13 @@
-{% extends "base.html" %} {% load static %} {% block content %}
+{% extends "base.html" %}
+{% load static %}
+{% load breadcrumb_item %}
+
+{% block breadcrumb_items %}
+  {% breadcrumb_item text="Home" icon="home" href='people:students:home' %}
+  {% breadcrumb_item text="Certificação de Conhecimentos" icon_path='people/images/icons/diploma.svg' active=True last_item=True image_icon=True %}
+{% endblock breadcrumb_items %}
+
+{% block content %}
 <main id="container">
   <h1 class="green-text fw-bold">Certificação de Conhecimentos</h1>
   <form method="post" id="knowledge-certificate-form" class="pt-4">
@@ -108,9 +117,6 @@
       </div>
     </fieldset>
   </form>
-  {% include "core/_button.html" with button_text="Enviar"
-  custom_class="align-self-end" color_class="green-svg"
-  icon_path='people/images/icons/doubleTick.svg' alt_text="Double overlapping
-  greent ticks" form_id="knowledge-certificate-form" %}
+  {% include "core/_button.html" with button_text="Enviar" custom_class="align-self-end" color_class="green-svg" icon_path='people/images/icons/doubleTick.svg' alt_text="Double overlapping greent ticks" form_id="knowledge-certificate-form" %}
 </main>
 {% endblock content %}

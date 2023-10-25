@@ -1,11 +1,15 @@
+{% load static %}
+
 <a
     {% if href %} href="{% url href %}" {% endif %}
-    class="d-flex align-items-center fw-bold {% if active %} green-text {% endif %} breadcrumb-item" >
+    class="d-flex align-items-center fw-bold {% if active %} green-text active {% endif %} ccam-breadcrumb-item" >
 
     {% if bootstrap_icon %}
-        <i class="{{ icon }}"></i>
+        <i class="{{ icon }} pe-2"></i>
+    {% elif image_icon %}
+        <img class="green-svg pe-2" src="{% static icon_path %}" alt="Breadcrumb icon" width="30" height="30"/>
     {% else %}
-        <span class="material-symbols-{{ icon_style }} green-svg">{{ icon }}</span>
+        <span class="material-symbols-{{ icon_style }} green-svg pe-2">{{ icon }}</span>
     {% endif %}
     {{ text }}
     {% if not last_item %}

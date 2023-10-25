@@ -86,6 +86,10 @@
         </div>
       {% endfor %}
     {% endif %}
+    <header class="breadcrumbs d-flex justfiy-content-start align-items-center pb-4">
+      {% block breadcrumb_items %}
+      {% endblock breadcrumb_items %}
+    </header>
     {% block content %}
       <p>Use this document as a way to quick start any new project.</p>
     {% endblock content %}

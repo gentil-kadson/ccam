@@ -5,7 +5,15 @@ register = template.Library()
 
 @register.inclusion_tag("core/_breadcrumb_item.html")
 def breadcrumb_item(
-    text: str, icon: str, href="", bootstrap_icon=False, active=False, icon_style="outlined", last_item=False
+    text: str,
+    icon: str = "",
+    href="",
+    bootstrap_icon=False,
+    active=False,
+    icon_style="outlined",
+    last_item=False,
+    image_icon=False,
+    icon_path="",
 ):
     return {
         "text": text,
@@ -15,4 +23,6 @@ def breadcrumb_item(
         "icon_style": icon_style,
         "last_item": last_item,
         "href": href,
+        "image_icon": image_icon,
+        "icon_path": icon_path,
     }
