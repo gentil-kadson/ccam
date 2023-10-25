@@ -1,5 +1,11 @@
 {% extends "base.html" %}
 {% load static %}
+{% load breadcrumb_item %}
+{% block breadcrumb_items %}
+  {% breadcrumb_item text="Home" icon="home" href='people:managers:home' %}
+  {% breadcrumb_item text="Professores" icon="list" href='people:teachers:list' %}
+  {% breadcrumb_item text="Visualizar Professor" icon="visibility" active=True last_item=True %}
+{% endblock breadcrumb_items %}
 
 {% block content %}
     <main id="container" class="centered-content student-details-center-vertical">
