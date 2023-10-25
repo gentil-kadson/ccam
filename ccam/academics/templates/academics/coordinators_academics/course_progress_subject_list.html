@@ -104,7 +104,10 @@
             <td>Superior</td>
             <td>4º</td>
             <td>
-                {% include 'core/_table_button.html' with button_text="Banca" color_class="green-svg" icon_path='people/images/icons/gavelIcon.svg' alt_text="A green eye icon" href='academics:cd_coordinators_committee' %}
+              <div class="d-flex justify-content-around">
+                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='people/images/icons/gavelIcon.svg' alt_text="A green eye" href='academics:cd_coordinators_committee' %}
+                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='images/icons/deleteIcon.svg' alt_text="A green recycle bin" custom_class="confirmation-modal-trigger" %}
+              </div>
             </td>
           </tr>
           <tr>
@@ -113,7 +116,10 @@
             <td>Superior</td>
             <td>4º</td>
             <td>
-                {% include 'core/_table_button.html' with button_text="Banca" color_class="green-svg" icon_path='people/images/icons/gavelIcon.svg' alt_text="A green eye icon" href='academics:cd_coordinators_committee' %}
+              <div class="d-flex justify-content-around">
+                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='people/images/icons/gavelIcon.svg' alt_text="A green eye" href='academics:cd_coordinators_committee' %}
+                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='images/icons/deleteIcon.svg' alt_text="A green recycle bin" custom_class="confirmation-modal-trigger" %}
+              </div>
             </td>
           </tr>
           <tr>
@@ -122,7 +128,10 @@
             <td>Superior</td>
             <td>4º</td>
             <td>
-                {% include 'core/_table_button.html' with button_text="Banca" color_class="green-svg" icon_path='people/images/icons/gavelIcon.svg' alt_text="A green eye icon" href='academics:cd_coordinators_committee' %}
+              <div class="d-flex justify-content-around">
+                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='people/images/icons/gavelIcon.svg' alt_text="A green eye" href='academics:cd_coordinators_committee' %}
+                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='images/icons/deleteIcon.svg' alt_text="A green recycle bin" custom_class="confirmation-modal-trigger" %}
+              </div>
             </td>
           </tr>
           <tr>
@@ -131,12 +140,16 @@
             <td>Superior</td>
             <td>4º</td>
             <td>
-                {% include 'core/_table_button.html' with button_text="Banca" color_class="green-svg" icon_path='people/images/icons/gavelIcon.svg' alt_text="A green eye icon" href='academics:cd_coordinators_committee' %}
+              <div class="d-flex justify-content-around">
+                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='people/images/icons/gavelIcon.svg' alt_text="A green eye" href='academics:cd_coordinators_committee' %}
+                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='images/icons/deleteIcon.svg' alt_text="A green recycle bin" custom_class="confirmation-modal-trigger" %}
+              </div>
             </td>
           </tr>
         </tbody>
       </table>
     </section>
+    {% include "core/_confirmation_modal.html" with text="Tem certeza que deseja excluir a disciplina" highlighted_text="APOO" %}
     {% include "core/_table_pagination.html" %}
   </main>
 {% endblock content %}
