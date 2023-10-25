@@ -1,6 +1,13 @@
 {% extends "base.html" %}
 
 {% load static %}
+{% load breadcrumb_item %}
+
+{% block breadcrumb_items %}
+  {% breadcrumb_item text="Home" icon="home" href='people:teachers:home' %}
+  {% breadcrumb_item text="Aproveitamento de Disciplina" icon="export_notes" href='academics:subject_course_progress_list' %}
+  {% breadcrumb_item text="Avaliação" icon="approval" active=True last_item=True %}
+{% endblock breadcrumb_items %}
 
 {% block content %}
   <main id="container" class="view-table-section">

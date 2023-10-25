@@ -1,4 +1,9 @@
 {% extends "base.html" %}
+{% load breadcrumb_item %}
+
+{% block breadcrumb_items %}
+  {% breadcrumb_item text="Home" icon="home" active=True last_item=True %}
+{% endblock breadcrumb_items %}
 
 {% block content %}
     <main id="container">

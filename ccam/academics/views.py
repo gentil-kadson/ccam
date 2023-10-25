@@ -45,6 +45,10 @@ class SubjectListView(TemplateView):
     template_name = "academics/teacher_academics/subject_list.html"
 
 
+class SubjectCourseProgressListView(TemplateView):
+    template_name = "academics/teacher_academics/subject_course_progress_list.html"
+
+
 class SubjectKnowledgeCertificateAssessView(TemplateView):
     template_name = "academics/teacher_academics/knowledge_certificate_assessment.html"
 
