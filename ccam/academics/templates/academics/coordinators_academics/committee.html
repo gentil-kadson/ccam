@@ -1,5 +1,12 @@
 {% extends 'base.html' %}
 
+{% load breadcrumb_item %}
+{% block breadcrumb_items %}
+  {% breadcrumb_item text="Home" icon="home" href='people:coordinators:home' %}
+  {% breadcrumb_item text="Certificação de Conhecimentos" image_icon=True icon_path='people/images/icons/diploma.svg' href='academics:kc_coordinators_subjects_list' %}
+  {% breadcrumb_item text="APOO" icon="school" active=True last_item=True %}
+{% endblock breadcrumb_items %}
+
 {% block content %}
   <main id="container"
         class="centered-content student-details-center-vertical">

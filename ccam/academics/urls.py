@@ -4,6 +4,8 @@ from ccam.academics.views import (
     AddCourseView,
     CoordinatorsAddCourse,
     CoordinatorsCommittee,
+    CoordinatorsCourseProgressComittee,
+    CoordinatorsCourseProgressSubjectList,
     CoordinatorsSubjectList,
     CourseProgressCreateView,
     KnowledgeCertificateCreateView,
@@ -44,7 +46,7 @@ urlpatterns = [
     ),
     path(
         "coordinators/courses-dispensal/subject/committee/",
-        CoordinatorsCommittee.as_view(),
+        CoordinatorsCourseProgressComittee.as_view(),
         name="cd_coordinators_committee",
     ),
     path("add-course/", CoordinatorsAddCourse.as_view(), name="add_course"),
@@ -55,7 +57,7 @@ urlpatterns = [
     ),
     path(
         "coordinators/courses-dispensal/subjects/list/",
-        CoordinatorsSubjectList.as_view(),
+        CoordinatorsCourseProgressSubjectList.as_view(),
         name="cd_coordinators_subjects_list",
     ),
     path("subjects/list/", SubjectListView.as_view(), name="subject_list"),

@@ -29,12 +29,20 @@ class CoordinatorsCommittee(TemplateView):
     template_name = "academics/coordinators_academics/committee.html"
 
 
+class CoordinatorsCourseProgressComittee(TemplateView):
+    template_name = "academics/coordinators_academics/course_progress_committee.html"
+
+
 class CoordinatorsAddCourse(TemplateView):
     template_name = "academics/coordinators_academics/add_course.html"
 
 
 class CoordinatorsSubjectList(TemplateView):
     template_name = "academics/coordinators_academics/subjects_list.html"
+
+
+class CoordinatorsCourseProgressSubjectList(TemplateView):
+    template_name = "academics/coordinators_academics/course_progress_subject_list.html"
 
 
 class AddCourseView(TemplateView):
