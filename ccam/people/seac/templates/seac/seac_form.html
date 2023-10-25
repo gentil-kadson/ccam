@@ -1,6 +1,12 @@
 {% extends "base.html" %}
 
 {% load static %}
+{% load breadcrumb_item %}
+
+{% block breadcrumb_items %}
+  {% breadcrumb_item text="Home" icon="home" href='people:managers:home' %}
+  {% breadcrumb_item text="Cadastrar Funcionário da SEAC" icon="add_circle" active=True last_item=True %}
+{% endblock breadcrumb_items %}
 
 {% block content %}
   <main id="container">
