@@ -1,3 +1,5 @@
-from django.db import models
+from ccam.core.models import BaseModel
 
-# Create your models here.
+
+class SEACStaff(BaseModel):
+    pass
