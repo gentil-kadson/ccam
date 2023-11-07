@@ -23,3 +23,5 @@ django-cors-headers==4.2.0  # https://github.com/adamchainz/django-cors-headers
 drf-spectacular==0.26.5  # https://github.com/tfranzel/drf-spectacular
 # Django Bootstrap Icons
 django-bootstrap-icons==0.8.6
+# Django CPF Field
+django-cpf==0.1.0

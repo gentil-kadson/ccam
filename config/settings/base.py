@@ -88,6 +88,7 @@ THIRD_PARTY_APPS = [
     "corsheaders",
     "drf_spectacular",
     "django_bootstrap_icons",
+    "cpf_field",
 ]
 
 LOCAL_APPS = [
