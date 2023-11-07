@@ -1,3 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Person
+from .seac.models import SEACStaff
+
+admin.site.register(SEACStaff)
+admin.site.register(Person)
