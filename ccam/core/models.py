@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.db import models
 
@@ -5,7 +6,7 @@ User = get_user_model()
 
 
 def get_sentinel_user():
-    return User.objects.get_or_create(username="deleted")[0]
+    return get_user_model().objects.get_or_create(username="deleted")[0]
 
 
 class TimeStampedModel(models.Model):
@@ -18,10 +19,14 @@ class TimeStampedModel(models.Model):
 
 class BaseModel(TimeStampedModel):
     created_by = models.ForeignKey(
-        to=User, on_delete=models.SET(get_sentinel_user().id), related_name="%(app_label)s_%(class)s_created_by"
+        to=settings.AUTH_USER_MODEL,
+        on_delete=models.SET(get_sentinel_user),
+        related_name="%(app_label)s_%(class)s_created_by",
     )
     updated_by = models.ForeignKey(
-        to=User, on_delete=models.SET(get_sentinel_user().id), related_name="%(app_label)s_%(class)s_updated_by"
+        to=settings.AUTH_USER_MODEL,
+        on_delete=models.SET(get_sentinel_user),
+        related_name="%(app_label)s_%(class)s_updated_by",
     )
 
     class Meta:

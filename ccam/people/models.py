@@ -1,13 +1,11 @@
 import cpf_field.models as cpf_field_models
-from django.contrib.auth import get_user_model
+from django.conf import settings
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from ccam.core.constants import MAX_LENGTH_NAME_FIELD, MAX_LENGTH_REGISTRATION_FIELD
 from ccam.core.models import BaseModel
 from ccam.core.utils import user_directory_path
-
-User = get_user_model()
 
 
 class Person(BaseModel):
@@ -21,7 +19,7 @@ class Person(BaseModel):
     registration = models.CharField(max_length=MAX_LENGTH_REGISTRATION_FIELD, unique=True, verbose_name=_("Matrícula"))
     sex = models.CharField(max_length=1, choices=Sex.choices)
     cpf = cpf_field_models.CPFField(verbose_name=_("CPF"), unique=True)
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="person")
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="person")
 
     class Meta:
         verbose_name = _("Person")
