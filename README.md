@@ -77,4 +77,9 @@ celery -A config.celery_app worker -B -l info
 The following details how to deploy this application.
 
 ## Material Symbols and Bootstrap Icons
-Install [material-symbols](https://github.com/marella/material-symbols/tree/main) npm module in **base 'static'** folder
+Run ```npm install or npm i``` inside  ```ccam/static``` folder.
+
+## Setting Up Database
+Run the migration files normally and then use `load_db_users` to preload:
+* A superuser (username: admin; password:ccam.admin@PF)
+* A SEAC Coordinator (username: 20231874523467; password: 23647863041)
