@@ -3,6 +3,8 @@ from django.db import transaction
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 
+from ccam.people.utils import clean_cpf
+
 from .models import Person
 
 User = get_user_model()
@@ -11,7 +13,10 @@ User = get_user_model()
 @receiver(signal=pre_save, sender=Person)
 def create_person_auth_user(sender, instance: Person, **kwargs):
     with transaction.atomic():
-        if not instance.user:
-            auth_user = User.objects.create_user(name=instance.registration, password=instance.cpf)
+        cleaned_cpf = clean_cpf(instance.cpf)
+        try:
+            auth_user = User.objects.get(username=instance.registration, password=cleaned_cpf)
+            # TODO: Update fields accordingly
+        except User.DoesNotExist:
+            auth_user = User.objects.create_user(username=instance.registration, password=cleaned_cpf)
             instance.user = auth_user
-            instance.save()

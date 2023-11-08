@@ -10,7 +10,7 @@ from ccam.core.utils import user_directory_path
 
 class Person(BaseModel):
     class Sex(models.TextChoices):
-        MALE = "H", _("Homem")
+        MALE = "M", _("Homem")
         FEMALE = "F", _("Mulher")
 
     name = models.CharField(max_length=MAX_LENGTH_NAME_FIELD, verbose_name=_("Nome"))
