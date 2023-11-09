@@ -1,4 +1,6 @@
-from django.views.generic import TemplateView
+from django.views.generic import CreateView, TemplateView
+
+from .forms import SEACStaffForm
 
 
 class SeacHomeView(TemplateView):
@@ -9,8 +11,9 @@ class SeacStaffListView(TemplateView):
     template_name = "seac/seac_staff_list.html"
 
 
-class SeacStaffCreateView(TemplateView):
-    template_name = "seac/seac_form.html"
+class SeacStaffCreateView(CreateView):
+    form_class = SEACStaffForm
+    template_name = "seac/seac_staff_form.html"
 
 
 class SeacStaffDetailView(TemplateView):
