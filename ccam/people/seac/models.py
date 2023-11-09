@@ -11,8 +11,8 @@ class SEACStaff(BaseModel):
         COORDINATOR = "CO", _("Coordenador")
         EMPLOYEE = "FU", _("Funcionário")
 
-    phone_line = models.CharField(max_length=MAX_LENGTH_PHONE_LINE_FIELD, unique=True)
-    role = models.CharField(max_length=2, choices=Role.choices)
+    phone_line = models.CharField(max_length=MAX_LENGTH_PHONE_LINE_FIELD, unique=True, verbose_name=_("Fone Ramal"))
+    role = models.CharField(max_length=2, choices=Role.choices, verbose_name=_("Responsabilidade"))
     person = models.OneToOneField(Person, on_delete=models.CASCADE, related_name="person")
 
     class Meta:
