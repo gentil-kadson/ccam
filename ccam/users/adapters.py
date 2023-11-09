@@ -6,9 +6,13 @@ from allauth.account.adapter import DefaultAccountAdapter
 from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
 from django.conf import settings
 from django.http import HttpRequest
+from django.urls import reverse_lazy
+
+from ccam.core.constants import SEAC_COORDINATOR_GROUP_NAME
 
 if typing.TYPE_CHECKING:
     from allauth.socialaccount.models import SocialLogin
+
     from ccam.users.models import User
 
 
@@ -35,3 +39,13 @@ class SocialAccountAdapter(DefaultSocialAccountAdapter):
             if last_name := data.get("last_name"):
                 user.name += f" {last_name}"
         return super().populate_user(request, sociallogin, data)
+
+
+class PeopleAccountAdapter(AccountAdapter):
+    GROUPS_HOME_URLS = {
+        SEAC_COORDINATOR_GROUP_NAME: reverse_lazy("people:managers:home"),
+    }
+
+    def get_login_redirect_url(self, request):
+        user_group_name = request.user.groups.first().name
+        return self.GROUPS_HOME_URLS[user_group_name]
