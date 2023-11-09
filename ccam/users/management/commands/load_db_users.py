@@ -1,10 +1,12 @@
 from pathlib import Path
 
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import Group
 from django.core.files import File
 from django.core.management.base import BaseCommand
 from django.db import IntegrityError, transaction
 
+from ccam.core.constants import SEAC_COORDINATOR_GROUP_NAME
 from ccam.core.models import get_sentinel_user
 from ccam.people.models import Person
 from ccam.people.seac.models import SEACStaff
@@ -43,13 +45,15 @@ class Command(BaseCommand):
                     },
                 )
 
-            SEACStaff.objects.get_or_create(
+            seac_staff, _ = SEACStaff.objects.get_or_create(
                 phone_line="(84) 4005 4109",
                 role=SEACStaff.Role.COORDINATOR,
                 person=seac_person,
                 created_by=sentinel,
                 updated_by=sentinel,
             )
+            seac_coordinator_group = Group.objects.get(name=SEAC_COORDINATOR_GROUP_NAME)
+            seac_staff.person.user.groups.add(seac_coordinator_group)
             if not person_created:
                 self.stdout.write(self.style.WARNING(f"SEAC Coordinator {seac_person.name} is already created"))
             else:
