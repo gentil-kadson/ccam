@@ -1,0 +1,12 @@
+{% load static %}
+
+<label for="{{ widget.attrs.id }}" class="ccam-file-input-label">
+    <p class="m-0 p-0 green-text fs-6">{{ widget.attrs.label }}</p>
+    <button class="ccam-button ccam-file-input-button">
+        Carregar
+        <img src="{% static 'images/icons/fileUpload.svg' %}"
+            alt="Green file being uploaded"
+            class="green-svg" />
+    </button>
+</label>
+<input class="d-none" type="file" name="{{ widget.name }}" id="{{ widget.attrs.id }}" />

@@ -10,16 +10,7 @@
         {{ person_form.cpf }}
     </div>
     <div class="ccam-file-input">
-        <label for="new" class="ccam-file-input-label">
-            <p class="m-0 p-0 green-text fs-6">Foto de perfil</p>
-            <button class="ccam-button ccam-file-input-button">
-                Carregar
-                <img src="{% static 'images/icons/fileUpload.svg' %}"
-                    alt="Green file being uploaded"
-                    class="green-svg" />
-            </button>
-        </label>
-        <input class="d-none" type="file" name="new" id="new" />
+        {{ person_form.profile_picture }}
     </div>
 </fieldset>
 
@@ -33,11 +24,9 @@
         {{ person_form.email }}
     </div>
     <div class="ccam-input">
-        <label for="sex">Sexo</label>
+        {{ person_form.sex.label_tag }}
         <div class="ccam-select">
-            <select name="sex" id="sex">
-                <option value="------">------</option>
-            </select>
+            {{ person_form.sex }}
         </div>
     </div>
 </fieldset>
