@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView, TemplateView
 
 from ccam.people.mixins import PersonFormMixin
@@ -13,7 +14,7 @@ class SeacStaffListView(TemplateView):
     template_name = "seac/seac_staff_list.html"
 
 
-class SeacStaffCreateView(PersonFormMixin, CreateView):
+class SeacStaffCreateView(LoginRequiredMixin, PersonFormMixin, CreateView):
     form_class = SEACStaffForm
     template_name = "seac/seac_staff_form.html"
 
