@@ -41,7 +41,7 @@ class KnowledgeCertificate(BaseModel):
         ANALYZING = "PR", _("Em análise")
         REJECTED = "ERR", _("Recusado")
 
-    accessed_by = models.ForeignKey(SEACStaff, on_delete=models.CASCADE, related_name="knowledge_certificate_assessor")
+    assessed_by = models.ForeignKey(SEACStaff, on_delete=models.CASCADE, related_name="knowledge_certificate_assessor")
     student = models.ForeignKey('students.Student', on_delete=models.CASCADE,
                                 related_name="knowledge_certificate_student")
     subjects = models.ManyToManyField(
@@ -75,7 +75,7 @@ class SubjectDispensal(BaseModel):
         ANALYZING = "PR", _("Em análise")
         REJECTED = "ERR", _("Recusado")
 
-    accessed_by = models.ForeignKey(SEACStaff, on_delete=models.CASCADE, related_name="subject_dispensal_assessor")
+    assessed_by = models.ForeignKey(SEACStaff, on_delete=models.CASCADE, related_name="subject_dispensal_assessor")
     student = models.ForeignKey('students.Student', on_delete=models.CASCADE, related_name="subject_dispensal_student")
     subjects = models.ManyToManyField(Subject, related_name="subject_dispensal_subjects", through='SubjectDGrades')
 
