@@ -4,12 +4,14 @@ from django.core.validators import MaxValueValidator
 
 from ccam.core.models import BaseModel
 from ccam.people.models import Person
+from ccam.academics.models import Course
 
 
 class Student(BaseModel):
     current_grade_semester = models.PositiveSmallIntegerField(
         verbose_name=_("Ano/Período"), validators=[MaxValueValidator(8)])
     person = models.OneToOneField(Person, on_delete=models.CASCADE, related_name="student_person")
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="student_course")
 
     class Meta:
         verbose_name = _("Student")
