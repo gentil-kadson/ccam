@@ -23,8 +23,8 @@ class Person(BaseModel):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="person")
 
     class Meta:
-        verbose_name = _("Person")
-        verbose_name_plural = _("People")
+        verbose_name = _("Pessoa")
+        verbose_name_plural = _("Pessoas")
 
     def __str__(self):
         return f"{self.name} - {self.registration}"

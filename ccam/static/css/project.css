@@ -81,3 +81,11 @@ header.breadcrumbs {
   padding-left: 100px;
   padding-right: 100px;
 }
+
+.bg-form-warning {
+  background-color: #8F701A;
+}
+
+.warning-margin {
+  margin: 0 6.25rem;
+}

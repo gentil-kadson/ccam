@@ -1,6 +1,8 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import redirect
+from django.contrib.messages.views import SuccessMessageMixin
+from django.db import transaction
 from django.urls import reverse_lazy
+from django.utils.translation import gettext_lazy as _
 from django.views.generic import CreateView, TemplateView
 
 from .forms import SEACStaffPersonMultiForm
@@ -15,23 +17,23 @@ class SeacStaffListView(TemplateView):
     template_name = "seac/seac_staff_list.html"
 
 
-class SeacStaffCreateView(LoginRequiredMixin, CreateView):
+class SeacStaffCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     form_class = SEACStaffPersonMultiForm
     template_name = "seac/seac_staff_form.html"
     model = SEACStaff
     success_url = reverse_lazy("people:managers:home")
+    success_message = _("Funcionário da SEAC criado com sucesso!")
 
+    @transaction.atomic
     def form_valid(self, form):
         person = form["person"].save(commit=False)
         person.created_by = self.request.user
         person.updated_by = self.request.user
-        person.save()
         seac_staff = form["seacstaff"].save(commit=False)
         seac_staff.person = person
         seac_staff.created_by = self.request.user
         seac_staff.updated_by = self.request.user
-        seac_staff.save()
-        return redirect(self.success_url)
+        return super().form_valid(form)
 
 
 class SeacStaffDetailView(TemplateView):

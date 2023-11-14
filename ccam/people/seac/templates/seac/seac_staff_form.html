@@ -2,6 +2,7 @@
 
 {% load static %}
 {% load breadcrumb_item %}
+{% load i18n %}
 
 {% block breadcrumb_items %}
   {% breadcrumb_item text="Home" icon="home" href='people:managers:home' %}
@@ -9,16 +10,22 @@
 {% endblock breadcrumb_items %}
 
 {% block content %}
-  <main id="container">
+<main id="container">
     {% for field in form %}
-      <div class="fieldWrapper">
-        {{ field.errors }}
+      {% for error in field.errors %}
+      <div class="alert alert-dismissible bg-form-warning {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+        <strong>{{ field.label }}</strong>: {% translate error %}
+        <button type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"></button>
       </div>
+      {% endfor %}
     {% endfor %}
     <header>
       <h1 class="fw-bold green-text">Cadastrar Funcionário da SEAC</h1>
     </header>
-    <form method="post"
+    <form method="post" enctype="multipart/form-data"
           class="w-100 d-flex flex-column justify-content-evenly"
           id="seac-form">
       {% csrf_token %}

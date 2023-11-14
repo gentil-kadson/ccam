@@ -78,7 +78,7 @@
     {% endblock header %}
     {% if messages %}
       {% for message in messages %}
-        <div class="alert alert-dismissible {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+        <div class="alert alert-dismissible warning-margin {% if message.tags %}alert-{{ message.tags }}{% endif %}">
           {{ message }}
           <button type="button"
                   class="btn-close"
