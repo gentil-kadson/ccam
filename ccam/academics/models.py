@@ -3,7 +3,6 @@ from django.utils.translation import gettext_lazy as _
 from django.core.validators import MaxValueValidator
 
 from ccam.core.models import BaseModel
-# from ccam.people.students.models import Student
 from ccam.people.coordinators.models import Coordinator
 from ccam.people.seac.models import SEACStaff
 
