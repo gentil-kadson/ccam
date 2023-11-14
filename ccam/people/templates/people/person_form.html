@@ -1,6 +1,6 @@
 {% load static %}
 
-<fieldset name="teste" class="row align-items-center">
+<fieldset class="row align-items-center">
     <div class="ccam-input">
         {{ person_form.registration.label_tag }}
         {{ person_form.registration }}
@@ -28,5 +28,12 @@
         <div class="ccam-select">
             {{ person_form.sex }}
         </div>
+    </div>
+</fieldset>
+
+<fieldset class="row align-items-center">
+    <div class="ccam-input">
+        {{ person_form.name.label_tag }}
+        {{ person_form.name }}
     </div>
 </fieldset>

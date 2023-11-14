@@ -89,6 +89,7 @@ THIRD_PARTY_APPS = [
     "drf_spectacular",
     "django_bootstrap_icons",
     "cpf_field",
+    "betterforms",
 ]
 
 LOCAL_APPS = [

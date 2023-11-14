@@ -7,5 +7,5 @@ from ccam.people.models import Person
 class PersonForm(forms.ModelForm):
     class Meta:
         model = Person
-        fields = ("registration", "cpf", "profile_picture", "phone_number", "email", "sex")
+        fields = ("name", "registration", "cpf", "profile_picture", "phone_number", "email", "sex")
         widgets = {"profile_picture": CCAMFileWidget(attrs={"label": "Foto de perfil"})}

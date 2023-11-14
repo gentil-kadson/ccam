@@ -22,17 +22,17 @@
           class="w-100 d-flex flex-column justify-content-evenly"
           id="seac-form">
       {% csrf_token %}
-      {% include "people/person_form.html" with person_form=person_form %}
+      {% include "people/person_form.html" with person_form=form.person %}
         <fieldset class="row align-items-center mt-4">
             <div class="ccam-input">
-                {{ form.phone_line.label_tag }}
-                {{ form.phone_line }}
+                {{ form.seacstaff.phone_line.label_tag }}
+                {{ form.seacstaff.phone_line }}
             </div>
 
             <div class="ccam-input">
-                {{ form.role.label_tag }}
+                {{ form.seacstaff.role.label_tag }}
                 <div class="ccam-select">
-                    {{ form.role }}
+                    {{ form.seacstaff.role }}
                 </div>
             </div>
         </fieldset>
