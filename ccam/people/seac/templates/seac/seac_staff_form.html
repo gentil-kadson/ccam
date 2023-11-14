@@ -10,12 +10,18 @@
 
 {% block content %}
   <main id="container">
+    {% for field in form %}
+      <div class="fieldWrapper">
+        {{ field.errors }}
+      </div>
+    {% endfor %}
     <header>
       <h1 class="fw-bold green-text">Cadastrar Funcionário da SEAC</h1>
     </header>
     <form method="post"
           class="w-100 d-flex flex-column justify-content-evenly"
           id="seac-form">
+      {% csrf_token %}
       {% include "people/person_form.html" with person_form=person_form %}
         <fieldset class="row align-items-center mt-4">
             <div class="ccam-input">
