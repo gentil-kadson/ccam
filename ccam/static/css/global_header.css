@@ -1,30 +1,37 @@
 #global-header {
-    display: flex;
-    justify-content: space-between;
-    padding: 2.25rem 6.25rem;
-    background-color: var(--bg-color);
+  display: flex;
+  justify-content: space-between;
+  padding: 2.25rem 6.25rem;
+  background-color: var(--bg-color);
+}
+
+@media (max-width: 431px) {
+  #global-header {
+    display: none;
+  }
 }
 
 #global-header > #user-profile {
-display: flex;
-gap: 1.875rem;
-align-items: center;
+  display: flex;
+  gap: 1.875rem;
+  align-items: center;
 }
 
 #global-header > #user-profile > img {
-width: 4rem;
-height: 4rem;
-border-radius: 50%;
-border: solid 0.125rem var(--green);
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  border: solid 0.125rem var(--green);
 }
 
 #global-header > #user-profile > a > img {
-width: 2rem;
-height: 2rem;
-filter: invert(43%) sepia(95%) saturate(3914%) hue-rotate(347deg) brightness(98%) contrast(90%)
+  width: 2rem;
+  height: 2rem;
+  filter: invert(43%) sepia(95%) saturate(3914%) hue-rotate(347deg)
+    brightness(98%) contrast(90%);
 }
 
 #global-header > #user-profile > span {
-font-size: 1.6875rem;
-font-weight: bold;
+  font-size: 1.6875rem;
+  font-weight: bold;
 }
