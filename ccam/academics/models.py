@@ -18,3 +18,7 @@ class Course(BaseModel):
 
     def __str__(self) -> str:
         return f'{self.name}'
+
+
+class Subject(BaseModel):
+    pass
