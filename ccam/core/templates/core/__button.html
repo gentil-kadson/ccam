@@ -1,0 +1,17 @@
+{% load static %}
+
+<button class="ccam-button {{ custom_class }}"
+        type="{{ type }}"
+        {% if form_id %}form="{{ form_id }}"{% endif %}
+        {% if id %}id="{{ id }}"{% endif %}
+        >
+  {{ button_text }}
+
+  {% if bootstrap_icon %}
+        <i class="{{ icon }} pe-2 {{ color_class }}"></i>
+    {% elif image_icon %}
+        <img class="{{ color_class }} pe-2" src="{% static icon_path %}" alt="Breadcrumb icon" width="30" height="30"/>
+    {% else %}
+        <span class="material-symbols-{{ icon_style }} {{ color_class }} pe-2">{{ icon }}</span>
+    {% endif %}
+</button>

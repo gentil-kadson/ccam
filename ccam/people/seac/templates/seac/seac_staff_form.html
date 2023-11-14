@@ -2,6 +2,7 @@
 
 {% load static %}
 {% load breadcrumb_item %}
+{% load button %}
 
 {% block breadcrumb_items %}
   {% breadcrumb_item text="Home" icon="home" href='people:managers:home' %}
@@ -33,6 +34,6 @@
             </div>
         </fieldset>
 </form>
-{% include "core/_button.html" with button_text="Enviar" color_class="green-svg" icon_path='people/images/icons/doubleTick.svg' alt_text="A green double tick" custom_class="align-self-end" form_id="seac-form" %}
+{% button button_text="Enviar" color_class="green-svg" icon="done_all" custom_class="align-self-end" form_id="seac-form" %}
 </main>
 {% endblock content %}
