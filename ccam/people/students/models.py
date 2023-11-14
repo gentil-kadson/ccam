@@ -2,7 +2,6 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.core.validators import MaxValueValidator
 
-from ccam.core.constants import MAX_LENGTH_PHONE_LINE_FIELD
 from ccam.core.models import BaseModel
 from ccam.people.models import Person
 
