@@ -1,9 +1,7 @@
 from django.db import models
-from django.utils.translation import gettext_lazy as _
-
+from ccam.people.models import BaseModel, Person
 from ccam.core.constants import MAX_LENGTH_PHONE_LINE_FIELD
-from ccam.core.models import BaseModel
-from ccam.people.models import Person
+from django.utils.translation import gettext_lazy as _
 
 
 class SEACStaff(BaseModel):
@@ -16,8 +14,8 @@ class SEACStaff(BaseModel):
     person = models.OneToOneField(Person, on_delete=models.CASCADE, related_name="person")
 
     class Meta:
-        verbose_name = _("SEAC Staff")
-        verbose_name_plural = _("SEAC Staff")
+        verbose_name = _("Funcionário da SEAC")
+        verbose_name_plural = _("Funcionários da SEAC")
 
     def __str__(self):
         return f"{self.person.name} - {self.person.registration} - {self.role}"

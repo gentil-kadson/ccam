@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import SEACStaff
+from ccam.people.seac.models import SEACStaff
 
 
 class SEACStaffForm(forms.ModelForm):

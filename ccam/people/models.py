@@ -3,7 +3,7 @@ from django.conf import settings
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from ccam.core.constants import MAX_LENGTH_NAME_FIELD, MAX_LENGTH_PHONE_NUMBER_FIELD, MAX_LENGTH_REGISTRATION_FIELD
+from ccam.core.constants import MAX_LENGTH_NAME_FIELD, MAX_LENGTH_PHONE_NUMBER_FIELD, MAX_LENGTH_REGISTRATION_FIELD, MAX_LENGTH_PHONE_LINE_FIELD
 from ccam.core.models import BaseModel
 from ccam.core.utils import user_directory_path
 
@@ -23,8 +23,8 @@ class Person(BaseModel):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="person")
 
     class Meta:
-        verbose_name = _("Person")
-        verbose_name_plural = _("People")
+        verbose_name = _("Pessoa")
+        verbose_name_plural = _("Pessoas")
 
     def __str__(self):
         return f"{self.name} - {self.registration}"

@@ -3,19 +3,18 @@ from django.utils.translation import gettext_lazy as _
 from django.core.validators import MaxValueValidator
 
 from ccam.core.models import BaseModel
-from ccam.people.coordinators.models import Coordinator
-from ccam.people.seac.models import SEACStaff
 
 
 class Course(BaseModel):
     name = models.CharField(max_length=40, verbose_name=_("Nome do curso"))
     duration = models.SmallIntegerField(verbose_name=_(
         "Duração (em anos/períodos)"), validators=[MaxValueValidator(8)])
-    coordinator = models.OneToOneField(Coordinator, on_delete=models.CASCADE, related_name="coordinator")
+    coordinator = models.OneToOneField('coordinators.Coordinator',
+                                       on_delete=models.CASCADE, related_name="coordinator")
 
     class Meta:
-        verbose_name = _("Course")
-        verbose_name_plural = _("Courses")
+        verbose_name = _("Curso")
+        verbose_name_plural = _("Cursos")
 
     def __str__(self) -> str:
         return f'{self.name}'
@@ -28,8 +27,8 @@ class Subject(BaseModel):
         verbose_name=_("Ano/Período"), validators=[MaxValueValidator(8)], default=1)
 
     class Meta:
-        verbose_name = _("Subject")
-        verbose_name_plural = _("Subjects")
+        verbose_name = _("Disciplina")
+        verbose_name_plural = _("Disciplinas")
 
     def __str__(self):
         return f'{self.name}'
@@ -41,15 +40,16 @@ class KnowledgeCertificate(BaseModel):
         ANALYZING = "PR", _("Em análise")
         REJECTED = "ERR", _("Recusado")
 
-    assessed_by = models.ForeignKey(SEACStaff, on_delete=models.CASCADE, related_name="knowledge_certificate_assessor")
+    assessed_by = models.ForeignKey('seac.SEACStaff', on_delete=models.CASCADE,
+                                    related_name="knowledge_certificate_assessor")
     student = models.ForeignKey('students.Student', on_delete=models.CASCADE,
                                 related_name="knowledge_certificate_student")
     subjects = models.ManyToManyField(
         Subject, related_name="knowledge_certifiace_subjects", through='KnowledgeCGrades')
 
     class Meta:
-        verbose_name = _("Knowledge Certificate")
-        verbose_name_plural = _("Knowledge Certificates")
+        verbose_name = _("Certificação de Conhecimento")
+        verbose_name_plural = _("Certificação de Conhecimentos")
 
     def __str__(self):
         return f'{self.subjects}, {self.student.person.name} - {self.student.person.registration}'
@@ -62,8 +62,8 @@ class KnowledgeCGrades(BaseModel):
     grade = models.PositiveSmallIntegerField(verbose_name=_("Nota"), validators=[MaxValueValidator(100)])
 
     class Meta:
-        verbose_name = _("KnowledgeCGrades")
-        verbose_name_plural = _("KnowledgeCGrades")
+        verbose_name = _("CertificaçãoCNotas")
+        verbose_name_plural = _("CertificaçãoCNotas")
 
     def __str__(self):
         return f'{self.subject}; \n{self.knowledge_certificate.student.person.name}; \n{self.knowledge_certificate.student.person.registration}'
@@ -75,13 +75,14 @@ class SubjectDispensal(BaseModel):
         ANALYZING = "PR", _("Em análise")
         REJECTED = "ERR", _("Recusado")
 
-    assessed_by = models.ForeignKey(SEACStaff, on_delete=models.CASCADE, related_name="subject_dispensal_assessor")
+    assessed_by = models.ForeignKey('seac.SEACStaff', on_delete=models.CASCADE,
+                                    related_name="subject_dispensal_assessor")
     student = models.ForeignKey('students.Student', on_delete=models.CASCADE, related_name="subject_dispensal_student")
     subjects = models.ManyToManyField(Subject, related_name="subject_dispensal_subjects", through='SubjectDGrades')
 
     class Meta:
-        verbose_name = _("Subject Dispensal")
-        verbose_name_plural = _("Subject Dispensals")
+        verbose_name = _("Aproveitamento de Disciplina")
+        verbose_name_plural = _("Aproveitamento de Disciplinas")
 
     def __str__(self):
         return f'{self.subjects}, {self.student.person.name} - {self.student.person.registration}'
@@ -95,21 +96,22 @@ class SubjectDGrades(BaseModel):
         "Compatibilidade"), validators=[MaxValueValidator(100)])
 
     class Meta:
-        verbose_name = _("SubjectDGrades")
-        verbose_name_plural = _("SubjectDGrades")
+        verbose_name = _("AproveitamentoDCompatibilidades")
+        verbose_name_plural = _("AproveitamentoDCompatibilidades")
 
     def __str__(self):
         return f'{self.subject}; \n{self.subject_dispensal.student.person.name}; \n{self.subject_dispensal.student.person.registration}'
 
 
 class Committee(BaseModel):
-    coordinator = models.ForeignKey(Coordinator, on_delete=models.CASCADE, related_name="committee_coordinator")
+    coordinator = models.ForeignKey('coordinators.Coordinator', on_delete=models.CASCADE,
+                                    related_name="committee_coordinator")
     teachers = models.ManyToManyField('teachers.Teacher', related_name="committee_teachers")
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name="committee_subject")
 
     class Meta:
-        verbose_name = _("Committee")
-        verbose_name_plural = _("Committees")
+        verbose_name = _("Banca")
+        verbose_name_plural = _("Bancas")
 
     def __str__(self):
         return f'{self.subject.name}'
