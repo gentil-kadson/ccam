@@ -24,6 +24,8 @@ class Course(BaseModel):
 class Subject(BaseModel):
     name = models.CharField(max_length=40, verbose_name=_("Disciplina"))
     course = models.ManyToManyField(Course, related_name="subject_courses")
+    grade_semester_availability = models.PositiveSmallIntegerField(
+        verbose_name=_("Ano/Período"), validators=[MaxValueValidator(8)], default=1)
 
     class Meta:
         verbose_name = _("Subject")
@@ -98,3 +100,16 @@ class SubjectDGrades(BaseModel):
 
     def __str__(self):
         return f'{self.subject}; \n{self.subject_dispensal.student.person.name}; \n{self.subject_dispensal.student.person.registration}'
+
+
+class Committee(BaseModel):
+    coordinator = models.ForeignKey(Coordinator, on_delete=models.CASCADE, related_name="committee_coordinator")
+    teachers = models.ManyToManyField('teachers.Teacher', related_name="committee_teachers")
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name="committee_subject")
+
+    class Meta:
+        verbose_name = _("Committee")
+        verbose_name_plural = _("Committees")
+
+    def __str__(self):
+        return f'{self.subject.name}'
