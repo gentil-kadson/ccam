@@ -2,7 +2,6 @@
 
 {% load static %}
 {% load breadcrumb_item %}
-{% load i18n %}
 
 {% block breadcrumb_items %}
   {% breadcrumb_item text="Home" icon="home" href='people:managers:home' %}
@@ -11,17 +10,7 @@
 
 {% block content %}
 <main id="container">
-    {% for field in form %}
-      {% for error in field.errors %}
-      <div class="alert alert-dismissible bg-form-warning {% if message.tags %}alert-{{ message.tags }}{% endif %}">
-        <strong>{{ field.label }}</strong>: {% translate error %}
-        <button type="button"
-                class="btn-close"
-                data-bs-dismiss="alert"
-                aria-label="Close"></button>
-      </div>
-      {% endfor %}
-    {% endfor %}
+    {% include "core/_form_errors.html" %}
     <header>
       <h1 class="fw-bold green-text">Cadastrar Funcionário da SEAC</h1>
     </header>
