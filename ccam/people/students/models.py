@@ -9,7 +9,7 @@ from ccam.people.models import Person
 class Student(BaseModel):
     current_grade_semester = models.PositiveSmallIntegerField(
         verbose_name=_("Ano/Período"), validators=[MaxValueValidator(8)])
-    person = models.OneToOneField(Person, on_delete=models.CASCADE, related_name="person")
+    person = models.OneToOneField(Person, on_delete=models.CASCADE, related_name="student_person")
 
     class Meta:
         verbose_name = _("Student")

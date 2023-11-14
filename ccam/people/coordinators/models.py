@@ -6,7 +6,7 @@ from ccam.people.models import Person
 
 
 class Coordinator(BaseModel):
-    person = models.OneToOneField(Person, on_delete=models.CASCADE, related_name="person")
+    person = models.OneToOneField(Person, on_delete=models.CASCADE, related_name="coordinator_person")
 
     class Meta:
         verbose_name = _("Coordinator")
