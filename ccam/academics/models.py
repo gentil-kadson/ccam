@@ -4,6 +4,8 @@ from django.core.validators import MaxValueValidator
 
 from ccam.core.models import BaseModel
 from ccam.people.coordinators.models import Coordinator
+from ccam.people.students.models import Student
+from ccam.people.seac.models import SEACStaff
 
 
 class Course(BaseModel):
@@ -30,3 +32,14 @@ class Subject(BaseModel):
 
     def __str__(self):
         return f'{self.name}'
+
+
+class KnowledgeCertificate(BaseModel):
+    class Status(models.TextChoices):
+        APPROVED = "AP", _("Aprovado")
+        ANALYZING = "PR", _("Em análise")
+        REJECTED = "ERR", _("Recusado")
+
+    accessed_by = models.ForeignKey(SEACStaff, on_delete=models.CASCADE, related_name="knowledge_certifiacte_assessor")
+    student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name="knowledge_certificate_student")
+    subjects = models.ManyToManyField(Subject, related_name="knowledge_certifiace_subjects")
