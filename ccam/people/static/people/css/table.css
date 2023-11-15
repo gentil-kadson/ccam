@@ -1,81 +1,88 @@
 .ccam-table tr:nth-child(odd) {
-    background-color: var(--table-cell-colour);
+  background-color: var(--table-cell-colour);
 }
 
 .ccam-table tr:nth-child(even) {
-    background-color: var(--element-dark);
+  background-color: var(--element-dark);
 }
 
 .ccam-table th:first-of-type {
-    border-radius: 15px 0px 0px 0px;
+  border-radius: 15px 0px 0px 0px;
 }
 
 .ccam-table th:last-of-type {
-    border-radius: 0px 15px 0px 0px;
+  border-radius: 0px 15px 0px 0px;
 }
 
 .ccam-table tbody tr:last-of-type td:first-of-type {
-    border-radius: 0px 0px 0px 15px;
+  border-radius: 0px 0px 0px 15px;
 }
 
 .ccam-table tbody tr:last-of-type td:last-of-type {
-    border-radius: 0px 0px 15px 0px;
+  border-radius: 0px 0px 15px 0px;
 }
 
 .ccam-table {
-    margin-top: 2.5rem;
-    width: 100%;
-    text-align: center;
-    vertical-align: middle;
-    padding: 10px 20px;
+  margin-top: 2.5rem;
+  width: 100%;
+  text-align: center;
+  vertical-align: middle;
+  padding: 10px 20px;
 }
 
 .ccam-table button {
-    margin: auto;
+  margin: auto;
 }
 
-.ccam-table th, .ccam-table td {
-    padding: 10px 10px;
+.ccam-table th,
+.ccam-table td {
+  padding: 10px 10px;
 }
 
 .ccam-table thead * {
-    background-color: var(--element-dark);
-    margin: auto;
+  background-color: var(--element-dark);
+  margin: auto;
 }
 
 .ccam-table thead img {
-    background-color: transparent;
-    filter: var(--green-svg);
-    margin-right: 5px;
+  background-color: transparent;
+  filter: var(--green-svg);
+  margin-right: 5px;
 }
 
 section#table-pagination {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    padding-top: 20px;
-    gap: 20px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-top: 20px;
+  gap: 20px;
 }
 
 #page-selector-input select {
-    background-color: var(--element-dark);
-    border: none;
-    padding: 4px 20px;
-    border-radius: 8px;
+  background-color: var(--element-dark);
+  border: none;
+  padding: 4px 20px;
+  border-radius: 8px;
 }
 
 #table-navigation-arrows > a:last-of-type img {
-    transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 
 #table-navigation-arrows {
-    display: flex;
-    gap: 10px;
+  display: flex;
+  gap: 10px;
 }
 
 #table-navigation-arrows > a > button {
-    background-color: var(--element-dark);
-    border: none;
-    padding: 8px;
-    border-radius: 8px;
+  background-color: var(--element-dark);
+  border: none;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+@media (max-width: 431px) {
+  section {
+    overflow-x: auto;
+  }
 }
