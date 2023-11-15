@@ -1,26 +1,27 @@
 /* These styles are generated from project.scss. */
 :root {
   --bg-color: #202020;
-  --green: #0BDA51;
-  --white: #FFF;
-  --red : #EE4B2B;
+  --green: #0bda51;
+  --white: #fff;
+  --red: #ee4b2b;
   --element-dark: #353935;
   --black-border: #000000;
-  --palceholder-text-color: #B5B5B5;
-  --table-cell-colour: #28282B;
-  --status-analysis: #E8D848;
-  --green-svg: invert(51%) sepia(100%) saturate(602%) hue-rotate(93deg) brightness(104%) contrast(91%);
-  --red-svg: brightness(0) saturate(100%) invert(36%) sepia(98%) saturate(2331%) hue-rotate(345deg) brightness(96%) contrast(94%);
+  --palceholder-text-color: #b5b5b5;
+  --table-cell-colour: #28282b;
+  --status-analysis: #e8d848;
+  --green-svg: invert(51%) sepia(100%) saturate(602%) hue-rotate(93deg)
+    brightness(104%) contrast(91%);
+  --red-svg: brightness(0) saturate(100%) invert(36%) sepia(98%) saturate(2331%)
+    hue-rotate(345deg) brightness(96%) contrast(94%);
 }
 
 * {
   margin: 0;
   padding: 0;
   color: var(--white);
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   box-sizing: border-box;
 }
-
 
 .alert-debug {
   color: black;
@@ -34,11 +35,13 @@
   border-color: #eed3d7;
 }
 
-address, ul {
+address,
+ul {
   margin-bottom: 0;
 }
 
-html, body {
+html,
+body {
   height: 100%;
 }
 
@@ -80,4 +83,19 @@ main#container {
 header.breadcrumbs {
   padding-left: 100px;
   padding-right: 100px;
+}
+
+@media (max-width: 431px) {
+  header.breadcrumbs {
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 0;
+    padding-left: 24px;
+    padding-top: 30px;
+  }
+
+  main#container {
+    padding: 30px 24px;
+  }
 }

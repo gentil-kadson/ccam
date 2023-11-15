@@ -53,8 +53,17 @@
     gap: 2rem;
 }
 
+@media (max-width: 431px) {
+    .student-info {
+        flex-direction: column;
+        padding: 40px 15px;
+    }
+}
+
 @media (min-width: 1441px) {
     .student-details-center-vertical {
         justify-content: center;
     }
 }
+
+

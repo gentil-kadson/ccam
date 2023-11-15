@@ -14,3 +14,10 @@
 .ccam-file-input {
     width: fit-content;
 }
+
+@media (max-width: 431px) {
+    .ccam-file-input-label p {
+        width: 15.625rem;
+        text-wrap: wrap;
+    }
+}
