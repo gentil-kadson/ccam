@@ -65,3 +65,21 @@
     background-color: inherit;
     text-align: center;
 }
+
+@media (max-width: 431px) {
+    #knowledge-certificate-form, #student-data {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #subject-data {
+        display: block;
+        padding-left: 2.5rem;
+    }
+
+    #knowledge-certificate-form + button {
+        align-self: center !important;
+        margin-top: 40px;
+    }
+}
