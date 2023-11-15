@@ -82,7 +82,12 @@ section#table-pagination {
 }
 
 @media (max-width: 431px) {
-  section {
-    overflow-x: auto;
+  main#container section:nth-of-type(2), main#container > section section:last-of-type {
+    width: auto;
+    overflow: auto;
+  }
+
+  main#container > section {
+    width: 100%;
   }
 }

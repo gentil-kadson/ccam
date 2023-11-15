@@ -24,6 +24,7 @@
   .filter-section {
     flex-direction: column;
     justify-content: center;
+    align-items: center;
   }
 
   .filter-section button {
@@ -33,6 +34,7 @@
   }
 
   .fields-container {
+    flex-direction: column;
     justify-content: center;
   }
 }

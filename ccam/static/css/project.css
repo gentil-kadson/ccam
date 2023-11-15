@@ -87,7 +87,12 @@ header.breadcrumbs {
 
 @media (max-width: 431px) {
   header.breadcrumbs {
-    padding-left: 1.25rem;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 0;
+    padding-left: 24px;
+    padding-top: 30px;
   }
 
   main#container {
