@@ -65,3 +65,30 @@
     background-color: inherit;
     text-align: center;
 }
+
+@media (max-width: 431px) {
+    #knowledge-certificate-form, #student-data, #course-progress-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #course-progress-file-inputs, #course-progress-file-inputs .ccam-file-input {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #knowledge-certificate-form + button {
+        align-self: center !important;
+        margin-top: 40px;
+    }
+
+    #course-progress-file-inputs {
+        gap: 2rem;
+    }
+
+    #course-progress-form + button {
+        margin-top: 30px;
+        align-self: center !important;
+    }
+}

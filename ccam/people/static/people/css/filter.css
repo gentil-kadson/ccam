@@ -1,22 +1,40 @@
 .view-table-section {
-    width: 100%;
+  width: 100%;
 }
 
 .filter-section {
-    margin-top: 1.25rem;
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
+  margin-top: 1.25rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
 }
 
-
 .fields-container {
-    display: flex;
-    align-items: flex-end;
-    flex-wrap: wrap;
-    gap: 1.165rem;
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 1.165rem;
 }
 
 .fields-container button {
-    margin-left: auto;
+  margin-left: auto;
+}
+
+@media (max-width: 431px) {
+  .filter-section {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .filter-section button {
+    align-self: center;
+    margin-top: 1rem;
+    width: 18.75rem;
+  }
+
+  .fields-container {
+    flex-direction: column;
+    justify-content: center;
+  }
 }

@@ -3,7 +3,7 @@ from django.conf import settings
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from ccam.core.constants import MAX_LENGTH_NAME_FIELD, MAX_LENGTH_PHONE_NUMBER_FIELD, MAX_LENGTH_REGISTRATION_FIELD
+from ccam.core.constants import MAX_LENGTH_NAME_FIELD, MAX_LENGTH_PHONE_NUMBER_FIELD, MAX_LENGTH_REGISTRATION_FIELD, MAX_LENGTH_PHONE_LINE_FIELD
 from ccam.core.models import BaseModel
 from ccam.core.utils import user_directory_path
 

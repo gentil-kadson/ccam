@@ -1,50 +1,63 @@
 #main-footer {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background-color: var(--element-dark);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: var(--element-dark);
 }
 
 #ifrn-contact {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 #ifrn-contact > ul {
-list-style: none;
-font-weight: 500;
+  list-style: none;
+  font-weight: 500;
 }
 
 #ifrn-contact > ul > li > span {
-color: var(--green);
-font-weight: bold;
+  color: var(--green);
+  font-weight: bold;
 }
 
 #devs-contact {
-display: flex;
-flex-direction: column;
-justify-content: center;
-font-size: 0.8125rem;
-padding: 1.5rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 0.8125rem;
+  padding: 1.5rem 0;
 }
 
 #devs-contact > p:first-child {
-font-size: 1.25rem;
+  font-size: 1.25rem;
 }
 
 #devs-contact > p:not(p:first-child) {
-font-size: 0.625rem;
+  font-size: 0.625rem;
 }
 
 #devs-contact > p:first-child {
-font-weight: bold;
+  font-weight: bold;
 }
 
 #devs-contact > p:first-child > img {
-padding-right: 0.75rem;
+  padding-right: 0.75rem;
 }
 
 #devs-contact > p:not(p:first-child) > img {
-padding-right: 0.1875rem;
-filter: invert(99%) sepia(100%) saturate(0%) hue-rotate(286deg) brightness(111%) contrast(100%);
+  padding-right: 0.1875rem;
+  filter: invert(99%) sepia(100%) saturate(0%) hue-rotate(286deg)
+    brightness(111%) contrast(100%);
+}
+
+@media (max-width: 431px) {
+  #main-footer {
+    padding: 30px;
+    gap: 1rem;
+    flex-direction: column;
+  }
+
+  #ifrn-contact {
+    gap: 0.5rem;
+  }
 }

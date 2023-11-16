@@ -1,9 +1,7 @@
 from django.db import models
-from django.utils.translation import gettext_lazy as _
-
+from ccam.people.models import BaseModel, Person
 from ccam.core.constants import MAX_LENGTH_PHONE_LINE_FIELD
-from ccam.core.models import BaseModel
-from ccam.people.models import Person
+from django.utils.translation import gettext_lazy as _
 
 
 class SEACStaff(BaseModel):
