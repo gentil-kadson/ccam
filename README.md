@@ -80,6 +80,9 @@ The following details how to deploy this application.
 Run ```npm install or npm i``` inside  ```ccam/static``` folder.
 
 ## Setting Up Database
-Run the migration files normally and then use `load_db_users` to preload:
+Run the migration files normally and then run `load_db_people` for groups creation
+Then, use `load_db_users` to preload:
 * A superuser (username: admin; password:ccam.admin@PF)
 * A SEAC Coordinator (username: 20231874523467; password: 23647863041)
+
+Finnaly, use `load_db_academics` to load all courses to database.
