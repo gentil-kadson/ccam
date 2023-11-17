@@ -16,46 +16,7 @@
     <form method="post"
           class="w-100 d-flex flex-column justify-content-evenly"
           id="teachers-form">
-      <fieldset class="row align-items-center">
-        <div class="ccam-input">
-          <label for="registration">Matrícula</label>
-          <input type="text" name="registration" id="registration" />
-        </div>
-        <div class="ccam-input">
-          <label for="teacher-cpf">CPF</label>
-          <input type="text" name="teacher-cpf" id="teacher-cpf" />
-        </div>
-        <div class="ccam-file-input">
-          <label for="new" class="ccam-file-input-label">
-            <p class="m-0 p-0 green-text fs-6">Foto de perfil</p>
-            <button class="ccam-button ccam-file-input-button">
-              Carregar
-              <img src="{% static 'images/icons/fileUpload.svg' %}"
-                   alt="Green file being uploaded"
-                   class="green-svg" />
-            </button>
-          </label>
-          <input class="d-none" type="file" name="new" id="new" />
-        </div>
-      </fieldset>
-      <fieldset class="row align-items-center">
-        <div class="ccam-input">
-          <label for="phone-number">Fone</label>
-          <input type="text" name="phone-number" id="phone-number" />
-        </div>
-        <div class="ccam-input">
-          <label for="email">Email</label>
-          <input type="email" name="email" id="email" />
-        </div>
-        <div class="ccam-input">
-          <label for="sex">Sexo</label>
-          <div class="ccam-select">
-            <select name="sex" id="sex">
-              <option value="------">------</option>
-            </select>
-          </div>
-        </div>
-        </fieldset>
+        {% include "people/person_form.html" with person_form=form.person %}
         <fieldset class="row align-items-center mt-4">
         <legend class="fw-bold">Selecione as <span class="green-text">matérias</span> que ele irá lecionar:</legend>
             <div class="ccam-input">
