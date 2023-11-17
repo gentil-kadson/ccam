@@ -2,6 +2,7 @@
 
 {% load static %}
 {% load breadcrumb_item %}
+{% load bootstrap_icons %}
 {% block breadcrumb_items %}
   {% breadcrumb_item text="Home" icon="home" href='people:managers:home' %}
   {% breadcrumb_item text="Funcionários da SEAC" icon="list" active=True last_item=True %}
@@ -59,94 +60,58 @@
         <thead>
           <tr>
             <th>
-              <img src="{% static 'people/images/icons/signatureIcon.svg' %}"
-                   alt="A handwritten signature" />
+              <span class="material-symbols-outlined">
+                signature
+                </span>
               Nome
             </th>
             <th>
-              <img src="{% static 'people/images/icons/personVCard.svg' %}"
-                   alt="A VCard" />
+              {% bs_icon 'person-vcard-fill' %}
               CPF
             </th>
             <th>
-              <img src="{% static 'people/images/icons/badge.svg' %}"
-                   alt="A badge containing ID information" />
+              <span class="material-symbols-outlined">
+                badge
+              </span>
               Matrícula
             </th>
             <th>
-              <img src="{% static 'images/icons/email.svg' %}"
-                   alt="A mail letter envelope" />
+              <span class="material-symbols-outlined">
+                mail
+              </span>
               Email
             </th>
             <th>
-              <img src="{% static 'seac/images/icons/role.svg' %}"
-                   alt="A green group of three people" />
+              <span class="material-symbols-outlined">
+                groups_2
+              </span>
               Responsabilidade
             </th>
             <th>
-              <img src="{% static 'people/images/icons/actionIcon.svg' %}"
-                   alt="A green settings icon indicating actions you can take on a specific table" />
+              <span class="material-symbols-outlined">
+                tune
+              </span>
               Ações
             </th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Ernie & Bert</td>
-            <td>123.456.789-10</td>
-            <td>20221094040191</td>
-            <td>ernie.bert@sesame.com</td>
-            <td>TADS</td>
-            <td>
-              <div class="d-flex justify-content-around">
-                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='people/images/icons/detailsIcon.svg' alt_text="A green eye" href='people:seac:detail' %}
-                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='images/icons/editIcon.svg' alt_text="A green pen" href='people:seac:create' %}
-                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='images/icons/deleteIcon.svg' alt_text="A green recycle bin" custom_class="confirmation-modal-trigger" %}
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>Ernie & Bert</td>
-            <td>123.456.789-10</td>
-            <td>20221094040191</td>
-            <td>ernie.bert@sesame.com</td>
-            <td>TADS</td>
-            <td>
-              <div class="d-flex justify-content-around">
-                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='people/images/icons/detailsIcon.svg' alt_text="A green eye" href='people:seac:detail' %}
-                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='images/icons/editIcon.svg' alt_text="A green pen" href='people:seac:create' %}
-                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='images/icons/deleteIcon.svg' alt_text="A green recycle bin" custom_class="confirmation-modal-trigger" %}
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>Ernie & Bert</td>
-            <td>123.456.789-10</td>
-            <td>20221094040191</td>
-            <td>ernie.bert@sesame.com</td>
-            <td>TADS</td>
-            <td>
-              <div class="d-flex justify-content-around">
-                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='people/images/icons/detailsIcon.svg' alt_text="A green eye" href='people:seac:detail' %}
-                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='images/icons/editIcon.svg' alt_text="A green pen" href='people:seac:create' %}
-                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='images/icons/deleteIcon.svg' alt_text="A green recycle bin" custom_class="confirmation-modal-trigger" %}
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>Ernie & Bert</td>
-            <td>123.456.789-10</td>
-            <td>20221094040191</td>
-            <td>ernie.bert@sesame.com</td>
-            <td>TADS</td>
-            <td>
-              <div class="d-flex justify-content-around">
-                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='people/images/icons/detailsIcon.svg' alt_text="A green eye" href='people:seac:detail' %}
-                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='images/icons/editIcon.svg' alt_text="A green pen" href='people:seac:create' %}
-                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='images/icons/deleteIcon.svg' alt_text="A green recycle bin" custom_class="confirmation-modal-trigger" %}
-              </div>
-            </td>
-          </tr>
+          {% for seac_staff in seac_staff_list %}
+            <tr>
+              <td>{{ seac_staff.person.name }}</td>
+              <td>{{ seac_staff.person.cpf }}</td>
+              <td>{{ seac_staff.person.registration }}</td>
+              <td>{{ seac_staff.person.email }}</td>
+              <td>{{ seac_staff.role }}</td>
+              <td>
+                <div class="d-flex justify-content-around">
+                  {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='people/images/icons/detailsIcon.svg' alt_text="A green eye" href='people:seac:detail' %}
+                  {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='images/icons/editIcon.svg' alt_text="A green pen" href='people:seac:create' %}
+                  {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='images/icons/deleteIcon.svg' alt_text="A green recycle bin" custom_class="confirmation-modal-trigger" %}
+                </div>
+              </td>
+            </tr>
+          {% endfor %}
         </tbody>
       </table>
     </section>

@@ -3,7 +3,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.db import transaction
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
-from django.views.generic import CreateView, TemplateView
+from django.views.generic import CreateView, ListView, TemplateView
 
 from .forms import SEACStaffPersonMultiForm
 from .models import SEACStaff
@@ -13,8 +13,10 @@ class SeacHomeView(TemplateView):
     template_name = "seac/home.html"
 
 
-class SeacStaffListView(TemplateView):
+class SeacStaffListView(LoginRequiredMixin, ListView):
+    model = SEACStaff
     template_name = "seac/seac_staff_list.html"
+    context_object_name = "seac_staff_list"
 
 
 class SeacStaffCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
