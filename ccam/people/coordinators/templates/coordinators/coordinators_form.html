@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load breadcrumb_item %}
+{% load button %}
+
+{% block breadcrumb_items %}
+  {% breadcrumb_item text="Home" icon="home" href='people:managers:home' %}
+  {% breadcrumb_item text="Cadastrar Coordenador" icon="add_circle" active=True last_item=True %}
+{% endblock breadcrumb_items %}
+
+{% block content %}
+<main id="container">
+    {% include "core/_form_errors.html" %}
+    <header>
+      <h1 class="fw-bold green-text">Cadastrar Coordenador</h1>
+    </header>
+    <form method="post" enctype="multipart/form-data"
+          class="w-100 d-flex flex-column justify-content-evenly"
+          id="coordinator-form">
+      {% csrf_token %}
+      {% include "people/person_form.html" with person_form=form.person %}
+        <fieldset class="row align-items-center mt-4">
+            <div class="ccam-input">
+                <label for="{{ form.coordinator.course.id_for_label }}">Curso</label>
+                <div class="ccam-select">
+                    {{ form.coordinator.course }}
+                </div>
+            </div>
+        </fieldset>
+</form>
+{% button button_text="Enviar" color_class="green-svg" icon="done_all" custom_class="align-self-end" form_id="coordinator-form" %}
+</main>
+{% endblock content %}
