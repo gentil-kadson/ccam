@@ -1,7 +1,9 @@
 from django.db import models
-from ccam.people.models import BaseModel, Person
-from ccam.core.constants import MAX_LENGTH_PHONE_LINE_FIELD
+from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
+
+from ccam.core.constants import MAX_LENGTH_PHONE_LINE_FIELD
+from ccam.people.models import BaseModel, Person
 
 
 class SEACStaff(BaseModel):
@@ -19,3 +21,6 @@ class SEACStaff(BaseModel):
 
     def __str__(self):
         return f"{self.person.name} - {self.person.registration} - {self.role}"
+
+    def get_absolute_url(self):
+        return reverse("people:seac:detail", kwargs={"pk": self.pk})
