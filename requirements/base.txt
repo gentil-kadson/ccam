@@ -27,3 +27,5 @@ django-bootstrap-icons==0.8.6 # https://github.com/christianwgd/django-bootstrap
 django-cpf==0.1.0 # https://github.com/gabrielloliveira/django-cpf
 # django-betterforms
 django-betterforms==2.0.0 # https://github.com/fusionbox/django-betterforms
+#django-filter
+django-filter==23.3 # https://github.com/carltongibson/django-filter

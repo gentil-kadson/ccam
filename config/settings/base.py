@@ -90,6 +90,7 @@ THIRD_PARTY_APPS = [
     "django_bootstrap_icons",
     "cpf_field",
     "betterforms",
+    "django_filters",
 ]
 
 LOCAL_APPS = [
