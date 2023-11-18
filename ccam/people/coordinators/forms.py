@@ -13,8 +13,12 @@ class CoordinatorsForm(forms.ModelForm):
         fields = ("course",)
 
     def save(self, commit=True):
-        instance: Coordinator = super().save(commit)
+        instance = super().save(commit)
         instance.course = self.cleaned_data["course"]
+        if commit:
+            instance.save()
+            self.cleaned_data["course"].coordinator = instance
+            self.cleaned_data["course"].save()
         return instance
 
 
