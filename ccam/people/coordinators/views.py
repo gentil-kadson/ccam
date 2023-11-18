@@ -1,5 +1,6 @@
-from django.views.generic import TemplateView, CreateView
-from django.db import transaction
+from typing import Any
+from django.views.generic import TemplateView, CreateView, DetailView
+from django.db import models, transaction
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -11,6 +12,15 @@ from ccam.people.coordinators.models import Coordinator
 # Create your views here.
 class CoordinatorsHomeView(TemplateView):
     template_name = "coordinators/home.html"
+
+
+class CoordinatorsDetailView(DetailView):
+    model = Coordinator
+    template_name = 'coordinators/coordinators_detail.html'
+    context_object_name = 'coordinator'
+
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        return super().get_context_data(**kwargs)
 
 
 class CoordinatorsListView(TemplateView):
