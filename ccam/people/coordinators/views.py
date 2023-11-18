@@ -13,6 +13,10 @@ class CoordinatorsHomeView(TemplateView):
     template_name = "coordinators/home.html"
 
 
+class CoordinatorsListView(TemplateView):
+    template_name = 'coordinators/coordinators_list.html'
+
+
 class CoordinatorsCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     form_class = CoordinatorsMultiForm
     template_name = "coordinators/coordinators_form.html"
