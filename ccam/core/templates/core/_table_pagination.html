@@ -5,14 +5,20 @@
       <div id="page-selector-input">
         <label class="pe-2" for="page">Página</label>
         <select name="page" id="page">
-          <option value="500">500</option>
-          <option value="505">505</option>
+          {% for page_number in paginator.page_range %}
+            <option value="{{ page_number }}">{{ page_number }}</option>
+          {% endfor %}
         </select>
-        <span class="ps-2">de 505</span>
+        <span class="ps-2">de {{ paginator.num_pages }}</span>
       </div>
     </section>
     <section id="table-navigation-arrows">
-      <a href=""><button><img src="{% static 'core/images/icons/backbutton.svg' %}" class="green-svg" alt="a green arrow pointing left"/></button></a>
-      <a href=""><button><img src="{% static 'core/images/icons/backbutton.svg' %}" class="green-svg" alt="a green arrow pointing right"/></button></a>
+      {% if paginator.has_previous %}
+        <a href=""><button><img src="{% static 'core/images/icons/backbutton.svg' %}" class="green-svg" alt="a green arrow pointing left"/></button></a>
+      {% endif %}
+
+      {% if paginator.has_next %}
+        <a href=""><button><img src="{% static 'core/images/icons/backbutton.svg' %}" class="green-svg" alt="a green arrow pointing right"/></button></a>
+      {% endif %}
     </section>
   </section>

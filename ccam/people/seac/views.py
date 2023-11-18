@@ -19,6 +19,7 @@ class SeacStaffListView(LoginRequiredMixin, FilterView):
     model = SEACStaff
     filterset_class = SEACStaffFilterSet
     template_name = "seac/seac_staff_filter.html"
+    paginate_by = 10
 
 
 class SeacStaffCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
