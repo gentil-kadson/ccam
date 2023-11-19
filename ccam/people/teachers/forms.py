@@ -1,13 +1,14 @@
 from betterforms.multiform import MultiModelForm
 from django import forms
 
+from ccam.academics.models import Course
 from ccam.people.forms import PersonForm
 
 from .models import Teacher
 
 
 class TeacherForm(forms.ModelForm):
-    course = forms.ChoiceField()
+    course = forms.ModelChoiceField(queryset=Course.objects.all())
 
     class Meta:
         model = Teacher
