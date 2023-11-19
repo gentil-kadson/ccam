@@ -1,5 +1,7 @@
 from typing import Any
+from django.conf import settings
 from django.views.generic import TemplateView, CreateView, DetailView
+from django_filters.views import FilterView
 from django.db import models, transaction
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
@@ -7,9 +9,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from ccam.people.coordinators.forms import CoordinatorsMultiForm
 from ccam.people.coordinators.models import Coordinator
-
+from .filters import CoordinatorsFilterSet
 
 # Create your views here.
+
+
 class CoordinatorsHomeView(TemplateView):
     template_name = "coordinators/home.html"
 
@@ -23,8 +27,17 @@ class CoordinatorsDetailView(DetailView):
         return super().get_context_data(**kwargs)
 
 
-class CoordinatorsListView(TemplateView):
+class CoordinatorsListView(LoginRequiredMixin, FilterView):
+    model = Coordinator
+    filterset_class = CoordinatorsFilterSet
     template_name = 'coordinators/coordinators_list.html'
+    paginate_by = settings.PAGINATE_BY
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        current_page = int(self.request.GET.get("page", 1))
+        context.update({"current_page": current_page})
+        return context
 
 
 class CoordinatorsCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):

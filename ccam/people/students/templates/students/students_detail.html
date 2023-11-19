@@ -10,7 +10,7 @@
 {% block content %}
     <main id="container" class="centered-content student-details-center-vertical">
         <section class="prof-pic-and-name">
-          <img src="{% static 'images/ernieAndBert.jpg' %}"
+          <img src="{{ student.person.profile_picture.url }}"
                alt="Ernie and Bert from Sesame Street"
                width="150"
                height="151" />
