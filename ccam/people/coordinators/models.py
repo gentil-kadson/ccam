@@ -1,7 +1,7 @@
 from django.db import models
 from ccam.people.models import Person
-from ccam.academics.models import Course
 from ccam.core.models import BaseModel
+from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
 
@@ -14,3 +14,6 @@ class Coordinator(BaseModel):
 
     def __str__(self):
         return f'{self.person.name} - {self.person.registration}'
+
+    def get_absolute_url(self):
+        return reverse("people:coordinators:detail", kwargs={"pk": self.pk})

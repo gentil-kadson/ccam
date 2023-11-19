@@ -10,22 +10,22 @@
 {% block content %}
     <main id="container" class="centered-content student-details-center-vertical">
         <section class="prof-pic-and-name">
-          <img src="{% static 'images/ernieAndBert.jpg' %}"
+          <img src="{{ student.person.profile_picture.url }}"
                alt="Ernie and Bert from Sesame Street"
                width="150"
                height="151" />
-          <span>Ernie and Bert</span>
+          <span>{{ student.person.name }}</span>
         </section>
         <section class="student-info">
           <div>
-            <span><b>Matrícula:</b> 20231094030008</span>
-            <span><b>Curso:</b> Identid@des.com</span>
-            <span><b>Período:</b> 4º</span>
+            <span><b>Matrícula:</b> {{ student.person.registration }}</span>
+            <span><b>Curso:</b> {{ student.course.name }}</span>
+            <span><b>Período:</b> {{student.current_grade_semester}}º</span>
           </div>
           <div>
-            <span><b>Fone: </b>(84) 99999-9999</span>
-            <span><b>E-mail: </b>ernie.and.bert@sesame.com</span>
-            <span><b>CPF: </b>123.456.789-10</span>
+            <span><b>Fone: </b>{{ student.person.phone_number }}</span>
+            <span><b>E-mail: </b>{{ student.person.email }}</span>
+            <span><b>CPF: </b>{{ student.person.cpf }}</span>
           </div>
         </section>
     </main>

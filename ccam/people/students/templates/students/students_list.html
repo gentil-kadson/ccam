@@ -2,6 +2,10 @@
 
 {% load static %}
 {% load breadcrumb_item %}
+{% load bootstrap_icons %}
+{% load button %}
+{% load simple_table_button %}
+
 {% block breadcrumb_items %}
   {% breadcrumb_item text="Home" icon="home" href='people:managers:home' %}
   {% breadcrumb_item text="Alunos" icon="list" active=True last_item=True %}
@@ -10,42 +14,23 @@
 {% block content %}
   <main id="container" class="view-table-section">
     <header class="header-with-icon">
-      <img src="{% static 'people/images/icons/filter.svg' %}"
-           alt="A classic, green filter icon"
-           width="35"
-           height="35"
-           class="green-svg" />
+      <span class="material-symbols-outlined green-text">
+        filter_alt
+      </span>
       <h2>Filtros</h2>
     </header>
-    <section class="filter-section">
+    <form method="get" id="students-filter" class="filter-section">
       <div class="fields-container">
+        {% include "people/person_filter.html" with filter=filter %}
         <div class="ccam-input">
-          <label for="student-id">Matrícula</label>
-          <input type="text" name="student-id" id="student-id" />
-        </div>
-        <div class="ccam-input">
-          <label for="email">Email</label>
-          <input type="email" name="email" id="email" />
-        </div>
-        <div class="ccam-input">
-          <label for="student-name">Nome</label>
-          <input type="text" name="student-name" id="student-name" />
-        </div>
-        <div class="ccam-input">
-          <label for="student-cpf">CPF</label>
-          <input type="text" name="student-cpf" id="student-cpf" />
-        </div>
-        <div class="ccam-input">
-          <label for="course">Curso</label>
+          {{ filter.form.course.label_tag }}
           <div class="ccam-select">
-            <select name="course" id="course">
-              <option value="------">------</option>
-            </select>
+            {{ filter.form.course }}
           </div>
         </div>
       </div>
-      {% include "core/_button.html" with button_text="Filtrar" color_class="green-svg" icon_path='people/images/icons/filter.svg' alt_text="A classic green filter object" %}
-    </section>
+      {% button button_text="Filtrar" color_class="green-svg" icon="filter_alt" form_id="students-filter" %}
+    </form>  
     <header class="header-with-icon padding-from-content">
       <img src="{% static 'people/images/icons/backpack-fill.svg' %}"
            alt="A green school backpack"
@@ -91,62 +76,22 @@
           </tr>
         </thead>
         <tbody>
+          {% for student in object_list %}
           <tr>
-            <td>Ernie & Bert</td>
-            <td>123.456.789-10</td>
-            <td>20221094040191</td>
-            <td>ernie.bert@sesame.com</td>
-            <td>TADS</td>
+            <td>{{ student.person.name }}</td>
+            <td>{{ student.person.cpf }}</td>
+            <td>{{ student.person.registration }}</td>
+            <td>{{ student.person.email }}</td>
+            <td>{{ student.course.name }}</td>
             <td>
               <div class="d-flex justify-content-around">
-                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='people/images/icons/detailsIcon.svg' alt_text="A green eye" href='people:students:detail' %}
-                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='images/icons/editIcon.svg' alt_text="A green pen" href='people:students:create' %}
-                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='images/icons/deleteIcon.svg' alt_text="A green recycle bin" custom_class="confirmation-modal-trigger" %}
+                {% simple_table_button color_class='green-text' icon='visibility' abs_url=student.get_absolute_url %}
+                {% simple_table_button color_class='green-text' icon='edit' href='people:students:create' %}
+                {% simple_table_button color_class='green-text' icon='delete' href='people:students:delete' %}
               </div>
             </td>
           </tr>
-          <tr>
-            <td>Ernie & Bert</td>
-            <td>123.456.789-10</td>
-            <td>20221094040191</td>
-            <td>ernie.bert@sesame.com</td>
-            <td>TADS</td>
-            <td>
-              <div class="d-flex justify-content-around">
-                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='people/images/icons/detailsIcon.svg' alt_text="A green eye" href='people:students:detail' %}
-                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='images/icons/editIcon.svg' alt_text="A green pen" href='people:students:create' %}
-                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='images/icons/deleteIcon.svg' alt_text="A green recycle bin" custom_class="confirmation-modal-trigger" %}
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>Ernie & Bert</td>
-            <td>123.456.789-10</td>
-            <td>20221094040191</td>
-            <td>ernie.bert@sesame.com</td>
-            <td>TADS</td>
-            <td>
-              <div class="d-flex justify-content-around">
-                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='people/images/icons/detailsIcon.svg' alt_text="A green eye" href='people:students:detail' %}
-                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='images/icons/editIcon.svg' alt_text="A green pen" href='people:students:create' %}
-                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='images/icons/deleteIcon.svg' alt_text="A green recycle bin" custom_class="confirmation-modal-trigger" %}
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>Ernie & Bert</td>
-            <td>123.456.789-10</td>
-            <td>20221094040191</td>
-            <td>ernie.bert@sesame.com</td>
-            <td>TADS</td>
-            <td>
-              <div class="d-flex justify-content-around">
-                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='people/images/icons/detailsIcon.svg' alt_text="A green eye" href='people:students:detail' %}
-                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='images/icons/editIcon.svg' alt_text="A green pen" href='people:students:create' %}
-                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='images/icons/deleteIcon.svg' alt_text="A green recycle bin" custom_class="confirmation-modal-trigger" %}
-              </div>
-            </td>
-          </tr>
+          {% endfor %}
         </tbody>
       </table>
     </section>

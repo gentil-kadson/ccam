@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.core.validators import MaxValueValidator
 from ccam.people.models import Person
 from ccam.core.models import BaseModel
@@ -17,3 +18,6 @@ class Student(BaseModel):
 
     def __str__(self) -> str:
         return f'{self.person.name} - {self.person.registration} - {self.person.phone_number}'
+
+    def get_absolute_url(self):
+        return reverse("people:students:detail", kwargs={"pk": self.pk})
