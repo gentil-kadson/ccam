@@ -3,9 +3,9 @@
 <header id="global-header">
   <img src="{% static 'images/icons/logoNav.svg' %}" alt="CCAM logo" />
   <div id="user-profile">
-    <img src="{% static 'images/ernieAndBert.jpg' %}"
+    <img src="{{ request.user.person.profile_picture.url }}"
          alt="Ernie and Bert from Sesame Street" />
-    <span>Ernie And Bert</span>
+    <span>{{ request.user.person.name }}</span>
     <a href={% url "account_logout" %}>
       <img src="{% static 'images/icons/logout.svg' %}" alt="Teste" />
     </a>
