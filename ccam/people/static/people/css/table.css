@@ -81,7 +81,7 @@ div.anchors {
   border-radius: 8px;
 }
 
-#table-navigation-arrows > a:last-of-type img {
+#table-navigation-arrows > a img.right {
   transform: rotate(180deg);
 }
 
