@@ -6,6 +6,7 @@ from ccam.core.constants import (
     SEAC_COORDINATOR_GROUP_NAME,
     SEAC_EMPLOYEE_GROUP_NAME,
     STUDENT_GROUP_NAME,
+    TEACHER_GROUP_NAME,
 )
 
 
@@ -23,8 +24,10 @@ class Command(BaseCommand):
         _, student_created = Group.objects.get_or_create(name=STUDENT_GROUP_NAME)
         _, seac_coordinator_created = Group.objects.get_or_create(name=SEAC_COORDINATOR_GROUP_NAME)
         _, seac_employee_created = Group.objects.get_or_create(name=SEAC_EMPLOYEE_GROUP_NAME)
+        _, teacher_created = Group.objects.get_or_create(name=TEACHER_GROUP_NAME)
 
         self.log_group_creation_feedback(COURSE_COORDINATOR_GROUP_NAME, coordinator_created)
         self.log_group_creation_feedback(STUDENT_GROUP_NAME, student_created)
         self.log_group_creation_feedback(SEAC_COORDINATOR_GROUP_NAME, seac_coordinator_created)
         self.log_group_creation_feedback(SEAC_EMPLOYEE_GROUP_NAME, seac_employee_created)
+        self.log_group_creation_feedback(TEACHER_GROUP_NAME, teacher_created)

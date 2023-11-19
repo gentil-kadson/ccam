@@ -16,7 +16,10 @@
     </header>
     <form method="post"
           class="w-100 d-flex flex-column justify-content-evenly"
-          id="teachers-form">
+          id="teachers-form"
+          enctype="multipart/form-data">
+        {% csrf_token %}
+        {% include "core/_form_errors.html" with form=form %}
         {% include "people/person_form.html" with person_form=form.person %}
         <fieldset class="row flex-column align-items-start mt-4">
         <legend class="fw-bold">Selecione as <span class="green-text">matérias</span> que ele irá lecionar:</legend>
