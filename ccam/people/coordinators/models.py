@@ -1,5 +1,6 @@
 from django.db import models
 from ccam.people.models import Person
+from ccam.academics.models import Course
 from ccam.core.models import BaseModel
 from django.utils.translation import gettext_lazy as _
 
