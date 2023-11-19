@@ -15,4 +15,5 @@
 
 .ccam-simple-table-button {
     cursor: pointer;
+    text-decoration: none;
 }
