@@ -11,7 +11,7 @@ class Course(BaseModel):
         verbose_name=_("Duração (em anos/períodos)"), validators=[MaxValueValidator(8)]
     )
     coordinator = models.OneToOneField(
-        "coordinators.Coordinator", on_delete=models.CASCADE, related_name="coordinator", null=True
+        "coordinators.Coordinator", on_delete=models.CASCADE, related_name="course", null=True
     )
 
     class Meta:

@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load breadcrumb_item %}
+{% block breadcrumb_items %}
+  {% breadcrumb_item text="Home" icon="home" href='people:managers:home' %}
+  {% breadcrumb_item text="Coordenadores de Curso" icon="list" active=True last_item=True %}
+{% endblock breadcrumb_items %}
+
+{% block content %}
+  <main id="container" class="view-table-section">
+    <header class="header-with-icon">
+      <img src="{% static 'people/images/icons/filter.svg' %}"
+           alt="A classic, green filter icon"
+           width="35"
+           height="35"
+           class="green-svg" />
+      <h2>Filtros</h2>
+    </header>
+    <section class="filter-section">
+      <div class="fields-container">
+        <div class="ccam-input">
+          <label for="student-id">Matrícula</label>
+          <input type="text" name="student-id" id="student-id" />
+        </div>
+        <div class="ccam-input">
+          <label for="email">Email</label>
+          <input type="email" name="email" id="email" />
+        </div>
+        <div class="ccam-input">
+          <label for="student-name">Nome</label>
+          <input type="text" name="student-name" id="student-name" />
+        </div>
+        <div class="ccam-input">
+          <label for="student-cpf">CPF</label>
+          <input type="text" name="student-cpf" id="student-cpf" />
+        </div>
+        <div class="ccam-input">
+          <label for="role">Curso</label>
+          <div class="ccam-select">
+            <select name="role" id="role">
+              <option value="------">------</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      {% include "core/_button.html" with button_text="Filtrar" color_class="green-svg" icon_path='people/images/icons/filter.svg' alt_text="A classic green filter object" %}
+    </section>
+    <header class="header-with-icon padding-from-content">
+      <img src="{% static 'people/images/icons/cap.svg' %}"
+           alt="A green student cap"
+           width="35"
+           height="35"
+           class="green-svg" />
+      <h2>Coordenadores de curso</h2>
+    </header>
+    <section>
+      <table class="ccam-table">
+        <thead>
+          <tr>
+            <th>
+              <img src="{% static 'people/images/icons/signatureIcon.svg' %}"
+                   alt="A handwritten signature" />
+              Nome
+            </th>
+            <th>
+              <img src="{% static 'people/images/icons/personVCard.svg' %}"
+                   alt="A VCard" />
+              CPF
+            </th>
+            <th>
+              <img src="{% static 'people/images/icons/badge.svg' %}"
+                   alt="A badge containing ID information" />
+              Matrícula
+            </th>
+            <th>
+              <img src="{% static 'images/icons/email.svg' %}"
+                   alt="A mail letter envelope" />
+              Email
+            </th>
+            <th>
+              <img src="{% static 'seac/images/icons/role.svg' %}"
+                   alt="A green group of three people" />
+              Curso
+            </th>
+            <th>
+              <img src="{% static 'people/images/icons/actionIcon.svg' %}"
+                   alt="A green settings icon indicating actions you can take on a specific table" />
+              Ações
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Ernie & Bert</td>
+            <td>123.456.789-10</td>
+            <td>20221094040191</td>
+            <td>ernie.bert@sesame.com</td>
+            <td>TADS</td>
+            <td>
+              <div class="d-flex justify-content-around">
+                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='people/images/icons/detailsIcon.svg' alt_text="A green eye" href='people:seac:detail' %}
+                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='images/icons/editIcon.svg' alt_text="A green pen" href='people:seac:create' %}
+                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='images/icons/deleteIcon.svg' alt_text="A green recycle bin" custom_class="confirmation-modal-trigger" %}
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Ernie & Bert</td>
+            <td>123.456.789-10</td>
+            <td>20221094040191</td>
+            <td>ernie.bert@sesame.com</td>
+            <td>TADS</td>
+            <td>
+              <div class="d-flex justify-content-around">
+                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='people/images/icons/detailsIcon.svg' alt_text="A green eye" href='people:seac:detail' %}
+                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='images/icons/editIcon.svg' alt_text="A green pen" href='people:seac:create' %}
+                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='images/icons/deleteIcon.svg' alt_text="A green recycle bin" custom_class="confirmation-modal-trigger" %}
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Ernie & Bert</td>
+            <td>123.456.789-10</td>
+            <td>20221094040191</td>
+            <td>ernie.bert@sesame.com</td>
+            <td>TADS</td>
+            <td>
+              <div class="d-flex justify-content-around">
+                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='people/images/icons/detailsIcon.svg' alt_text="A green eye" href='people:seac:detail' %}
+                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='images/icons/editIcon.svg' alt_text="A green pen" href='people:seac:create' %}
+                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='images/icons/deleteIcon.svg' alt_text="A green recycle bin" custom_class="confirmation-modal-trigger" %}
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Ernie & Bert</td>
+            <td>123.456.789-10</td>
+            <td>20221094040191</td>
+            <td>ernie.bert@sesame.com</td>
+            <td>TADS</td>
+            <td>
+              <div class="d-flex justify-content-around">
+                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='people/images/icons/detailsIcon.svg' alt_text="A green eye" href='people:seac:detail' %}
+                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='images/icons/editIcon.svg' alt_text="A green pen" href='people:seac:create' %}
+                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='images/icons/deleteIcon.svg' alt_text="A green recycle bin" custom_class="confirmation-modal-trigger" %}
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    {% include "core/_table_pagination.html" %}
+    {% include "core/_confirmation_modal.html" with text="Tem certeza que deseja excluir o funcionário" highlighted_text="Ernie and Bert (123.456.789-10)" %}
+  </main>
+{% endblock content %}

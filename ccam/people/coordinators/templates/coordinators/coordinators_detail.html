@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+{% load breadcrumb_item %}
+{% block breadcrumb_items %}
+  {% breadcrumb_item text="Home" icon="home" href='people:managers:home' %}
+  {% breadcrumb_item text="Alunos" icon="list" href='people:students:list' %}
+  {% breadcrumb_item text="Visualizar Aluno" icon="visibility" active=True last_item=True %}
+{% endblock breadcrumb_items %}
+
+{% block content %}
+    <main id="container" class="centered-content student-details-center-vertical">
+        <section class="prof-pic-and-name">
+          <img src="{{ coordinator.person.profile_picture }}"
+               alt="Ernie and Bert from Sesame Street"
+               width="150"
+               height="151" />
+          <span> {{ coordinator.person.name }} </span>
+        </section>
+        <section class="student-info">
+          <div>
+            <span><b>Matrícula:</b> {{ coordinator.person.registration }}</span>
+            <span><b>Curso:</b> {{ coordinator.course.name }} </span>
+          </div>
+          <div>
+            <span><b>Fone: </b> {{ coordinator.person.phone_number }} </span>
+            <span><b>E-mail: </b> {{ coordinator.person.email }} </span>
+            <span><b>CPF: </b> {{ coordinator.person.cpf }} </span>
+          </div>
+        </section>
+    </main>
+{% endblock content %}
