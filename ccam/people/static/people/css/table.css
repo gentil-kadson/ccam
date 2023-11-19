@@ -70,6 +70,10 @@ section#table-pagination {
   gap: 20px;
 }
 
+div.anchors {
+  display: none;
+}
+
 #page-selector-input select {
   background-color: var(--element-dark);
   border: none;

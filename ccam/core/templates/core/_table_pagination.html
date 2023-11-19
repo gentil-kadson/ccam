@@ -1,15 +1,21 @@
 {% load static %}
+{% load param_replace %}
 
 <section id="table-pagination">
     <section id="table-page-selector">
       <div id="page-selector-input">
         <label class="pe-2" for="page">Página</label>
-        <select name="page" id="page">
+        <select name="page" id="table-pagination">
           {% for page_number in paginator.page_range %}
-            <option value="{{ page_number }}">{{ page_number }}</option>
+            <option {% if page_number == current_page %} selected {% endif %} value="page-{{ page_number }}-link">{{ page_number }}</option>
           {% endfor %}
         </select>
         <span class="ps-2">de {{ paginator.num_pages }}</span>
+        <div class="anchors">
+          {% for page_number in paginator.page_range %}
+            <a id="page-{{ page_number }}-link" href="?{% param_replace page=page_number %}"></a>
+          {% endfor %}
+        </div>
       </div>
     </section>
     <section id="table-navigation-arrows">

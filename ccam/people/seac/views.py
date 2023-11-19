@@ -19,7 +19,13 @@ class SeacStaffListView(LoginRequiredMixin, FilterView):
     model = SEACStaff
     filterset_class = SEACStaffFilterSet
     template_name = "seac/seac_staff_filter.html"
-    paginate_by = 10
+    paginate_by = 2
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        current_page = int(self.request.GET.get("page", 1))
+        context.update({"current_page": current_page})
+        return context
 
 
 class SeacStaffCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
