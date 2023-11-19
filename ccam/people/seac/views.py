@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db import transaction
@@ -19,7 +20,7 @@ class SeacStaffListView(LoginRequiredMixin, FilterView):
     model = SEACStaff
     filterset_class = SEACStaffFilterSet
     template_name = "seac/seac_staff_filter.html"
-    paginate_by = 2
+    paginate_by = settings.PAGINATE_BY
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
