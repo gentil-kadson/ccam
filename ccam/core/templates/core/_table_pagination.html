@@ -20,11 +20,11 @@
     </section>
     <section id="table-navigation-arrows">
       {% if page_obj.has_previous %}
-      <a href=""><button><img src="{% static 'core/images/icons/backbutton.svg' %}" class="green-svg left" alt="a green arrow pointing left"/></button></a>
+      <a href="?{% param_replace page=page_obj.previous_page_number %}"><button><img src="{% static 'core/images/icons/backbutton.svg' %}" class="green-svg left" alt="a green arrow pointing left"/></button></a>
       {% endif %}
 
       {% if page_obj.has_next %}
-        <a href=""><button><img src="{% static 'core/images/icons/backbutton.svg' %}" class="green-svg right" alt="a green arrow pointing right"/></button></a>
+        <a href="?{% param_replace page=page_obj.next_page_number %}"><button><img src="{% static 'core/images/icons/backbutton.svg' %}" class="green-svg right" alt="a green arrow pointing right"/></button></a>
       {% endif %}
     </section>
   </section>
