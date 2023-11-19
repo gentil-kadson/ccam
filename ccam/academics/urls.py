@@ -77,5 +77,5 @@ urlpatterns = [
     ),
     path("add-courses/", AddCourseView.as_view(), name="add_courses"),
     path("processes/list/", TrackProcessesListView.as_view(), name="processes_list"),
-    path("courses/<int:pk>/subjects/", CourseSubjects.as_view(), name="course-subjects"),
+    path("course-subjects/", CourseSubjects.as_view(), name="course_subjects"),
 ]
