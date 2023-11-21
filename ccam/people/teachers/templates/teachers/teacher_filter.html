@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load breadcrumb_item %}
+{% load button %}
+{% load simple_table_button %}
+
+{% block breadcrumb_items %}
+  {% breadcrumb_item text="Home" icon="home" href='people:managers:home' %}
+  {% breadcrumb_item text="Professores" icon="list" active=True last_item=True %}
+{% endblock breadcrumb_items %}
+
+{% block content %}
+  <main id="container" class="view-table-section">
+    <header class="header-with-icon">
+      <img src="{% static 'people/images/icons/filter.svg' %}"
+           alt="A classic, green filter icon"
+           width="35"
+           height="35"
+           class="green-svg" />
+      <h2>Filtros</h2>
+    </header>
+    <form method="get" class="filter-section" id="teacher-filter-form">
+      <div class="fields-container">
+        {% include "people/person_filter.html" %}
+        {% url 'academics:course_subjects' as course_subjects_url %}
+        <div class="ccam-input">
+          <label for="course">Curso</label>
+          <div class="ccam-select">
+            <select name="teacher-course" id="id_teacher-courses" hx-trigger="change" hx-get="{{ course_subjects_url }}" hx-target="#{{ filter.form.subjects.id_for_label }}", hx-swap="innerHTML">
+              <option value="">---------</option>
+              {% for course in courses %}
+                <option value="{{ course.id }}">{{ course.name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+        <div class="ccam-input">
+          <label for="subject">Matéria</label>
+          <div class="ccam-select">
+            <select name="{{ filter.form.subjects.html_name }}" id="{{ filter.form.subjects.id_for_label }}">
+            </select>
+          </div>
+        </div>
+      </div>
+      {% button button_text="Filtrar" color_class="green-svg" icon="filter_alt" form_id="teacher-filter-form" %}
+    </form>
+<header class="header-with-icon padding-from-content">
+  <img src="{% static 'people/images/icons/teacher.svg' %}"
+       alt="A green person on the side of a chalkboard"
+       width="35"
+       height="35"
+       class="green-svg" />
+  <h2>Professores</h2>
+</header>
+<section>
+  <table class="ccam-table">
+    <thead>
+      <tr>
+        {% include "people/person_table_header.html" %}
+        <th>
+          <img src="{% static 'people/images/icons/cap.svg' %}"
+               alt="A green student cap" />
+          Matérias
+        </th>
+        <th>
+          <img src="{% static 'people/images/icons/actionIcon.svg' %}"
+               alt="A green settings icon indicating actions you can take on a specific table" />
+          Ações
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for teacher, subject in teachers_subjects %}
+        <tr>
+          <td>{{ teacher.person.name }}</td>
+          <td>{{ teacher.person.cpf }}</td>
+          <td>{{ teacher.person.registration }}</td>
+          <td>{{ teacher.person.email }}</td>
+          <td>{{ subject }}</td>
+          <td>
+            <div class="d-flex justify-content-around">
+              {% simple_table_button color_class='green-text' icon='visibility' abs_url=teacher.get_absolute_url %}
+              {% simple_table_button color_class='green-text' icon='edit' href='people:teachers:list' %}
+              {% simple_table_button color_class='green-text' icon='delete' href='people:teachers:list' %}
+            </div>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% include "core/_table_pagination.html" %}
+{% include "core/_confirmation_modal.html" with text="Tem certeza que deseja excluir o docente" highlighted_text="Ernie and Bert (123.456.789-10)" %}
+</main>
+{% endblock content %}

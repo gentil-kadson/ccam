@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
 from ccam.academics.models import Subject
@@ -16,3 +17,6 @@ class Teacher(BaseModel):
 
     def __str__(self):
         return f"{self.person.name} - {self.person.registration}"
+
+    def get_absolute_url(self):
+        return reverse("people:teachers:detail", kwargs={"pk": self.pk})
