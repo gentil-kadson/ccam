@@ -4,7 +4,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.db import transaction
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
-from django.views.generic import CreateView, DetailView, TemplateView, UpdateView
+from django.views.generic import CreateView, DeleteView, DetailView, TemplateView, UpdateView
 from django_filters.views import FilterView
 
 from .filters import SEACStaffFilterSet
@@ -65,3 +65,10 @@ class SeacStaffDetailView(DetailView):
     model = SEACStaff
     template_name = "seac/seac_detail.html"
     context_object_name = "seacstaff"
+
+
+class SeacStaffDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+    model = SEACStaff
+    success_url = reverse_lazy("people:seac:list")
+    success_message = _("Funcionário da SEAC deletado com sucesso")
+    template_name = "seac/seac_check_delete.html"
