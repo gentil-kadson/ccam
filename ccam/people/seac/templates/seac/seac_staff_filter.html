@@ -74,7 +74,8 @@
                 <div class="d-flex justify-content-around">
                   {% simple_table_button color_class='green-text' icon='visibility' abs_url=seac_staff.get_absolute_url %}
                   {% simple_table_button color_class='green-text' icon='edit' abs_url=seac_staff.get_update_url %}
-                  {% simple_table_button color_class='green-text' icon='delete' href='people:seac:create' %}
+                  {% url 'people:seac:delete' seac_staff.pk as seac_delete_url %}
+                  {% include "core/_table_delete_button.html" with delete_url=seac_delete_url %}
                 </div>
               </td>
             </tr>

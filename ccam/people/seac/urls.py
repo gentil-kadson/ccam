@@ -10,4 +10,5 @@ urlpatterns = [
     path("create/", views.SeacStaffCreateView.as_view(), name="create"),
     path("detail/<int:pk>/", views.SeacStaffDetailView.as_view(), name="detail"),
     path("update/<int:pk>/", views.SeacStaffUpdateView.as_view(), name="update"),
+    path("delete/<int:pk>/", views.SeacStaffDeleteView.as_view(), name="delete"),
 ]
