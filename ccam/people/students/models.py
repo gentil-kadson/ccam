@@ -21,3 +21,6 @@ class Student(BaseModel):
 
     def get_absolute_url(self):
         return reverse("people:students:detail", kwargs={"pk": self.pk})
+
+    def get_update_url(self):
+        return reverse("people:students:update", kwargs={"pk": self.pk})

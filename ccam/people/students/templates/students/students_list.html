@@ -86,7 +86,7 @@
             <td>
               <div class="d-flex justify-content-around">
                 {% simple_table_button color_class='green-text' icon='visibility' abs_url=student.get_absolute_url %}
-                {% simple_table_button color_class='green-text' icon='edit' href='people:students:create' %}
+                {% simple_table_button color_class='green-text' icon='edit' abs_url=student.get_update_url %}
                 {% simple_table_button color_class='green-text' icon='delete' href='people:students:delete' %}
               </div>
             </td>

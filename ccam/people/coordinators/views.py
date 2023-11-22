@@ -1,6 +1,6 @@
 from typing import Any
 from django.conf import settings
-from django.views.generic import TemplateView, CreateView, DetailView
+from django.views.generic import TemplateView, CreateView, DetailView, UpdateView
 from django_filters.views import FilterView
 from django.db import models, transaction
 from django.urls import reverse_lazy
@@ -57,3 +57,16 @@ class CoordinatorsCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView
         coordinator.created_by = self.request.user
         coordinator.updated_by = self.request.user
         return super().form_valid(form)
+
+
+class CoordinatorsUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = Coordinator
+    form_class = CoordinatorsMultiForm
+    template_name = 'coordinators/coordinators_form.html'
+    success_url = reverse_lazy('people:coordinators:home')
+    success_message = _("Coordenador de curso editado com sucesso!")
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update(instance={"person": self.object.person, "coordinator": self.object})
+        return kwargs

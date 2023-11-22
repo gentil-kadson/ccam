@@ -1,7 +1,7 @@
 from django.views.generic import TemplateView
 from django.conf import settings
 from typing import Any
-from django.views.generic import TemplateView, CreateView, DetailView, DeleteView
+from django.views.generic import TemplateView, CreateView, DetailView, DeleteView, UpdateView
 from django_filters.views import FilterView
 from django.db import models, transaction
 from django.urls import reverse_lazy
@@ -61,3 +61,16 @@ class StudentDetailView(DetailView):
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         return super().get_context_data(**kwargs)
+
+
+class StudentUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = Student
+    form_class = StudentsMultiForm
+    template_name = 'students/students_form.html'
+    success_url = reverse_lazy('people:students:home')
+    success_message = _("Aluno editado com sucesso!")
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update(instance={"person": self.object.person, "student": self.object})
+        return kwargs

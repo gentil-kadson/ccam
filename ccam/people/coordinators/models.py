@@ -17,3 +17,6 @@ class Coordinator(BaseModel):
 
     def get_absolute_url(self):
         return reverse("people:coordinators:detail", kwargs={"pk": self.pk})
+
+    def get_update_url(self):
+        return reverse("people:coordinators:edit", kwargs={"pk": self.pk})
