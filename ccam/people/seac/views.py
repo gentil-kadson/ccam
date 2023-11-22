@@ -4,7 +4,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.db import transaction
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
-from django.views.generic import CreateView, TemplateView
+from django.views.generic import CreateView, TemplateView, UpdateView
 from django_filters.views import FilterView
 
 from .filters import SEACStaffFilterSet
@@ -46,6 +46,19 @@ class SeacStaffCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         seac_staff.created_by = self.request.user
         seac_staff.updated_by = self.request.user
         return super().form_valid(form)
+
+
+class SeacStaffUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = SEACStaff
+    form_class = SEACStaffPersonMultiForm
+    template_name = "seac/seac_staff_form.html"
+    success_url = reverse_lazy("people:managers:home")
+    success_message = _("Funcionário da SEAC editado com sucesso!")
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update(instance={"person": self.object.person, "seacstaff": self.object})
+        return kwargs
 
 
 class SeacStaffDetailView(TemplateView):
