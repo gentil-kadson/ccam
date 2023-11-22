@@ -50,9 +50,16 @@ class StudentCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         return super().form_valid(form)
 
 
-class StudentDeleteView(LoginRequiredMixin, DeleteView):
+class StudentDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Student
-    success_url = reverse_lazy("list")
+    success_url = reverse_lazy("people:students:list")
+    success_message = _("Aluno deletado com sucesso!")
+    template_name = "students/student_check_delete.html"
+
+    @transaction.atomic
+    def form_valid(self, form):
+        self.object.person.delete()
+        return super().form_valid(form)
 
 
 class StudentDetailView(DetailView):

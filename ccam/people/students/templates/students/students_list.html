@@ -30,7 +30,7 @@
         </div>
       </div>
       {% button button_text="Filtrar" color_class="green-svg" icon="filter_alt" form_id="students-filter" %}
-    </form>  
+    </form>
     <header class="header-with-icon padding-from-content">
       <img src="{% static 'people/images/icons/backpack-fill.svg' %}"
            alt="A green school backpack"
@@ -87,7 +87,8 @@
               <div class="d-flex justify-content-around">
                 {% simple_table_button color_class='green-text' icon='visibility' abs_url=student.get_absolute_url %}
                 {% simple_table_button color_class='green-text' icon='edit' abs_url=student.get_update_url %}
-                {% simple_table_button color_class='green-text' icon='delete' href='people:students:delete' %}
+                {% url 'people:students:delete' pk=student.id as student_delete_url %}
+                {% include 'core/_table_delete_button.html' with delete_url=student_delete_url %}
               </div>
             </td>
           </tr>
@@ -96,6 +97,6 @@
       </table>
     </section>
     {% include "core/_table_pagination.html" %}
-    {% include "core/_confirmation_modal.html" with text="Tem certeza que deseja excluir o discente" highlighted_text="Ernie and Bert (123.456.789-10)" %}
+    {% include "core/_confirmation_modal.html" %}
   </main>
 {% endblock content %}
