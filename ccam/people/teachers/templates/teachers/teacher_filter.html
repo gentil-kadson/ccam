@@ -32,7 +32,6 @@
               {% for course in courses %}
                 <option value="{{ course.id }}">{{ course.name }}</option>
               {% endfor %}
-            </select>
           </div>
         </div>
         <div class="ccam-input">
@@ -59,14 +58,20 @@
       <tr>
         {% include "people/person_table_header.html" %}
         <th>
-          <img src="{% static 'people/images/icons/cap.svg' %}"
-               alt="A green student cap" />
-          Matérias
+          <div>
+            <span class="material-symbols-outlined">
+                school
+            </span>
+            Matérias
+          </div>
         </th>
         <th>
-          <img src="{% static 'people/images/icons/actionIcon.svg' %}"
-               alt="A green settings icon indicating actions you can take on a specific table" />
-          Ações
+          <div>
+            <span class="material-symbols-outlined">
+              tune
+            </span>
+            Ações
+          </div>
         </th>
       </tr>
     </thead>
