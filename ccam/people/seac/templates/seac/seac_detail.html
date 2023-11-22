@@ -10,22 +10,16 @@
 {% block content %}
     <main id="container" class="centered-content student-details-center-vertical">
         <section class="prof-pic-and-name">
-          <img src="{% static 'images/ernieAndBert.jpg' %}"
+          <img src="{{ seacstaff.person.profile_picture.url }}"
                alt="Ernie and Bert from Sesame Street"
                width="150"
                height="151" />
-          <span>Ernie and Bert</span>
+          <span>{{ seacstaff.person.name }}</span>
         </section>
-        <section class="student-info">
+        <section class="person-info">
+          {% include "people/person_detail.html" with person=seacstaff.person only %}
           <div>
-            <span><b>Matrícula:</b> 20231094030008</span>
-            <span><b>Fone Ramal:</b> 4019-6715</span>
-            <span><b>Responsabilidade:</b> Gerenciador de Processos</span>
-          </div>
-          <div>
-            <span><b>Fone: </b>(84) 99999-9999</span>
-            <span><b>E-mail: </b>ernie.and.bert@sesame.com</span>
-            <span><b>CPF: </b>123.456.789-10</span>
+            <span><b>Responsabilidade:</b> {{ seacstaff.get_role_display }}</span>
           </div>
         </section>
     </main>

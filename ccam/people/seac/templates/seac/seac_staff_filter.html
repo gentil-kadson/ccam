@@ -69,12 +69,12 @@
               <td>{{ seac_staff.person.cpf }}</td>
               <td>{{ seac_staff.person.registration }}</td>
               <td>{{ seac_staff.person.email }}</td>
-              <td>{{ seac_staff.role }}</td>
+              <td>{{ seac_staff.get_role_display }}</td>
               <td>
                 <div class="d-flex justify-content-around">
-                  {% simple_table_button color_class='green-text' icon='visibility' href='people:seac:detail' %}
+                  {% simple_table_button color_class='green-text' icon='visibility' abs_url=seac_staff.get_absolute_url %}
                   {% simple_table_button color_class='green-text' icon='edit' abs_url=seac_staff.get_update_url %}
-                  {% simple_table_button color_class='green-text' icon='delete' href='people:seac:detail' %}
+                  {% simple_table_button color_class='green-text' icon='delete' href='people:seac:create' %}
                 </div>
               </td>
             </tr>
