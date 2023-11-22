@@ -77,13 +77,13 @@
       </tr>
     </thead>
     <tbody>
-      {% for teacher, subject in teachers_subjects %}
+      {% for teacher in object_list %}
         <tr>
           <td>{{ teacher.person.name }}</td>
           <td>{{ teacher.person.cpf }}</td>
           <td>{{ teacher.person.registration }}</td>
           <td>{{ teacher.person.email }}</td>
-          <td>{{ subject }}</td>
+          <td>{{ teacher.get_subjects_names }}</td>
           <td>
             <div class="d-flex justify-content-around">
               {% simple_table_button color_class='green-text' icon='visibility' abs_url=teacher.get_absolute_url %}

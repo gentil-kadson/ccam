@@ -3,7 +3,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db import transaction
 from django.urls import reverse_lazy
-from django.utils.text import get_text_list
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import CreateView, DetailView, TemplateView
 
@@ -25,17 +24,8 @@ class TeacherListView(LoginRequiredMixin, FilteredListView):
     template_name = "teachers/teacher_filter.html"
     paginate_by = settings.PAGINATE_BY
 
-    def pair_teachers_with_their_subjects(self, teachers):
-        teachers_subjects = []
-        for teacher in teachers:
-            teacher_subjects = list(teacher.subjects.values_list("name", flat=True))
-            teacher_subjects = get_text_list(teacher_subjects, "e")
-            teachers_subjects.append((teacher, teacher_subjects))
-        return teachers_subjects
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context.update({"teachers_subjects": self.pair_teachers_with_their_subjects(context["object_list"])})
         context.update({"courses": Course.objects.all()})
         return context
 
