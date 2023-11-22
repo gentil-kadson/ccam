@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db import transaction
-from django.db.models.signals import pre_save
+from django.db.models.signals import post_delete, pre_save
 from django.dispatch import receiver
 
 from ccam.people.utils import clean_cpf
@@ -22,3 +22,8 @@ def create_person_auth_user(sender, instance: Person, **kwargs):
         except User.DoesNotExist:
             auth_user = User.objects.create_user(username=instance.registration, password=cleaned_cpf)
             instance.user = auth_user
+
+
+@receiver(signal=post_delete, sender=Person)
+def delete_person_auth_user(sender, instance: Person, **kwargs):
+    instance.user.delete()

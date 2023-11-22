@@ -2,6 +2,7 @@
 
 <form action="{% url 'people:seac:delete' object.pk %}" method="post" id="delete-seac-staff">
     {% csrf_token %}
+    {{ form }}
     <p>
         Tem certeza que deseja excluir o funcionário <span class="green-text">{{ object.person.name }}({{ object.person.cpf }})</span>?
     </p>

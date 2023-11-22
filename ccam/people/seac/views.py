@@ -72,3 +72,8 @@ class SeacStaffDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     success_url = reverse_lazy("people:seac:list")
     success_message = _("Funcionário da SEAC deletado com sucesso")
     template_name = "seac/seac_check_delete.html"
+
+    @transaction.atomic
+    def form_valid(self, form):
+        self.object.person.delete()
+        return super().form_valid(form)
