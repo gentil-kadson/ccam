@@ -16,15 +16,10 @@
                height="151" />
           <span> {{ coordinator.person.name }} </span>
         </section>
-        <section class="student-info">
+        <section class="person-info">
+          {% include "people/person_detail.html" with person=coordinator.person only %}
           <div>
-            <span><b>Matrícula:</b> {{ coordinator.person.registration }}</span>
             <span><b>Curso:</b> {{ coordinator.course.name }} </span>
-          </div>
-          <div>
-            <span><b>Fone: </b> {{ coordinator.person.phone_number }} </span>
-            <span><b>E-mail: </b> {{ coordinator.person.email }} </span>
-            <span><b>CPF: </b> {{ coordinator.person.cpf }} </span>
           </div>
         </section>
     </main>
