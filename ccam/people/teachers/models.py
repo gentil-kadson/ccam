@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.utils.text import get_text_list
 from django.utils.translation import gettext_lazy as _
 
 from ccam.academics.models import Subject
@@ -20,3 +21,8 @@ class Teacher(BaseModel):
 
     def get_absolute_url(self):
         return reverse("people:teachers:detail", kwargs={"pk": self.pk})
+
+    def get_subjects_names(self):
+        teacher_subjects = list(self.subjects.values_list("name", flat=True))
+        teacher_subjects = get_text_list(teacher_subjects, "e")
+        return teacher_subjects

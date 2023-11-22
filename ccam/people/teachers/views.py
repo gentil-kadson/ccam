@@ -60,4 +60,6 @@ class TeacherCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 
 
 class TeacherDetailView(DetailView):
-    template_name = "teachers/teachers_detail.html"
+    model = Teacher
+    template_name = "teachers/teacher_detail.html"
+    context_object_name = "teacher"
