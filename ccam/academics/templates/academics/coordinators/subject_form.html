@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load breadcrumb_item %}
+{% block breadcrumb_items %}
+  {% breadcrumb_item text="Home" icon="home" href='people:coordinators:home' %}
+  {% breadcrumb_item text="Cadastrar Disciplina" icon="more" active=True last_item=True %}
+{% endblock breadcrumb_items %}
+
+{% block content %}
+  <main id="container"
+        class="left-aligned-content">
+        <h1 class="green-text fw-bold">Cadastrar Disciplina</h1>
+        <section id="add-subject-section" class="pt-4">
+            <form action="" id="subject-form">
+            <h2 class="fw-bold">
+                <img
+                src="{% static 'academics/images/icons/database.svg' %}"
+                alt="Disks stacked on top of each other"
+                class="green-svg"
+                width="35"
+                height="35"
+                />
+                Preencha os dados:
+            </h2>
+            <fieldset id="subject-data" class="pt-4">
+                <div class="ccam-input">
+                    {{ form.name.label_tag }}
+                    {{ form.name }}
+                </div>
+                <div class="ccam-input">
+                    {{ form.grade_semester_availability.label_tag }}
+                    {{ form.grade_semester_availability }}
+                </div>
+                <div class="ccam-input">
+                    {{ form.course.label_tag }}
+                    <div class="ccam-select">
+                        {{ form.course }}
+                    </div>
+                </div>
+                <div class="ccam-radio-input">
+                    <p class="m-0 p-0 green-text fw-bold">{{ form.educational_level.label }}</p>
+                    <div class="d-flex" id="radio-group">
+                        {% for valid, educational_level in form.educational_level.field.choices %}
+                            {% if valid %}
+                                <div class="d-flex">
+                                    <input type="radio" name="{{ form.educational_level.html_name }}" id="{{ form.educational_level.id_for_label }}" value="{{ educational_level }}" />
+                                    <label class="fw-bold" for="{{ form.educational_level.id_for_label }}">{{ educational_level }}</label>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </fieldset>
+            </form>
+            {% include "core/_button.html" with button_text="Enviar" color_class="green-svg" icon_path='people/images/icons/doubleTick.svg' alt_text="Double overlapping greent ticks" form_id="subject-form" %}
+        </section>
+  </main>
+{% endblock content %}

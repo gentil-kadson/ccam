@@ -1,6 +1,19 @@
-from django.views.generic import TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
+from django.urls import reverse_lazy
+from django.utils.translation import gettext_lazy as _
+from django.views.generic import CreateView, TemplateView
 
-from ccam.academics.models import Course
+from ccam.academics.forms import SubjectForm
+from ccam.academics.models import Course, Subject
+
+
+class SubjectCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    model = Subject
+    success_url = reverse_lazy("people:coordinators:home")
+    success_message = _("Disciplina cadastrada com sucesso!")
+    template_name = "academics/coordinators/subject_form.html"
+    form_class = SubjectForm
 
 
 class CourseSubjects(TemplateView):
@@ -56,20 +69,12 @@ class CoordinatorsCourseProgressComittee(TemplateView):
     template_name = "academics/coordinators_academics/course_progress_committee.html"
 
 
-class CoordinatorsAddCourse(TemplateView):
-    template_name = "academics/coordinators_academics/add_course.html"
-
-
 class CoordinatorsSubjectList(TemplateView):
     template_name = "academics/coordinators_academics/subjects_list.html"
 
 
 class CoordinatorsCourseProgressSubjectList(TemplateView):
     template_name = "academics/coordinators_academics/course_progress_subject_list.html"
-
-
-class AddCourseView(TemplateView):
-    template_name = "academics/coordinators_academics/add_course.html"
 
 
 class SubjectListView(TemplateView):

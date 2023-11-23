@@ -1,4 +1,4 @@
-#add-course-section {
+#add-subject-section {
     width: 100%;
 
     display: flex;
@@ -7,13 +7,14 @@
     height: 100%;
 }
 
-#add-course-section button {
+#add-subject-section button {
     align-self: flex-end;
 }
 
-#course-data {
+#subject-data {
     display: grid;
     grid-template-columns: 1fr 7fr;
     column-gap: 3.5rem;
+    row-gap: 2.5rem;
 
 }

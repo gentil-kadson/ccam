@@ -1,5 +1,7 @@
 .ccam-radio-input {
     width: max-content;
+    display: flex;
+    flex-direction: column;
 }
 
 .ccam-radio-input input {

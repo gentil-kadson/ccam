@@ -23,8 +23,8 @@ class Course(BaseModel):
 
 
 class Subject(BaseModel):
-    name = models.CharField(max_length=40, verbose_name=_("Disciplina"))
-    course = models.ManyToManyField(Course, related_name="subjects")
+    name = models.CharField(max_length=40, verbose_name=_("Nome da Disciplina"))
+    course = models.ManyToManyField(Course, related_name="subjects", verbose_name=_("Cursos"))
     grade_semester_availability = models.PositiveSmallIntegerField(
         verbose_name=_("Ano/Período"), validators=[MaxValueValidator(8)], default=1
     )
