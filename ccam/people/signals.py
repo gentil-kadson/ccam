@@ -17,7 +17,7 @@ def create_person_auth_user(sender, instance: Person, **kwargs):
         try:
             auth_user = User.objects.get(username=instance.registration)
             auth_user.username = instance.registration
-            auth_user.password = cleaned_cpf
+            auth_user.set_password(cleaned_cpf)
             auth_user.save()
         except User.DoesNotExist:
             auth_user = User.objects.create_user(username=instance.registration, password=cleaned_cpf)

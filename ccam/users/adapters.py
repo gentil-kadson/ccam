@@ -8,7 +8,7 @@ from django.conf import settings
 from django.http import HttpRequest
 from django.urls import reverse_lazy
 
-from ccam.core.constants import SEAC_COORDINATOR_GROUP_NAME
+from ccam.core.constants import COURSE_COORDINATOR_GROUP_NAME, SEAC_COORDINATOR_GROUP_NAME
 
 if typing.TYPE_CHECKING:
     from allauth.socialaccount.models import SocialLogin
@@ -44,8 +44,12 @@ class SocialAccountAdapter(DefaultSocialAccountAdapter):
 class PeopleAccountAdapter(AccountAdapter):
     GROUPS_HOME_URLS = {
         SEAC_COORDINATOR_GROUP_NAME: reverse_lazy("people:managers:home"),
+        COURSE_COORDINATOR_GROUP_NAME: reverse_lazy("people:coordinators:home"),
     }
 
     def get_login_redirect_url(self, request):
-        user_group_name = request.user.groups.first().name
-        return self.GROUPS_HOME_URLS[user_group_name]
+        user_group = request.user.groups.first()
+        return self.GROUPS_HOME_URLS[user_group.name] if user_group else "/"
+
+    def get_logout_redirect_url(self, request):
+        return "/accounts/login/"
