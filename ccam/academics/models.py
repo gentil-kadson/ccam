@@ -2,7 +2,7 @@ from django.core.validators import MaxValueValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from ccam.core.models import BaseModel
+from ccam.core.models import BaseModel, EducationalLevel
 
 
 class Course(BaseModel):
@@ -28,13 +28,16 @@ class Subject(BaseModel):
     grade_semester_availability = models.PositiveSmallIntegerField(
         verbose_name=_("Ano/Período"), validators=[MaxValueValidator(8)], default=1
     )
+    educational_level = models.CharField(
+        max_length=4, choices=EducationalLevel.choices, verbose_name=_("Nível Educacional")
+    )
 
     class Meta:
         verbose_name = _("Disciplina")
         verbose_name_plural = _("Disciplinas")
 
     def __str__(self):
-        return f"{self.name}"
+        return f"{self.name} - {self.get_educational_level_display()}"
 
 
 class KnowledgeCertificate(BaseModel):

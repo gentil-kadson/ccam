@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 def get_sentinel_user():
@@ -29,3 +30,8 @@ class BaseModel(TimeStampedModel):
 
     class Meta:
         abstract = True
+
+
+class EducationalLevel(models.TextChoices):
+    TECHNICIAN = "TEEM", _("Técnico Médio Integrado")
+    UNIVERSITY = "UNI", _("Superior")
