@@ -1,5 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
+from django.db import transaction
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import CreateView, TemplateView
@@ -14,6 +15,13 @@ class SubjectCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     success_message = _("Disciplina cadastrada com sucesso!")
     template_name = "academics/coordinators/subject_form.html"
     form_class = SubjectForm
+
+    @transaction.atomic
+    def form_valid(self, form):
+        subject = form.save(commit=False)
+        subject.created_by = self.request.user
+        subject.updated_by = self.request.user
+        return super().form_valid(form)
 
 
 class CourseSubjects(TemplateView):
