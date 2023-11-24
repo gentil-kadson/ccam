@@ -6,7 +6,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.db import transaction
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
-from django.views.generic import CreateView, DetailView, TemplateView, UpdateView
+from django.views.generic import CreateView, DetailView, TemplateView, UpdateView, DeleteView
 
 from ccam.core.views import FilteredListView
 from ccam.people.coordinators.forms import CoordinatorsMultiForm
@@ -67,3 +67,15 @@ class CoordinatorsUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView
         kwargs = super().get_form_kwargs()
         kwargs.update(instance={"person": self.object.person, "coordinator": self.object})
         return kwargs
+
+
+class CoordinatorsDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+    model = Coordinator
+    success_url = reverse_lazy("people:coordinators:list")
+    success_message = _("Coordenador de curso excluído com sucesso!")
+    template_name = "coordinators/coordinators_check_delete.html"
+
+    @transaction.atomic
+    def form_valid(self, form):
+        self.object.person.delete()
+        return super().form_valid(form)

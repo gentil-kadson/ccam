@@ -2,14 +2,12 @@
 {% load breadcrumb_item %}
 
 {% block breadcrumb_items %}
-  {% breadcrumb_item text="Home" icon="home" active=True last_item=True %}
-{% endblock breadcrumb_items %}
+  {% breadcrumb_item text = 'Home' icon = 'home' active = True last_item = True %}
+{% endblock %}
 
 {% block content %}
   <main id="container" class="left-aligned-content">
-    <h1 class="fw-bold">
-      O que você <span class="green-text">deseja</span> fazer hoje?
-    </h1>
+    <h1 class="fw-bold">O que você <span class="green-text">deseja</span> fazer hoje?</h1>
     {% include 'students/_students_home_menu.html' %}
   </main>
-{% endblock content %}
+{% endblock %}

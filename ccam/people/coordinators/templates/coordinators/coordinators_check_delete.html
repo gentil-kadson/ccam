@@ -1,0 +1,13 @@
+{% load button %}
+
+<form action="{% url 'people:coordinators:delete' object.pk %}" method="post" id="delete-coordinators">
+  {% csrf_token %}
+  {{ form }}
+  <p>
+    Tem certeza que deseja excluir o coordenador de curso <span class="green-text">{{ object.person.name }}({{ object.person.cpf }})</span>?
+  </p>
+  <footer class="d-flex w-100 close-modal-buttons-container">
+    {% button button_text='Sim' color_class='green-svg' icon='thumb_up' id='submit-modal-button' form_id='delete-coordinators' %}
+    {% button button_text='Não' color_class='red-svg' icon='thumb_down' id='close-modal-button' type='button' %}
+  </footer>
+</form>
