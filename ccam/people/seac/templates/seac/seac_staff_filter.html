@@ -43,38 +43,7 @@
       <table class="ccam-table">
         <thead>
           <tr>
-            <th>
-              <div>
-                <span class="material-symbols-outlined">
-                  signature
-                </span>
-                <span class="teste">
-                  Nome
-                </span>
-              </div>
-            </th>
-            <th>
-              <div>
-                {% bs_icon 'person-vcard-fill' color='#0bda51' %}
-                CPF
-            </div>
-            </th>
-            <th>
-              <div>
-                <span class="material-symbols-outlined">
-                  badge
-                </span>
-                Matrícula
-              </div>
-            </th>
-            <th>
-              <div>
-                <span class="material-symbols-outlined">
-                  mail
-                </span>
-                Email
-              </div>
-            </th>
+            {% include "people/person_table_header.html" %}
             <th>
               <div>
                 <span class="material-symbols-outlined">
@@ -100,12 +69,13 @@
               <td>{{ seac_staff.person.cpf }}</td>
               <td>{{ seac_staff.person.registration }}</td>
               <td>{{ seac_staff.person.email }}</td>
-              <td>{{ seac_staff.role }}</td>
+              <td>{{ seac_staff.get_role_display }}</td>
               <td>
                 <div class="d-flex justify-content-around">
-                  {% simple_table_button color_class='green-text' icon='visibility' href='people:seac:detail' %}
-                  {% simple_table_button color_class='green-text' icon='edit' href='people:seac:create' %}
-                  {% simple_table_button color_class='green-text' icon='delete' href='people:seac:detail' %}
+                  {% simple_table_button color_class='green-text' icon='visibility' abs_url=seac_staff.get_absolute_url %}
+                  {% simple_table_button color_class='green-text' icon='edit' abs_url=seac_staff.get_update_url %}
+                  {% url 'people:seac:delete' seac_staff.pk as seac_delete_url %}
+                  {% include "core/_table_delete_button.html" with delete_url=seac_delete_url %}
                 </div>
               </td>
             </tr>

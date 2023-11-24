@@ -24,7 +24,7 @@ class Course(BaseModel):
 
 class Subject(BaseModel):
     name = models.CharField(max_length=40, verbose_name=_("Disciplina"))
-    course = models.ManyToManyField(Course, related_name="subject_courses")
+    course = models.ManyToManyField(Course, related_name="subjects")
     grade_semester_availability = models.PositiveSmallIntegerField(
         verbose_name=_("Ano/Período"), validators=[MaxValueValidator(8)], default=1
     )

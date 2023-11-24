@@ -2,6 +2,7 @@
 
 {% load static %}
 {% load breadcrumb_item %}
+{% load button %}
 
 {% block breadcrumb_items %}
   {% breadcrumb_item text="Home" icon="home" href='people:managers:home' %}
@@ -15,33 +16,32 @@
     </header>
     <form method="post"
           class="w-100 d-flex flex-column justify-content-evenly"
-          id="teachers-form">
+          id="teachers-form"
+          enctype="multipart/form-data">
+        {% csrf_token %}
+        {% include "core/_form_errors.html" with form=form %}
         {% include "people/person_form.html" with person_form=form.person %}
-        <fieldset class="row align-items-center mt-4">
+        <fieldset class="row flex-column align-items-start mt-4">
         <legend class="fw-bold">Selecione as <span class="green-text">matérias</span> que ele irá lecionar:</legend>
             <div class="ccam-input">
-                <label for="course">Curso<img src="{% static 'images/icons/info.svg' %}"
+                <label for="{{ form.teacher.course.id_for_label }}">Curso<img src="{% static 'images/icons/info.svg' %}"
                  class="green-svg"
                  alt="Letter 'i' in a circumference" />
                 </label>
                 <div class="ccam-select">
-                    <select name="course" id="course">
-                        <option value="-------">------</option>
-                    </select>
+                  {{ form.teacher.course }}
                 </div>
             </div>
 
-            <div class="ccam-input">
-                <label for="subject">Matéria<img src="{% static 'images/icons/info.svg' %}" class="green-svg" alt="Letter 'i' in a circumference" />
-                </label>
+            <div class="ccam-input mt-2">
+                {{ form.teacher.subjects.label_tag }}
                 <div class="ccam-select">
-                    <select name="subject" id="subject">
-                        <option value="------">-------</option>
+                    <select name="{{ form.teacher.subjects.html_name }}" id="{{ form.teacher.subjects.id_for_label }}" multiple size="3">
                     </select>
                 </div>
             </div>
         </fieldset>
 </form>
-{% include "core/_button.html" with button_text="Enviar" color_class="green-svg" icon_path='people/images/icons/doubleTick.svg' alt_text="A green double tick" custom_class="align-self-end" form_id="teachers-form" %}
+{% button button_text="Enviar" color_class="green-svg" icon="done_all" custom_class="align-self-end" form_id="teachers-form" %}
 </main>
 {% endblock content %}

@@ -6,15 +6,17 @@
   max-width: 450px;
   text-align: center;
 
+  padding: 40px;
+  margin: auto;
+  z-index: -1;
+}
+
+#confirmation-modal form {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 20px;
-
-  padding: 40px;
-  margin: auto;
-  z-index: -1;
 }
 
 .close-modal-buttons-container {

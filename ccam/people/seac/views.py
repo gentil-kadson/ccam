@@ -4,7 +4,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.db import transaction
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
-from django.views.generic import CreateView, TemplateView
+from django.views.generic import CreateView, DeleteView, DetailView, TemplateView, UpdateView
 from django_filters.views import FilterView
 
 from .filters import SEACStaffFilterSet
@@ -48,5 +48,32 @@ class SeacStaffCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         return super().form_valid(form)
 
 
-class SeacStaffDetailView(TemplateView):
+class SeacStaffUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = SEACStaff
+    form_class = SEACStaffPersonMultiForm
+    template_name = "seac/seac_staff_form.html"
+    success_url = reverse_lazy("people:managers:home")
+    success_message = _("Funcionário da SEAC editado com sucesso!")
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update(instance={"person": self.object.person, "seacstaff": self.object})
+        return kwargs
+
+
+class SeacStaffDetailView(DetailView):
+    model = SEACStaff
     template_name = "seac/seac_detail.html"
+    context_object_name = "seacstaff"
+
+
+class SeacStaffDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+    model = SEACStaff
+    success_url = reverse_lazy("people:seac:list")
+    success_message = _("Funcionário da SEAC deletado com sucesso")
+    template_name = "seac/seac_check_delete.html"
+
+    @transaction.atomic
+    def form_valid(self, form):
+        self.object.person.delete()
+        return super().form_valid(form)

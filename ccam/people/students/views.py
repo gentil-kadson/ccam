@@ -1,16 +1,17 @@
-from django.views.generic import TemplateView
-from django.conf import settings
 from typing import Any
-from django.views.generic import TemplateView, CreateView, DetailView, DeleteView
-from django_filters.views import FilterView
-from django.db import models, transaction
-from django.urls import reverse_lazy
-from django.utils.translation import gettext_lazy as _
+
+from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
+from django.db import transaction
+from django.urls import reverse_lazy
+from django.utils.translation import gettext_lazy as _
+from django.views.generic import CreateView, DeleteView, DetailView, TemplateView, UpdateView
+from django_filters.views import FilterView
+
+from ccam.people.students.filters import StudentFilterSet
 from ccam.people.students.forms import StudentsMultiForm
 from ccam.people.students.models import Student
-from ccam.people.students.filters import StudentFilterSet
 
 
 class StudentHomeView(TemplateView):
@@ -34,7 +35,7 @@ class StudentCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     template_name = "students/students_form.html"
     form_class = StudentsMultiForm
     model = Student
-    success_url = reverse_lazy("people:managers:home")
+    success_url = reverse_lazy("people:students:list")
     success_message = _("Estudante criado com sucesso!")
 
     @transaction.atomic
@@ -49,9 +50,16 @@ class StudentCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         return super().form_valid(form)
 
 
-class StudentDeleteView(LoginRequiredMixin, DeleteView):
+class StudentDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Student
-    success_url = reverse_lazy("list")
+    success_url = reverse_lazy("people:students:list")
+    success_message = _("Aluno deletado com sucesso!")
+    template_name = "students/student_check_delete.html"
+
+    @transaction.atomic
+    def form_valid(self, form):
+        self.object.person.delete()
+        return super().form_valid(form)
 
 
 class StudentDetailView(DetailView):
@@ -61,3 +69,16 @@ class StudentDetailView(DetailView):
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         return super().get_context_data(**kwargs)
+
+
+class StudentUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = Student
+    form_class = StudentsMultiForm
+    template_name = "students/students_form.html"
+    success_url = reverse_lazy("people:students:list")
+    success_message = _("Aluno editado com sucesso!")
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update(instance={"person": self.object.person, "student": self.object})
+        return kwargs

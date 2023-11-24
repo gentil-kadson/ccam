@@ -16,16 +16,10 @@
                height="151" />
           <span>{{ student.person.name }}</span>
         </section>
-        <section class="student-info">
+        <section class="person-info">
+          {% include "people/person_detail.html" with person=student.person only %}
           <div>
-            <span><b>Matrícula:</b> {{ student.person.registration }}</span>
             <span><b>Curso:</b> {{ student.course.name }}</span>
-            <span><b>Período:</b> {{student.current_grade_semester}}º</span>
-          </div>
-          <div>
-            <span><b>Fone: </b>{{ student.person.phone_number }}</span>
-            <span><b>E-mail: </b>{{ student.person.email }}</span>
-            <span><b>CPF: </b>{{ student.person.cpf }}</span>
           </div>
         </section>
     </main>

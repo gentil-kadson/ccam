@@ -18,7 +18,7 @@
     font-weight: bold;
 }
 
-.student-info {
+.person-info {
     border-radius: 10px;
     background-color: var(--element-dark);
     margin-top: 3rem;
@@ -26,23 +26,14 @@
     padding: 40px 0px;
 
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    align-items: space-around;
 }
 
-.student-info div:first-of-type {
-    grid-column-start: 0;
-    grid-column-end: 1;
+.person-info div {
     display: flex;
-    flex-direction: column;
-    gap: 1.3rem;
-}
-
-.student-info div:last-of-type {
-    grid-column-start: 1;
-    grid-column-end: 2;
-    display: flex;
-    flex-direction: column;
-    gap: 1.3rem;
+    justify-content: space-between;
+    padding: 0.2rem 3rem;
 }
 
 .assessment-buttons {
@@ -65,5 +56,3 @@
         justify-content: center;
     }
 }
-
-
