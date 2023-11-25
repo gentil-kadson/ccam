@@ -1,11 +1,11 @@
+from typing import Any
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db import transaction
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import CreateView, TemplateView
-
-from ccam.academics.forms import SubjectForm
+from ccam.academics.forms import SubjectForm, KnowledgeCertificateForm
 from ccam.academics.models import Course, Subject
 
 
@@ -45,8 +45,16 @@ class CourseSubjects(TemplateView):
         return context
 
 
-class KnowledgeCertificateCreateView(TemplateView):
-    template_name = "academics/knowledge_certificate_form.html"
+class KnowledgeCertificateCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    template_name = "academics/students/knowledge_certificate_form.html"
+    form_class = KnowledgeCertificateForm
+    success_url = reverse_lazy("people:students:home")
+    success_message = _("Certificação de conhecimento solicitada com sucesso!")
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs["student"] = self.request.user.person.student_person
+        return kwargs
 
 
 class CourseProgressCreateView(TemplateView):
