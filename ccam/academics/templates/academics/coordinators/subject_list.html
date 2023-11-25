@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load breadcrumb_item %}
+{% load button %}
+
+{% block breadcrumb_items %}
+  {% breadcrumb_item text="Home" icon="home" href='people:coordinators:home' %}
+  {% breadcrumb_item text="Certificação de Conhecimentos" image_icon=True icon_path='people/images/icons/diploma.svg' active=True last_item=True %}
+{% endblock breadcrumb_items %}
+
+{% block content %}
+  <main id="container" class="view-table-section">
+    <header class="header-with-icon">
+      <img src="{% static 'people/images/icons/filter.svg' %}"
+           alt="A classic, green filter icon"
+           width="35"
+           height="35"
+           class="green-svg" />
+      <h2>Filtros</h2>
+    </header>
+    <form method="get" class="filter-section">
+      <div class="fields-container">
+        <div class="ccam-input">
+          {{ filter.form.course.label_tag }}
+          <div class="ccam-select">
+            {{ filter.form.course }}
+          </div>
+        </div>
+
+      <div class="ccam-input">
+        {{ filter.form.name.label_tag }}
+        {{ filter.form.name }}
+      </div>
+
+      <div class="ccam-input">
+        {{ filter.form.grade_semester_availability.label_tag }}
+        {{ filter.form.grade_semester_availability }}
+      </div>
+
+        <div class="ccam-radio-input d-flex flex-column">
+            <p class="m-0 p-0 green-text fw-bold">{{ filter.form.educational_level.label }}</p>
+            <div class="d-flex" id="radio-group">
+                {% for value, educational_level in filter.form.educational_level.field.choices %}
+                    {% if value %}
+                        <div class="d-flex">
+                            <input type="radio" name="{{ filter.form.educational_level.html_name }}" id="{{ filter.form.educational_level.id_for_label }}" value="{{ value }}" />
+                            <label class="fw-bold" for="{{ filter.form.educational_level.id_for_label }}">{{ educational_level }}</label>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+      </div>
+      {% button button_text="Filtrar" icon="filter_alt" %}
+    </form>
+    <header class="header-with-icon padding-from-content">
+      <img src="{% static 'people/images/icons/dataTable.svg' %}"
+           alt="Green disks on top of each other"
+           width="35"
+           height="35"
+           class="green-svg" />
+      <h2>Disciplinas</h2>
+    </header>
+    <section>
+      <table class="ccam-table">
+        <thead>
+          <tr>
+            <th>
+              <img src="{% static 'people/images/icons/cap.svg' %}"
+                   alt="A green student cap" />
+              Nome
+            </th>
+            <th>
+              <img src="{% static 'images/icons/course.svg' %}"
+                   alt="A feather pen writing on a scroll" />
+              Curso
+            </th>
+            <th>
+              <img src="{% static 'core/images/icons/upgrade.svg' %}"
+                   alt="Green arrow pointing upwards on a baseline" />
+              Nível
+            </th>
+            <th>
+              <img src="{% static 'core/images/icons/hashtag.svg' %}"
+                   alt="A green settings icon indicating actions you can take on a specific table" />
+              Ano/Período
+            </th>
+            <th>
+                <img src="{% static 'people/images/icons/actionIcon.svg' %}"
+                     alt="A green settings icon indicating actions you can take on a specific table" />
+                Ações
+              </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>APOO</td>
+            <td>ADS</td>
+            <td>Superior</td>
+            <td>4º</td>
+            <td>
+              <div class="d-flex justify-content-around">
+                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='people/images/icons/gavelIcon.svg' alt_text="A green eye" href='academics:kc_coordinators_committee' %}
+                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='images/icons/deleteIcon.svg' alt_text="A green recycle bin" custom_class="confirmation-modal-trigger" custom_class="confirmation-modal-trigger" %}
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>APOO</td>
+            <td>ADS</td>
+            <td>Superior</td>
+            <td>4º</td>
+            <td>
+              <div class="d-flex justify-content-around">
+                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='people/images/icons/gavelIcon.svg' alt_text="A green eye" href='academics:kc_coordinators_committee' %}
+                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='images/icons/deleteIcon.svg' alt_text="A green recycle bin" custom_class="confirmation-modal-trigger" %}
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>APOO</td>
+            <td>ADS</td>
+            <td>Superior</td>
+            <td>4º</td>
+            <td>
+              <div class="d-flex justify-content-around">
+                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='people/images/icons/gavelIcon.svg' alt_text="A green eye" href='academics:kc_coordinators_committee' %}
+                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='images/icons/deleteIcon.svg' alt_text="A green recycle bin" custom_class="confirmation-modal-trigger" %}
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>APOO</td>
+            <td>ADS</td>
+            <td>Superior</td>
+            <td>4º</td>
+            <td>
+              <div class="d-flex justify-content-around">
+                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='people/images/icons/gavelIcon.svg' alt_text="A green eye" href='academics:kc_coordinators_committee' %}
+                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='images/icons/deleteIcon.svg' alt_text="A green recycle bin" custom_class="confirmation-modal-trigger" %}
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    {% include "core/_confirmation_modal.html" with text="Tem certeza que deseja excluir a disciplina" highlighted_text="APOO" %}
+    {% include "core/_table_pagination.html" %}
+  </main>
+{% endblock content %}

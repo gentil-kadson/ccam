@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db import transaction
@@ -5,8 +6,10 @@ from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import CreateView, TemplateView
 
+from ccam.academics.filters import SubjectFilterSet
 from ccam.academics.forms import SubjectForm
 from ccam.academics.models import Course, Subject
+from ccam.core.views import FilteredListView
 
 
 class SubjectCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
@@ -43,6 +46,13 @@ class CourseSubjects(TemplateView):
             subjects = []
         context["course_subjects"] = subjects
         return context
+
+
+class KnowledgeCertificateSubjectList(LoginRequiredMixin, FilteredListView):
+    model = Subject
+    filterset_class = SubjectFilterSet
+    template_name = "academics/coordinators/subject_list.html"
+    paginate_by = settings.PAGINATE_BY
 
 
 class KnowledgeCertificateCreateView(TemplateView):
