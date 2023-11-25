@@ -1,5 +1,6 @@
 from django.core.validators import MaxValueValidator
 from django.db import models
+from django.utils.text import get_text_list
 from django.utils.translation import gettext_lazy as _
 
 from ccam.core.models import BaseModel, EducationalLevel
@@ -38,6 +39,11 @@ class Subject(BaseModel):
 
     def __str__(self):
         return f"{self.name} - {self.get_educational_level_display()}"
+
+    def get_courses_names(self):
+        courses_names = list(self.course.values_list("name", flat=True))
+        courses_names = get_text_list(courses_names, "e")
+        return courses_names
 
 
 class KnowledgeCertificate(BaseModel):
