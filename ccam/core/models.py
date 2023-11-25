@@ -35,3 +35,14 @@ class BaseModel(TimeStampedModel):
 class EducationalLevel(models.TextChoices):
     TECHNICIAN = "TEEM", _("Técnico Médio Integrado")
     UNIVERSITY = "UNI", _("Superior")
+
+
+class GradeSemester(models.IntegerChoices):
+    FIRST = 1, _("1º")
+    SECOND = 2, _("2º")
+    THIRD = 3, _("3º")
+    FOURTH = 4, _("4º")
+    FIFTH = 5, _("5º")
+    SIXTH = 6, _("6º")
+    SEVENTH = 7, _("7º")
+    EIGHTH = 8, _("8º")

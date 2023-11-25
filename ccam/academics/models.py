@@ -3,7 +3,7 @@ from django.db import models
 from django.utils.text import get_text_list
 from django.utils.translation import gettext_lazy as _
 
-from ccam.core.models import BaseModel, EducationalLevel
+from ccam.core.models import BaseModel, EducationalLevel, GradeSemester
 
 
 class Course(BaseModel):
@@ -27,7 +27,7 @@ class Subject(BaseModel):
     name = models.CharField(max_length=40, verbose_name=_("Nome da Disciplina"))
     course = models.ManyToManyField(Course, related_name="subjects", verbose_name=_("Cursos"))
     grade_semester_availability = models.PositiveSmallIntegerField(
-        verbose_name=_("Ano/Período"), validators=[MaxValueValidator(8)], default=1
+        verbose_name=_("Ano/Período"), choices=GradeSemester.choices
     )
     educational_level = models.CharField(
         max_length=4, choices=EducationalLevel.choices, verbose_name=_("Nível Educacional")
