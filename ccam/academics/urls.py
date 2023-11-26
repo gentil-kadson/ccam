@@ -8,7 +8,6 @@ from ccam.academics.views import (
     CourseProgressCreateView,
     CourseSubjects,
     KnowledgeCertificateCreateView,
-    KnowledgeCertificateSubjectList,
     SeacCoursesDispensalStudentDetails,
     SeacKnowledgeCertificatesStudentDetails,
     SeacViewCoursesDispensal,
@@ -16,8 +15,11 @@ from ccam.academics.views import (
     SubjectCourseProgressAssessView,
     SubjectCourseProgressListView,
     SubjectCreateView,
+    SubjectDeleteView,
+    SubjectDetailView,
     SubjectKnowledgeCertificateAssessView,
     SubjectListView,
+    SubjectUpdateView,
     TrackProcessesListView,
 )
 
@@ -60,7 +62,6 @@ urlpatterns = [
         CoordinatorsCourseProgressSubjectList.as_view(),
         name="cd_coordinators_subjects_list",
     ),
-    path("subjects/list/", SubjectListView.as_view(), name="subject_list"),
     path(
         "subjects/course-progress/list/", SubjectCourseProgressListView.as_view(), name="subject_course_progress_list"
     ),
@@ -76,6 +77,10 @@ urlpatterns = [
     ),
     path("processes/list/", TrackProcessesListView.as_view(), name="processes_list"),
     path("course-subjects/", CourseSubjects.as_view(), name="course_subjects"),
+    # Coordinator urls
     path("subjects/create/", SubjectCreateView.as_view(), name="subjects_create"),
-    path("knowledge-certificates/subjects/", KnowledgeCertificateSubjectList.as_view(), name="kc_subjects_list"),
+    path("subjects/list/", SubjectListView.as_view(), name="subjects_list"),
+    path("subjects/update/<int:pk>/", SubjectUpdateView.as_view(), name="subjects_update"),
+    path("subjects/detail/<int:pk>/", SubjectDetailView.as_view(), name="subjects_detail"),
+    path("subjects/delete/<int:pk>/", SubjectDeleteView.as_view(), name="subjects_delete"),
 ]

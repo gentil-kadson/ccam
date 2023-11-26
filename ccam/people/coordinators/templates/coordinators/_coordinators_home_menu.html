@@ -1,4 +1,5 @@
 {% load static %}
+{% load anchor %}
 
 <section id="coordinators-section">
   <div class="coordinators-action-container">
@@ -10,7 +11,7 @@
            height="35" />
       <h2>Certificação de Conhecimentos</h2>
     </div>
-    {% include "core/_anchor.html" with anchor_text="Disciplinas" color_class="green-svg" icon_path='people/images/icons/cap.svg' alt_text="A green graduation cap" href='academics:kc_coordinators_subjects_list' %}
+    {% include "core/_anchor.html" with anchor_text="Disciplinas" color_class="green-svg" icon_path='people/images/icons/cap.svg' alt_text="A green graduation cap" href='academics:subjects_list' %}
   </div>
   <div class="coordinators-action-container">
     <div>
@@ -25,13 +26,12 @@
   </div>
   <div class="coordinators-action-container">
     <div>
-      <img class="green-svg"
-           src="{% static 'people/images/icons/moreIcon.svg' %}"
-           alt="A green sticker-like arrow with three dots inside it."
-           width="35"
-           height="35" />
-      <h2>Outros</h2>
+      <span class="material-symbols-outlined green-text fs-2">
+        school
+      </span>
+      <h2>Disciplinas</h2>
     </div>
-    {% include "core/_anchor.html" with anchor_text="Cadastrar Disciplina" color_class="green-svg" icon_path='people/images/icons/plus.svg' alt_text="A green plus icon inside a circle" href='academics:subjects_create' %}
+    {% anchor icon="add_circle" color_class="green-text" href="academics:subjects_create" anchor_text="Cadastrar Disciplina" %}
+    {% anchor icon="list" href="academics:subjects_list" anchor_text="Listagem" %}
   </div>
 </section>

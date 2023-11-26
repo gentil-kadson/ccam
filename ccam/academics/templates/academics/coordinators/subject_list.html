@@ -2,21 +2,20 @@
 
 {% load static %}
 {% load breadcrumb_item %}
+{% load simple_table_button %}
 {% load button %}
 
 {% block breadcrumb_items %}
   {% breadcrumb_item text="Home" icon="home" href='people:coordinators:home' %}
-  {% breadcrumb_item text="Certificação de Conhecimentos" image_icon=True icon_path='people/images/icons/diploma.svg' active=True last_item=True %}
+  {% breadcrumb_item text="Disciplinas" icon="school" active=True last_item=True %}
 {% endblock breadcrumb_items %}
 
 {% block content %}
   <main id="container" class="view-table-section">
     <header class="header-with-icon">
-      <img src="{% static 'people/images/icons/filter.svg' %}"
-           alt="A classic, green filter icon"
-           width="35"
-           height="35"
-           class="green-svg" />
+      <span class="material-symbols-outlined green-text fs-2">
+        filter_alt
+      </span>
       <h2>Filtros</h2>
     </header>
     <form method="get" class="filter-section">
@@ -55,11 +54,9 @@
       {% button button_text="Filtrar" icon="filter_alt" %}
     </form>
     <header class="header-with-icon padding-from-content">
-      <img src="{% static 'people/images/icons/dataTable.svg' %}"
-           alt="Green disks on top of each other"
-           width="35"
-           height="35"
-           class="green-svg" />
+      <span class="material-symbols-outlined green-text fs-2">
+        data_table
+      </span>
       <h2>Disciplinas</h2>
     </header>
     <section>
@@ -117,8 +114,10 @@
                 <td>{{ subject.grade_semester_availability }}º</td>
                 <td>
                 <div class="d-flex justify-content-around">
-                    {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='people/images/icons/gavelIcon.svg' alt_text="A green eye" href='academics:kc_coordinators_committee' %}
-                    {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='images/icons/deleteIcon.svg' alt_text="A green recycle bin" custom_class="confirmation-modal-trigger" custom_class="confirmation-modal-trigger" %}
+                    {% simple_table_button color_class='green-text' icon='visibility' abs_url=subject.get_absolute_url %}
+                    {% simple_table_button color_class='green-text' icon='edit' abs_url=subject.get_update_url %}
+                    {% url 'academics:subjects_delete' subject.pk as subject_delete_url %}
+                    {% include "core/_table_delete_button.html" with delete_url=subject_delete_url %}
                 </div>
                 </td>
             </tr>
@@ -126,7 +125,7 @@
         </tbody>
       </table>
     </section>
-    {% include "core/_confirmation_modal.html" with text="Tem certeza que deseja excluir a disciplina" highlighted_text="APOO" %}
+    {% include "core/_confirmation_modal.html" %}
     {% include "core/_table_pagination.html" %}
   </main>
 {% endblock content %}

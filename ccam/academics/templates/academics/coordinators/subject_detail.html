@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+{% load breadcrumb_item %}
+{% block breadcrumb_items %}
+  {% breadcrumb_item text="Home" icon="home" href='people:coordinators:home' %}
+  {% breadcrumb_item text="Disciplinas" icon="school" href='academics:subjects_list' %}
+  {% breadcrumb_item text="Visualizar Disciplina" icon="visibility" active=True last_item=True %}
+{% endblock breadcrumb_items %}
+
+{% block content %}
+    <main id="container" class="centered-content student-details-center-vertical">
+        <section class="person-info">
+          <div>
+            <span><b>Nome:</b> {{ subject.name }}</span>
+            <span><b>Cursos que ofertam a disciplina:</b> {{ subject.get_courses_names }}</span>
+          </div>
+          <div>
+            <span><b>Disponível nos anos/períodos: </b> {{ subject.grade_semester_availability }}</span>
+            <span><b>Nível educacional: </b> {{ subject.get_educational_level_display }}</span>
+          </div>
+        </section>
+    </main>
+{% endblock content %}

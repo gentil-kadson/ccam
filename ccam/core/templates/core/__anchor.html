@@ -1,0 +1,14 @@
+{% load static %}
+{% load bootstrap_icons %}
+
+<a class="ccam-button anchor-button d-flex justify-content-center mt-2 {{ custom_class }}"
+   href="{% url href %}">
+  {{ anchor_text }}
+  {% if bootstrap_icon %}
+    {% bs_icon icon color=color_class %}
+  {% else %}
+    <span class="material-symbols-outlined {{ color_class }}">
+        {{ icon }}
+    </span>
+  {% endif %}
+</a>

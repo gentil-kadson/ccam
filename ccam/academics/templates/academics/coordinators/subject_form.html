@@ -48,7 +48,7 @@
                         {% for value, educational_level in form.educational_level.field.choices %}
                             {% if value %}
                                 <div class="d-flex">
-                                    <input type="radio" name="{{ form.educational_level.html_name }}" id="{{ form.educational_level.id_for_label }}" value="{{ value }}" />
+                                    <input type="radio" name="{{ form.educational_level.html_name }}" {% if value == object.educational_level %} checked {% endif %} id="{{ form.educational_level.id_for_label }}" value="{{ value }}" />
                                     <label class="fw-bold" for="{{ form.educational_level.id_for_label }}">{{ educational_level }}</label>
                                 </div>
                             {% endif %}

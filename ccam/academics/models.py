@@ -1,5 +1,6 @@
 from django.core.validators import MaxValueValidator
 from django.db import models
+from django.urls import reverse
 from django.utils.text import get_text_list
 from django.utils.translation import gettext_lazy as _
 
@@ -44,6 +45,12 @@ class Subject(BaseModel):
         courses_names = list(self.course.values_list("name", flat=True))
         courses_names = get_text_list(courses_names, "e")
         return courses_names
+
+    def get_absolute_url(self):
+        return reverse("academics:subjects_detail", kwargs={"pk": self.pk})
+
+    def get_update_url(self):
+        return reverse("academics:subjects_update", kwargs={"pk": self.pk})
 
 
 class KnowledgeCertificate(BaseModel):

@@ -4,7 +4,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.db import transaction
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
-from django.views.generic import CreateView, TemplateView
+from django.views.generic import CreateView, DeleteView, DetailView, TemplateView, UpdateView
 
 from ccam.academics.filters import SubjectFilterSet
 from ccam.academics.forms import SubjectForm
@@ -25,6 +25,34 @@ class SubjectCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         subject.created_by = self.request.user
         subject.updated_by = self.request.user
         return super().form_valid(form)
+
+
+class SubjectListView(LoginRequiredMixin, FilteredListView):
+    model = Subject
+    filterset_class = SubjectFilterSet
+    template_name = "academics/coordinators/subject_list.html"
+    paginate_by = settings.PAGINATE_BY
+
+
+class SubjectUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = Subject
+    form_class = SubjectForm
+    success_message = _("Disciplina atualizada com sucesso!")
+    success_url = reverse_lazy("academics:subjects_list")
+    template_name = "academics/coordinators/subject_form.html"
+
+
+class SubjectDetailView(LoginRequiredMixin, DetailView):
+    template_name = "academics/coordinators/subject_detail.html"
+    model = Subject
+    context_object_name = "subject"
+
+
+class SubjectDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+    model = Subject
+    template_name = "academics/coordinators/subject_check_delete.html"
+    success_url = reverse_lazy("academics:subjects_list")
+    success_message = _("Disciplina deletada com sucesso!")
 
 
 class CourseSubjects(TemplateView):
@@ -93,10 +121,6 @@ class CoordinatorsSubjectList(TemplateView):
 
 class CoordinatorsCourseProgressSubjectList(TemplateView):
     template_name = "academics/coordinators_academics/course_progress_subject_list.html"
-
-
-class SubjectListView(TemplateView):
-    template_name = "academics/teacher_academics/subject_list.html"
 
 
 class SubjectCourseProgressListView(TemplateView):
