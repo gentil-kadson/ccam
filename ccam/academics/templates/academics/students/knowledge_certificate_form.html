@@ -31,59 +31,8 @@
       />
       Escolha as disciplinas:
     </h2>
-    <fieldset
-      id="student-data"
-      class="d-flex flex-wrap flex-shrink-1 align-items-center pt-2"
-    >
-      <div class="ccam-input">
-        <label for="registration">Matrícula</label>
-        <input
-          type="text"
-          name="registration"
-          id="registration"
-          placeholder="20221094040009"
-        />
-      </div>
-      <div class="ccam-input">
-        <label for="name">Nome</label>
-        <input type="text" name="name" id="name" placeholder="Donkus" />
-      </div>
-      <div class="ccam-input">
-        <label for="phone">Fone</label>
-        <input
-          type="text"
-          name="phone"
-          id="phone"
-          placeholder="(84) 98172-3452"
-        />
-      </div>
-      <div class="ccam-input">
-        <label for="course">Curso</label>
-        <div class="ccam-select">
-          <select name="course" id="course">
-            <option value="------">------</option>
-          </select>
-        </div>
-      </div>
-      <div class="ccam-input">
-        <label for="school_term">Período Letivo</label>
-        <div class="ccam-select">
-          <select name="school_term" id="school_term">
-            <option value="------">------</option>
-          </select>
-        </div>
-      </div>
-      <div class="ccam-input">
-        <label for="email">Email</label>
-        <input
-          type="email"
-          name="email"
-          id="email"
-          placeholder="jkl1231918@gmail.com"
-        />
-      </div>
-    </fieldset>
     <fieldset id="subject-data" class="d-flex flex-column w-100 pt-4">
+      {{ form.subjects }}
       <div class="ccam-checkbox">
         <input
           type="checkbox"
