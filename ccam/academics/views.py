@@ -6,9 +6,9 @@ from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import CreateView, DeleteView, DetailView, TemplateView, UpdateView
 
-from ccam.academics.filters import SubjectFilterSet
+from ccam.academics.filters import KnowledgeCertificateFilterSet, SubjectFilterSet
 from ccam.academics.forms import SubjectForm
-from ccam.academics.models import Course, Subject
+from ccam.academics.models import Course, KnowledgeCertificate, Subject
 from ccam.core.views import FilteredListView
 
 
@@ -91,8 +91,12 @@ class CourseProgressCreateView(TemplateView):
     template_name = "academics/course_progress_form.html"
 
 
-class SeacViewKnowledgeCertificates(TemplateView):
+class SeacViewKnowledgeCertificates(LoginRequiredMixin, FilteredListView):
+    model = KnowledgeCertificate
+    filterset_class = KnowledgeCertificateFilterSet
     template_name = "academics/seac_academics/seac_view_knowledge_certificates.html"
+    paginate_by = settings.PAGINATE_BY
+    context_object_name = "knowledge_certificates"
 
 
 class SeacViewCoursesDispensal(TemplateView):
