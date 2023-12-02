@@ -9,6 +9,7 @@ from django.views.generic import CreateView, DeleteView, DetailView, TemplateVie
 from ccam.academics.filters import SubjectFilterSet
 from ccam.academics.forms import KnowledgeCertificateForm, SubjectForm
 from ccam.academics.models import Course, Subject
+from ccam.core.mixins import UniqueConstraintErrorMessageMixin
 from ccam.core.views import FilteredListView
 
 
@@ -83,16 +84,27 @@ class KnowledgeCertificateSubjectList(LoginRequiredMixin, FilteredListView):
     paginate_by = settings.PAGINATE_BY
 
 
-class KnowledgeCertificateCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+class KnowledgeCertificateCreateView(
+    LoginRequiredMixin, UniqueConstraintErrorMessageMixin, SuccessMessageMixin, CreateView
+):
     template_name = "academics/students/knowledge_certificate_form.html"
     form_class = KnowledgeCertificateForm
     success_url = reverse_lazy("people:students:home")
-    success_message = _("Certificação de conhecimento solicitada com sucesso!")
+    success_message = _("Certificação de conhecimento solicitada com sucesso! Aguarde a avaliação")
+    unique_constraint_error_msg = _("Você já possui uma solicitação em aberto")
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
         kwargs["student"] = self.request.user.person.student_person
         return kwargs
+
+    @transaction.atomic
+    def form_valid(self, form):
+        instance = form.save(commit=False)
+        instance.student = self.request.user.person.student_person
+        instance.created_by = self.request.user
+        instance.updated_by = self.request.user
+        return super().form_valid(form)
 
 
 class CourseProgressCreateView(TemplateView):

@@ -8,7 +8,7 @@ from django.conf import settings
 from django.http import HttpRequest
 from django.urls import reverse_lazy
 
-from ccam.core.constants import COURSE_COORDINATOR_GROUP_NAME, SEAC_COORDINATOR_GROUP_NAME
+from ccam.core.constants import COURSE_COORDINATOR_GROUP_NAME, SEAC_COORDINATOR_GROUP_NAME, STUDENT_GROUP_NAME
 
 if typing.TYPE_CHECKING:
     from allauth.socialaccount.models import SocialLogin
@@ -45,6 +45,7 @@ class PeopleAccountAdapter(AccountAdapter):
     GROUPS_HOME_URLS = {
         SEAC_COORDINATOR_GROUP_NAME: reverse_lazy("people:managers:home"),
         COURSE_COORDINATOR_GROUP_NAME: reverse_lazy("people:coordinators:home"),
+        STUDENT_GROUP_NAME: reverse_lazy("people:students:home"),
     }
 
     def get_login_redirect_url(self, request):

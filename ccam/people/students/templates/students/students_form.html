@@ -28,8 +28,10 @@
                 </div>
             </div>
             <div class="ccam-input">
-              <label for="{{ form.student.current_grade_semester.id_for_labe }}">Ano/Período</label>
-              {{ form.student.current_grade_semester }}
+              <label for="{{ form.student.current_grade_semester.id_for_label }}">Ano/Período</label>
+              <div class="ccam-select">
+                {{ form.student.current_grade_semester }}
+              </div>
             </div>
         </fieldset>
 </form>

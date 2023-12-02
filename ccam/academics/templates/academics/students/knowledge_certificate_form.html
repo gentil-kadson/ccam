@@ -11,59 +11,25 @@
 <main id="container">
   <h1 class="green-text fw-bold">Certificação de Conhecimentos</h1>
   <form method="post" id="knowledge-certificate-form" class="pt-4">
-    <h2 class="fw-bold">
-      <img
-        src="{% static 'academics/images/icons/database.svg' %}"
-        alt="Disks stacked on top of each other"
-        class="green-svg"
-        width="35"
-        height="35"
-      />
-      Preencha os dados:
-    </h2>
-    <h2 class="text-start fw-bold">
-      <img
-        src="{% static 'academics/images/icons/book.svg' %}"
-        alt="A book"
-        class="green-svg"
-        width="35"
-        height="35"
-      />
+    {% csrf_token %}
+    <h2 class="text-start fw-bold d-flex justify-content-start align-items-center">
+      <span class="material-symbols-outlined green-text fs-2">
+        book_4
+      </span>
       Escolha as disciplinas:
     </h2>
     <fieldset id="subject-data" class="d-flex flex-column w-100 pt-4">
-      {{ form.subjects }}
-      <div class="ccam-checkbox">
-        <input
-          type="checkbox"
-          value="informatics"
-          name="courses"
-          id="informatics"
-        />
-        <label for="informatics">Informática</label>
-      </div>
-      <div class="ccam-checkbox">
-        <input
-          type="checkbox"
-          value="mobile_devices"
-          name="courses"
-          id="mobile_devices"
-        />
-        <label for="mobile_devices">Dispositivos Móveis</label>
-      </div>
-      <div class="ccam-checkbox">
-        <input type="checkbox" value="qm" name="courses" id="qm" />
-        <label for="qm">Métodos Quantitativos</label>
-      </div>
-      <div class="ccam-checkbox">
-        <input
-          type="checkbox"
-          value="workplace_psychology"
-          name="courses"
-          id="workplace_psychology"
-        />
-        <label for="workplace_psychology">Psicologia do Trabalho</label>
-      </div>
+      {% for subject in form.subjects.field.queryset %}
+        <div class="ccam-checkbox">
+          <input
+            type="checkbox"
+            value="{{ subject.id }}"
+            name="{{ form.subjects.html_name }}"
+            id="id_subjects-{{ subject.id }}"
+          />
+          <label for="id_subjects-{{ subject.id }}">{{ subject.name }}</label>
+        </div>
+      {% endfor %}
     </fieldset>
   </form>
   {% include "core/_button.html" with button_text="Enviar" custom_class="align-self-end" color_class="green-svg" icon_path='people/images/icons/doubleTick.svg' alt_text="Double overlapping greent ticks" form_id="knowledge-certificate-form" %}

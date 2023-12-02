@@ -60,29 +60,35 @@ class KnowledgeCertificate(BaseModel):
         REJECTED = "ERR", _("Recusado")
 
     assessed_by = models.ForeignKey(
-        "seac.SEACStaff", on_delete=models.CASCADE, related_name="knowledge_certificate_assessor"
+        "seac.SEACStaff", on_delete=models.CASCADE, related_name="assessor", blank=True, null=True
     )
     student = models.ForeignKey(
-        "students.Student", on_delete=models.CASCADE, related_name="knowledge_certificate_student"
+        "students.Student", on_delete=models.CASCADE, related_name="student_knowledge_certificates"
     )
-    subjects = models.ManyToManyField(
-        Subject, related_name="knowledge_certifiace_subjects", through="KnowledgeCGrades"
-    )
+    subjects = models.ManyToManyField(Subject, related_name="knowledge_certificates", through="KnowledgeCGrades")
+    status = models.CharField(max_length=3, choices=Status.choices, default=Status.ANALYZING, verbose_name=_("Status"))
 
     class Meta:
         verbose_name = _("Certificação de Conhecimento")
         verbose_name_plural = _("Certificação de Conhecimentos")
+        constraints = [
+            models.UniqueConstraint(
+                fields=["student", "status"], condition=models.Q(status="PR"), name="one-pending-request-per-student"
+            )
+        ]
 
     def __str__(self):
         return f"{self.subjects}, {self.student.person.name} - {self.student.person.registration}"
 
 
-class KnowledgeCGrades(BaseModel):
+class KnowledgeCGrades(models.Model):
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name="knowledge_certificate_subject")
     knowledge_certificate = models.ForeignKey(
         KnowledgeCertificate, on_delete=models.CASCADE, related_name="specific_knowledge_certificate"
     )
-    grade = models.PositiveSmallIntegerField(verbose_name=_("Nota"), validators=[MaxValueValidator(100)])
+    grade = models.PositiveSmallIntegerField(
+        verbose_name=_("Nota"), validators=[MaxValueValidator(100)], blank=True, null=True
+    )
 
     class Meta:
         verbose_name = _("CertificaçãoCNotas")
