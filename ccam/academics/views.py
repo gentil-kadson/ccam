@@ -7,7 +7,7 @@ from django.utils.translation import gettext_lazy as _
 from django.views.generic import CreateView, DeleteView, DetailView, TemplateView, UpdateView
 
 from ccam.academics.filters import KnowledgeCertificateFilterSet, SubjectFilterSet
-from ccam.academics.forms import SubjectForm
+from ccam.academics.forms import KnowledgeCertificateForm, SubjectForm
 from ccam.academics.models import Course, KnowledgeCertificate, Subject
 from ccam.core.views import FilteredListView
 
@@ -83,8 +83,16 @@ class KnowledgeCertificateSubjectList(LoginRequiredMixin, FilteredListView):
     paginate_by = settings.PAGINATE_BY
 
 
-class KnowledgeCertificateCreateView(TemplateView):
-    template_name = "academics/knowledge_certificate_form.html"
+class KnowledgeCertificateCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    template_name = "academics/students/knowledge_certificate_form.html"
+    form_class = KnowledgeCertificateForm
+    success_url = reverse_lazy("people:students:home")
+    success_message = _("Certificação de conhecimento solicitada com sucesso!")
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs["student"] = self.request.user.person.student_person
+        return kwargs
 
 
 class CourseProgressCreateView(TemplateView):
