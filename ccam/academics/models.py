@@ -67,6 +67,7 @@ class KnowledgeCertificate(BaseModel):
     )
     subjects = models.ManyToManyField(Subject, related_name="knowledge_certificates", through="KnowledgeCGrades")
     status = models.CharField(max_length=3, choices=Status.choices, default=Status.ANALYZING, verbose_name=_("Status"))
+    justification = models.TextField(blank=True)
 
     class Meta:
         verbose_name = _("Certificação de Conhecimento")
@@ -76,6 +77,11 @@ class KnowledgeCertificate(BaseModel):
                 fields=["student", "status"], condition=models.Q(status="PR"), name="one-pending-request-per-student"
             )
         ]
+
+    def get_subjects_names(self):
+        subjects_names = list(self.subjects.values_list("name", flat=True))
+        subjects_names = get_text_list(subjects_names, "e")
+        return subjects_names
 
     def __str__(self):
         return f"{self.subjects}, {self.student.person.name} - {self.student.person.registration}"

@@ -6,9 +6,9 @@ from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import CreateView, DeleteView, DetailView, TemplateView, UpdateView
 
-from ccam.academics.filters import SubjectFilterSet
+from ccam.academics.filters import KnowledgeCertificateFilterSet, SubjectFilterSet
 from ccam.academics.forms import KnowledgeCertificateForm, SubjectForm
-from ccam.academics.models import Course, Subject
+from ccam.academics.models import Course, KnowledgeCertificate, Subject
 from ccam.core.mixins import UniqueConstraintErrorMessageMixin
 from ccam.core.views import FilteredListView
 
@@ -105,6 +105,13 @@ class KnowledgeCertificateCreateView(
         instance.created_by = self.request.user
         instance.updated_by = self.request.user
         return super().form_valid(form)
+
+
+class KnowledgeCertificateListView(LoginRequiredMixin, FilteredListView):
+    template_name = "academics/students/knowledge_certificate_filter.html"
+    model = KnowledgeCertificate
+    paginate_by = settings.PAGINATE_BY
+    filterset_class = KnowledgeCertificateFilterSet
 
 
 class CourseProgressCreateView(TemplateView):
