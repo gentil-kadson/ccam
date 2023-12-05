@@ -119,14 +119,28 @@ class SubjectDispensal(BaseModel):
         "seac.SEACStaff", on_delete=models.CASCADE, related_name="subject_dispensal_assessor", blank=True, null=True
     )
     student = models.ForeignKey("students.Student", on_delete=models.CASCADE, related_name="subject_dispensal_student")
-    subjects = models.ManyToManyField(Subject, related_name="subject_dispensal_subjects", through="SubjectDGrades")
+    subjects = models.ManyToManyField(
+        Subject, related_name="subject_dispensal_subjects", through="SubjectDGrades", verbose_name=_("Disciplinas")
+    )
     justification = models.TextField(blank=True)
-    previous_university_ppc = models.FileField(upload_to=get_subject_dispensal_files_dir)
-    previous_university_grades = models.FileField(upload_to=get_subject_dispensal_files_dir)
+    status = models.CharField(max_length=3, choices=Status.choices, default=Status.ANALYZING, verbose_name=_("Status"))
+    previous_university_ppc = models.FileField(
+        upload_to=get_subject_dispensal_files_dir, verbose_name=_("PPC da Antiga Universidade")
+    )
+    previous_university_grades = models.FileField(
+        upload_to=get_subject_dispensal_files_dir, verbose_name=_("Histórico da Antiga Universidade")
+    )
 
     class Meta:
         verbose_name = _("Aproveitamento de Disciplina")
         verbose_name_plural = _("Aproveitamento de Disciplinas")
+        constraints = [
+            models.UniqueConstraint(
+                fields=["student", "status"],
+                condition=models.Q(status="PR"),
+                name="one-pending-subject-dispensal-request-per-student",
+            )
+        ]
 
     def __str__(self):
         return f"{self.subjects}, {self.student.person.name} - {self.student.person.registration}"

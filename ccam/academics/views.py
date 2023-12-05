@@ -130,12 +130,19 @@ class KnowledgeCertificateListView(LoginRequiredMixin, FilteredListView):
     filterset_class = KnowledgeCertificateFilterSet
 
 
-class SubjectDispensalCreateView(LoginRequiredMixin, StudentAcademicsFormBaseMixin, SuccessMessageMixin, CreateView):
+class SubjectDispensalCreateView(
+    LoginRequiredMixin,
+    StudentAcademicsFormBaseMixin,
+    UniqueConstraintErrorMessageMixin,
+    SuccessMessageMixin,
+    CreateView,
+):
     template_name = "academics/students/subject_dispensal_form.html"
     model = SubjectDispensal
     form_class = SubjectDispensalForm
     success_message = _("Aproveitamento de Disciplina cadastrado com sucesso!")
     success_url = reverse_lazy("people:students:home")
+    unique_constraint_error_msg = _("Você já possui uma solicitação pendente")
 
 
 class CourseProgressCreateView(TemplateView):
