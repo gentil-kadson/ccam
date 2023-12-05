@@ -7,10 +7,26 @@ from django.utils.translation import gettext_lazy as _
 from django.views.generic import CreateView, DeleteView, DetailView, TemplateView, UpdateView
 
 from ccam.academics.filters import KnowledgeCertificateFilterSet, SubjectFilterSet
-from ccam.academics.forms import KnowledgeCertificateForm, SubjectForm
-from ccam.academics.models import Course, KnowledgeCertificate, Subject
+from ccam.academics.forms import KnowledgeCertificateForm, SubjectDispensalForm, SubjectForm
+from ccam.academics.models import Course, KnowledgeCertificate, Subject, SubjectDispensal
 from ccam.core.mixins import UniqueConstraintErrorMessageMixin
 from ccam.core.views import FilteredListView
+
+
+class StudentAcademicsFormBaseMixin:
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs["student"] = self.request.user.person.student_person
+        return kwargs
+
+    @transaction.atomic
+    def form_valid(self, form):
+        # Either an instance of KnowledgeCertificate or SubjectDispensal
+        instance = form.save(commit=False)
+        instance.student = self.request.user.person.student_person
+        instance.created_by = self.request.user
+        instance.updated_by = self.request.user
+        return super().form_valid(form)
 
 
 class SubjectCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
@@ -112,6 +128,14 @@ class KnowledgeCertificateListView(LoginRequiredMixin, FilteredListView):
     model = KnowledgeCertificate
     paginate_by = settings.PAGINATE_BY
     filterset_class = KnowledgeCertificateFilterSet
+
+
+class SubjectDispensalCreateView(LoginRequiredMixin, StudentAcademicsFormBaseMixin, SuccessMessageMixin, CreateView):
+    template_name = "academics/students/subject_dispensal_form.html"
+    model = SubjectDispensal
+    form_class = SubjectDispensalForm
+    success_message = _("Aproveitamento de Disciplina cadastrado com sucesso!")
+    success_url = reverse_lazy("people:students:home")
 
 
 class CourseProgressCreateView(TemplateView):

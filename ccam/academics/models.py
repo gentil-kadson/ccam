@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.utils.text import get_text_list
 from django.utils.translation import gettext_lazy as _
 
+from ccam.academics.utils import get_subject_dispensal_files_dir
 from ccam.core.models import BaseModel, EducationalLevel, GradeSemester
 
 
@@ -115,10 +116,13 @@ class SubjectDispensal(BaseModel):
         REJECTED = "ERR", _("Recusado")
 
     assessed_by = models.ForeignKey(
-        "seac.SEACStaff", on_delete=models.CASCADE, related_name="subject_dispensal_assessor"
+        "seac.SEACStaff", on_delete=models.CASCADE, related_name="subject_dispensal_assessor", blank=True, null=True
     )
     student = models.ForeignKey("students.Student", on_delete=models.CASCADE, related_name="subject_dispensal_student")
     subjects = models.ManyToManyField(Subject, related_name="subject_dispensal_subjects", through="SubjectDGrades")
+    justification = models.TextField(blank=True)
+    previous_university_ppc = models.FileField(upload_to=get_subject_dispensal_files_dir)
+    previous_university_grades = models.FileField(upload_to=get_subject_dispensal_files_dir)
 
     class Meta:
         verbose_name = _("Aproveitamento de Disciplina")
@@ -128,13 +132,13 @@ class SubjectDispensal(BaseModel):
         return f"{self.subjects}, {self.student.person.name} - {self.student.person.registration}"
 
 
-class SubjectDGrades(BaseModel):
+class SubjectDGrades(models.Model):
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name="subject_dispensal_subject")
     subject_dispensal = models.ForeignKey(
         SubjectDispensal, on_delete=models.CASCADE, related_name="specific_subject_dispensal"
     )
     compatibility = models.PositiveSmallIntegerField(
-        verbose_name=_("Compatibilidade"), validators=[MaxValueValidator(100)]
+        verbose_name=_("Compatibilidade"), validators=[MaxValueValidator(100)], blank=True, null=True
     )
 
     class Meta:

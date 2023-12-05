@@ -17,6 +17,7 @@ from ccam.academics.views import (
     SubjectCreateView,
     SubjectDeleteView,
     SubjectDetailView,
+    SubjectDispensalCreateView,
     SubjectKnowledgeCertificateAssessView,
     SubjectListView,
     SubjectUpdateView,
@@ -30,7 +31,6 @@ urlpatterns = [
         "knowledge-certificate/create/", KnowledgeCertificateCreateView.as_view(), name="create_knowledge_certificate"
     ),
     path("course-progress/create/", CourseProgressCreateView.as_view(), name="create_course_progress"),
-    path("knowledge-certificates/list", KnowledgeCertificateListView.as_view(), name="knowledge_certificates_list"),
     path("courses-dispensal/list", SeacViewCoursesDispensal.as_view(), name="courses_dispensal"),
     path(
         "knowledge-certificates/detail/",
@@ -84,4 +84,6 @@ urlpatterns = [
     path("subjects/detail/<int:pk>/", SubjectDetailView.as_view(), name="subjects_detail"),
     path("subjects/delete/<int:pk>/", SubjectDeleteView.as_view(), name="subjects_delete"),
     # Students URLs
+    path("knowledge-certificates/list/", KnowledgeCertificateListView.as_view(), name="knowledge_certificates_list"),
+    path("subject-dispensals/create/", SubjectDispensalCreateView.as_view(), name="subject_dispensals_create"),
 ]

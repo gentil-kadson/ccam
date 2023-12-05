@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load static %}
+{% load breadcrumb_item %}
+
+{% block breadcrumb_items %}
+  {% breadcrumb_item text="Home" icon="home" href='people:students:home' %}
+  {% breadcrumb_item text="Aproveitamento de Disciplinas" icon="export_notes" active=True last_item=True %}
+{% endblock breadcrumb_items %}
+
+{% block content %}
+<main id="container">
+  <h1 class="green-text fw-bold">Certificação de Conhecimentos</h1>
+  <form method="post" id="knowledge-certificate-form" class="pt-4" enctype="multipart/form-data">
+    {% include "core/_form_errors.html" with form=form %}
+    {% csrf_token %}
+    <h2 class="text-start fw-bold d-flex justify-content-start align-items-center">
+      <span class="material-symbols-outlined green-text fs-2">
+        book_4
+      </span>
+      Especifique as disciplinas:
+    </h2>
+    <fieldset id="subject-data" class="d-flex flex-column w-100 pt-4">
+      {% for subject in form.subjects.field.queryset %}
+        <div class="ccam-checkbox">
+          <input
+            type="checkbox"
+            value="{{ subject.id }}"
+            name="{{ form.subjects.html_name }}"
+            id="id_subjects-{{ subject.id }}"
+          />
+          <label for="id_subjects-{{ subject.id }}">{{ subject.name }}</label>
+        </div>
+      {% endfor %}
+    </fieldset>
+
+    <h2 class="text-start fw-bold pt-3">
+      <span class="material-symbols-outlined green-text fs-2">
+        attach_file
+      </span>
+      Anexe os <span class="green-text pl-2">documentos</span>
+    </h2>
+    <fieldset class="d-flex gap-3">
+      <div class="ccam-file-input">
+        {{ form.previous_university_ppc }}
+      </div>
+      <div class="ccam-file-input">
+        {{ form.previous_university_grades }}
+      </div>
+    </fieldset>
+  </form>
+  {% include "core/_button.html" with button_text="Enviar" custom_class="align-self-end" color_class="green-svg" icon_path='people/images/icons/doubleTick.svg' alt_text="Double overlapping greent ticks" form_id="knowledge-certificate-form" %}
+</main>
+{% endblock content %}
