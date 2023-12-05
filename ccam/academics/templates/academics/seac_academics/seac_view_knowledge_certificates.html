@@ -21,23 +21,23 @@
              class="green-svg" />
         <h2>Filtros</h2>
       </header>
-      <!-- <form method="get" class="filter-section">
+      <form method="get" class="filter-section">
         <div class="fields-container">
           <div class="ccam-input">
-            {{ filter.form.knowledge_certificate.student.registration.label_tag }}
-            {{ filter.form.knowledge_certificate.student.registration }}
+            {{ filter.form.knowledge_certificate.student.person.registration.label_tag }}
+            {{ filter.form.knowledge_certificate.student.person.registration }}
           </div>
-          <div class="ccam-input">
+          <!-- <div class="ccam-input">
             {{ filter.form.knowledge_certificate.submisstion_date.label_tag }}
             {{ filter.form.knowledge_certificate.submission_date }}
-          </div>
+          </div> -->
           <div class="ccam-input">
-            {{ filter.form.knowledge_certificate.student.name.label_tag }}
-            {{ filter.form.knowledge_certificate.student.name }}
+            {{ filter.form.knowledge_certificate.student.person.name.label_tag }}
+            {{ filter.form.knowledge_certificate.student.person.name }}
           </div>
         </div>
         {% button button_text="Filtrar" icon="filter_alt" %}
-      </form> -->
+      </form>
       <header class="header-with-icon padding-from-content">
         <img src="{% static 'people/images/icons/dataTable.svg' %}"
              alt="A green icon representation of a table with data on it."

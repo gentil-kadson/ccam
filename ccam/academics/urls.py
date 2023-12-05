@@ -10,7 +10,7 @@ from ccam.academics.views import (
     KnowledgeCertificateCreateView,
     SeacCoursesDispensalStudentDetails,
     SeacKnowledgeCertificatesStudentDetails,
-    SeacViewCoursesDispensal,
+    SeacSubjectDispensalListView,
     SeacKnowledgeCertificatesListView,
     SubjectCourseProgressAssessView,
     SubjectCourseProgressListView,
@@ -31,7 +31,7 @@ urlpatterns = [
     ),
     path("course-progress/create/", CourseProgressCreateView.as_view(), name="create_course_progress"),
     path("knowledge-certificates/list", SeacKnowledgeCertificatesListView.as_view(), name="knowledge_certificates"),
-    path("courses-dispensal/list", SeacViewCoursesDispensal.as_view(), name="courses_dispensal"),
+    path("courses-dispensal/list", SeacSubjectDispensalListView.as_view(), name="courses_dispensal"),
     path(
         "knowledge-certificates/detail/",
         SeacKnowledgeCertificatesStudentDetails.as_view(),

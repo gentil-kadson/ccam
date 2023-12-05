@@ -3,7 +3,7 @@ from django.utils.translation import gettext_lazy as _
 
 from ccam.core.models import EducationalLevel
 
-from .models import Course, KnowledgeCertificate, Subject
+from .models import Course, KnowledgeCertificate, Subject, SubjectDispensal
 
 
 class SubjectFilterSet(django_filters.FilterSet):
@@ -18,4 +18,9 @@ class SubjectFilterSet(django_filters.FilterSet):
 class KnowledgeCertificateFilterSet(django_filters.FilterSet):
     class Meta:
         model = KnowledgeCertificate
+        fields = ("student",)
+
+class SubjectDispensalFilterSet(django_filters.FilterSet):
+    class Meta:
+        model = SubjectDispensal
         fields = ("student",)
