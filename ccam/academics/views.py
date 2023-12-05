@@ -99,12 +99,11 @@ class CourseProgressCreateView(TemplateView):
     template_name = "academics/course_progress_form.html"
 
 
-class SeacViewKnowledgeCertificates(LoginRequiredMixin, FilteredListView):
+class SeacKnowledgeCertificatesListView(LoginRequiredMixin, FilteredListView):
     model = KnowledgeCertificate
     filterset_class = KnowledgeCertificateFilterSet
     template_name = "academics/seac_academics/seac_view_knowledge_certificates.html"
     paginate_by = settings.PAGINATE_BY
-    context_object_name = "knowledge_certificates"
 
 
 class SeacViewCoursesDispensal(TemplateView):
