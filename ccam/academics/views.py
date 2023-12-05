@@ -1,3 +1,4 @@
+from typing import Any
 from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
@@ -8,7 +9,7 @@ from django.views.generic import CreateView, DeleteView, DetailView, TemplateVie
 
 from ccam.academics.filters import KnowledgeCertificateFilterSet, SubjectFilterSet, SubjectDispensalFilterSet
 from ccam.academics.forms import KnowledgeCertificateForm, SubjectForm
-from ccam.academics.models import Course, KnowledgeCertificate, Subject, SubjectDispensal
+from ccam.academics.models import Course, KnowledgeCertificate, Subject, SubjectDispensal, KnowledgeCGrades
 from ccam.core.views import FilteredListView
 
 
@@ -112,8 +113,11 @@ class SeacSubjectDispensalListView(LoginRequiredMixin, FilteredListView):
     template_name = "academics/seac_academics/seac_view_courses_dispensal.html"
     paginate_by = settings.PAGINATE_BY
 
-class SeacKnowledgeCertificatesStudentDetails(TemplateView):
+
+class SeacKnowledgeCertificatesStudentDetails(LoginRequiredMixin, DetailView):
+    model = KnowledgeCertificate
     template_name = "academics/seac_academics/knowledge_certificates_student_details.html"
+    context_object_name = "knowledge_certificate"
 
 
 class SeacCoursesDispensalStudentDetails(TemplateView):

@@ -33,7 +33,7 @@ urlpatterns = [
     path("knowledge-certificates/list", SeacKnowledgeCertificatesListView.as_view(), name="knowledge_certificates"),
     path("courses-dispensal/list", SeacSubjectDispensalListView.as_view(), name="courses_dispensal"),
     path(
-        "knowledge-certificates/detail/",
+        "knowledge-certificates/detail/<int:pk>/",
         SeacKnowledgeCertificatesStudentDetails.as_view(),
         name="knowledge_certificate_detail",
     ),

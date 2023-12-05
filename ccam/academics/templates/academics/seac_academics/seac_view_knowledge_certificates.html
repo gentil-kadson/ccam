@@ -85,7 +85,7 @@
                 <td>{{ knowledge_certificate.student.person.registration }}</td>
                 <td>{{ knowledge_certificate.submission_date }}</td>
                 <td>
-                  {% include 'core/_table_button.html' with button_text="Vizualizar" color_class="green-svg" icon_path='people/images/icons/detailsIcon.svg' alt_text="A green eye icon" href='academics:knowledge_certificate_detail' %}
+                  {% simple_table_button color_class='green-text' icon='visibility' abs_url=knowledge_certificate.get_absolute_url %}
                 </td>
               </tr>
             {% endfor %}

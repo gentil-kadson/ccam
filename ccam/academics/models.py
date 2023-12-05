@@ -80,6 +80,9 @@ class KnowledgeCertificate(BaseModel):
     def __str__(self):
         return f"{self.subjects}, {self.student.person.name} - {self.student.person.registration}"
 
+    def get_absolute_url(self):
+        return reverse("academics:knowledge_certificate_detail", kwargs={"pk": self.pk})
+
 
 class KnowledgeCGrades(BaseModel):
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name="knowledge_certificate_subject")
