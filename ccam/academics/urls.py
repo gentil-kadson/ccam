@@ -1,5 +1,7 @@
 from django.urls import path
 
+from ccam.academics.coordinators.urls import urlpatterns as coordinators_urls
+from ccam.academics.students.urls import urlpatterns as students_urls
 from ccam.academics.views import (
     CoordinatorsCommittee,
     CoordinatorsCourseProgressComittee,
@@ -7,29 +9,18 @@ from ccam.academics.views import (
     CoordinatorsSubjectList,
     CourseProgressCreateView,
     CourseSubjects,
-    KnowledgeCertificateCreateView,
-    KnowledgeCertificateListView,
     SeacCoursesDispensalStudentDetails,
     SeacKnowledgeCertificatesStudentDetails,
     SeacViewCoursesDispensal,
     SubjectCourseProgressAssessView,
     SubjectCourseProgressListView,
-    SubjectCreateView,
-    SubjectDeleteView,
-    SubjectDetailView,
-    SubjectDispensalCreateView,
     SubjectKnowledgeCertificateAssessView,
-    SubjectListView,
-    SubjectUpdateView,
     TrackProcessesListView,
 )
 
 app_name = "academics"
 
 urlpatterns = [
-    path(
-        "knowledge-certificate/create/", KnowledgeCertificateCreateView.as_view(), name="create_knowledge_certificate"
-    ),
     path("course-progress/create/", CourseProgressCreateView.as_view(), name="create_course_progress"),
     path("courses-dispensal/list", SeacViewCoursesDispensal.as_view(), name="courses_dispensal"),
     path(
@@ -77,13 +68,8 @@ urlpatterns = [
     ),
     path("processes/list/", TrackProcessesListView.as_view(), name="processes_list"),
     path("course-subjects/", CourseSubjects.as_view(), name="course_subjects"),
-    # Coordinator urls
-    path("subjects/create/", SubjectCreateView.as_view(), name="subjects_create"),
-    path("subjects/list/", SubjectListView.as_view(), name="subjects_list"),
-    path("subjects/update/<int:pk>/", SubjectUpdateView.as_view(), name="subjects_update"),
-    path("subjects/detail/<int:pk>/", SubjectDetailView.as_view(), name="subjects_detail"),
-    path("subjects/delete/<int:pk>/", SubjectDeleteView.as_view(), name="subjects_delete"),
     # Students URLs
-    path("knowledge-certificates/list/", KnowledgeCertificateListView.as_view(), name="knowledge_certificates_list"),
-    path("subject-dispensals/create/", SubjectDispensalCreateView.as_view(), name="subject_dispensals_create"),
 ]
+
+urlpatterns += coordinators_urls
+urlpatterns += students_urls
