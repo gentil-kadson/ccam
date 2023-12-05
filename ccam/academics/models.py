@@ -1,3 +1,5 @@
+from datetime import date
+
 from django.core.validators import MaxValueValidator
 from django.db import models
 from django.urls import reverse
@@ -69,6 +71,8 @@ class KnowledgeCertificate(BaseModel):
         Subject, related_name="knowledge_certifiace_subjects", through="KnowledgeCGrades"
     )
 
+    submission_date = models.DateField(verbose_name=_("Data de Submissão"), default=date.today())
+
     class Meta:
         verbose_name = _("Certificação de Conhecimento")
         verbose_name_plural = _("Certificação de Conhecimentos")
@@ -107,6 +111,8 @@ class SubjectDispensal(BaseModel):
     )
     student = models.ForeignKey("students.Student", on_delete=models.CASCADE, related_name="subject_dispensal_student")
     subjects = models.ManyToManyField(Subject, related_name="subject_dispensal_subjects", through="SubjectDGrades")
+
+    submission_date = models.DateField(default=date.today(), verbose_name=_("Data de Submissão"))
 
     class Meta:
         verbose_name = _("Aproveitamento de Disciplina")

@@ -87,7 +87,7 @@
             <tr>
               <td>{{ subject_dispensal.student.person.name }}</td>
               <td>{{ subject_dispensal.student.person.registration }}</td>
-              <td>22/09/23</td>
+              <td>{{ subject_dispensal.submission_date }}</td>
               <td>
                 {% include 'core/_table_button.html' with button_text="Vizualizar" color_class="green-svg" icon_path='people/images/icons/detailsIcon.svg' alt_text="A green eye icon" href='academics:courses_dispensal_detail' %}
               </td>
