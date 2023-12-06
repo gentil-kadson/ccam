@@ -9,12 +9,13 @@ from django.utils.translation import gettext_lazy as _
 from django.views.generic import CreateView, DeleteView, DetailView, TemplateView, UpdateView
 from django_filters.views import FilterView
 
+from ccam.people.mixins import UserIsStudentTestMixin
 from ccam.people.students.filters import StudentFilterSet
 from ccam.people.students.forms import StudentsMultiForm
 from ccam.people.students.models import Student
 
 
-class StudentHomeView(TemplateView):
+class StudentHomeView(LoginRequiredMixin, UserIsStudentTestMixin, TemplateView):
     template_name = "students/home.html"
 
 

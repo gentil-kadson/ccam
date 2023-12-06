@@ -11,6 +11,7 @@ from ccam.academics.forms import KnowledgeCertificateForm, SubjectDispensalForm
 from ccam.academics.models import KnowledgeCertificate, SubjectDispensal
 from ccam.core.mixins import UniqueConstraintErrorMessageMixin
 from ccam.core.views import FilteredListView
+from ccam.people.mixins import UserIsStudentTestMixin
 
 
 class StudentAcademicsFormBaseMixin:
@@ -31,6 +32,7 @@ class StudentAcademicsFormBaseMixin:
 
 class SubjectDispensalCreateView(
     LoginRequiredMixin,
+    UserIsStudentTestMixin,
     StudentAcademicsFormBaseMixin,
     UniqueConstraintErrorMessageMixin,
     SuccessMessageMixin,
@@ -44,7 +46,7 @@ class SubjectDispensalCreateView(
     unique_constraint_error_msg = _("Você já possui uma solicitação pendente")
 
 
-class SubjectDispensalListView(LoginRequiredMixin, FilteredListView):
+class SubjectDispensalListView(LoginRequiredMixin, UserIsStudentTestMixin, FilteredListView):
     template_name = "academics/students/subject_dispensal_filter.html"
     model = SubjectDispensal
     filterset_class = SubjectDispensalFilterSet
@@ -53,6 +55,7 @@ class SubjectDispensalListView(LoginRequiredMixin, FilteredListView):
 
 class KnowledgeCertificateCreateView(
     LoginRequiredMixin,
+    UserIsStudentTestMixin,
     StudentAcademicsFormBaseMixin,
     UniqueConstraintErrorMessageMixin,
     SuccessMessageMixin,
@@ -78,7 +81,7 @@ class KnowledgeCertificateCreateView(
         return super().form_valid(form)
 
 
-class KnowledgeCertificateListView(LoginRequiredMixin, FilteredListView):
+class KnowledgeCertificateListView(LoginRequiredMixin, UserIsStudentTestMixin, FilteredListView):
     template_name = "academics/students/knowledge_certificate_filter.html"
     model = KnowledgeCertificate
     paginate_by = settings.PAGINATE_BY
