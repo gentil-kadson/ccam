@@ -111,4 +111,7 @@ class CommitteeUpdateView(LoginRequiredMixin, UserIsCourseCoordinatorTestMixin, 
 
 
 class CommitteeDeleteView(LoginRequiredMixin, UserIsCourseCoordinatorTestMixin, SuccessMessageMixin, DeleteView):
-    pass
+    model = Committee
+    success_message = _("Banca exlcuída com sucesso!")
+    success_url = reverse_lazy("academics:committees_list")
+    template_name = "academics/coordinators/committee_check_delete.html"

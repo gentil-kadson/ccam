@@ -96,7 +96,8 @@
                         <td>
                             <div class="d-flex justify-content-around">
                                 {% simple_table_button icon="person_add" color_class="green-text" href="academics:committees_list" %}
-                                {% include 'core/_table_delete_button.html' with delete_url=student_delete_url %}
+                                {% url "academics:committees_delete" committee.pk as committee_delete_url %}
+                                {% include 'core/_table_delete_button.html' with delete_url=committee_delete_url %}
                             </div>
                         </td>
                     </tr>
