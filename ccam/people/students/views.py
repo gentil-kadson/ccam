@@ -9,7 +9,7 @@ from django.utils.translation import gettext_lazy as _
 from django.views.generic import CreateView, DeleteView, DetailView, TemplateView, UpdateView
 from django_filters.views import FilterView
 
-from ccam.people.mixins import UserIsStudentTestMixin
+from ccam.people.mixins import UserIsSeacCoordinatorTestMixin, UserIsStudentTestMixin
 from ccam.people.students.filters import StudentFilterSet
 from ccam.people.students.forms import StudentsMultiForm
 from ccam.people.students.models import Student
@@ -19,7 +19,7 @@ class StudentHomeView(LoginRequiredMixin, UserIsStudentTestMixin, TemplateView):
     template_name = "students/home.html"
 
 
-class StudentListView(LoginRequiredMixin, FilterView):
+class StudentListView(LoginRequiredMixin, UserIsSeacCoordinatorTestMixin, FilterView):
     model = Student
     filterset_class = StudentFilterSet
     template_name = "students/students_list.html"
@@ -32,7 +32,7 @@ class StudentListView(LoginRequiredMixin, FilterView):
         return context
 
 
-class StudentCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+class StudentCreateView(LoginRequiredMixin, UserIsSeacCoordinatorTestMixin, SuccessMessageMixin, CreateView):
     template_name = "students/students_form.html"
     form_class = StudentsMultiForm
     model = Student
@@ -51,7 +51,7 @@ class StudentCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         return super().form_valid(form)
 
 
-class StudentDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+class StudentDeleteView(LoginRequiredMixin, UserIsSeacCoordinatorTestMixin, SuccessMessageMixin, DeleteView):
     model = Student
     success_url = reverse_lazy("people:students:list")
     success_message = _("Aluno deletado com sucesso!")
@@ -63,7 +63,7 @@ class StudentDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
         return super().form_valid(form)
 
 
-class StudentDetailView(DetailView):
+class StudentDetailView(LoginRequiredMixin, UserIsSeacCoordinatorTestMixin, DetailView):
     model = Student
     template_name = "students/students_detail.html"
     context_object_name = "student"
@@ -72,7 +72,7 @@ class StudentDetailView(DetailView):
         return super().get_context_data(**kwargs)
 
 
-class StudentUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class StudentUpdateView(LoginRequiredMixin, UserIsSeacCoordinatorTestMixin, SuccessMessageMixin, UpdateView):
     model = Student
     form_class = StudentsMultiForm
     template_name = "students/students_form.html"
