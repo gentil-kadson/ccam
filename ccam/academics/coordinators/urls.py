@@ -11,4 +11,5 @@ urlpatterns = [
     path(
         "commiitee/select-subject/", views.SelectSubjectForCommitteeListView.as_view(), name="committee_select_subject"
     ),
+    path("committee/subject/<int:subject_id>/create/", views.CommitteeCreateView.as_view(), name="committee_create"),
 ]

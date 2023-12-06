@@ -14,6 +14,7 @@ def table_button(
     color_class="green-svg",
     icon_style="outlined",
     icon_path="",
+    abs_url="",
 ):
     return {
         "button_text": button_text,
@@ -25,4 +26,5 @@ def table_button(
         "color_class": color_class,
         "icon_style": icon_style,
         "icon_path": icon_path,
+        "abs_url": abs_url,
     }

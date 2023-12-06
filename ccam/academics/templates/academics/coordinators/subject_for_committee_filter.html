@@ -114,7 +114,8 @@
                 <td>{{ subject.grade_semester_availability }}º</td>
                 <td>
                 <div class="d-flex justify-content-around">
-                  {% table_button button_text="Adicionar professores" icon="person_add" %}
+                  {% url "academics:committee_create" subject.pk as subject_committee_create_url %}
+                  {% table_button button_text="Adicionar professores" icon="person_add" abs_url=subject_committee_create_url %}
                 </div>
                 </td>
             </tr>
