@@ -1,6 +1,6 @@
 from django import forms
 
-from ccam.academics.models import KnowledgeCertificate, Subject, SubjectDispensal
+from ccam.academics.models import Committee, KnowledgeCertificate, Subject, SubjectDispensal
 from ccam.core.widgets import CCAMFileWidget
 
 
@@ -39,3 +39,9 @@ class SubjectDispensalForm(forms.ModelForm):
         self.fields["subjects"].queryset = Subject.objects.filter(
             grade_semester_availability=student.current_grade_semester, course=student.course
         )
+
+
+class CommitteeForm(forms.ModelForm):
+    class Meta:
+        model = Committee
+        fields = ("teachers",)

@@ -7,12 +7,13 @@ from django.utils.translation import gettext_lazy as _
 from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
 
 from ccam.academics.filters import SubjectFilterSet
-from ccam.academics.forms import SubjectForm
-from ccam.academics.models import Subject
+from ccam.academics.forms import CommitteeForm, SubjectForm
+from ccam.academics.models import Committee, Subject
 from ccam.core.views import FilteredListView
+from ccam.people.mixins import UserIsCourseCoordinatorTestMixin
 
 
-class SubjectCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+class SubjectCreateView(LoginRequiredMixin, UserIsCourseCoordinatorTestMixin, SuccessMessageMixin, CreateView):
     model = Subject
     success_url = reverse_lazy("people:coordinators:home")
     success_message = _("Disciplina cadastrada com sucesso!")
@@ -27,14 +28,14 @@ class SubjectCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         return super().form_valid(form)
 
 
-class SubjectListView(LoginRequiredMixin, FilteredListView):
+class SubjectListView(LoginRequiredMixin, UserIsCourseCoordinatorTestMixin, FilteredListView):
     model = Subject
     filterset_class = SubjectFilterSet
     template_name = "academics/coordinators/subject_list.html"
     paginate_by = settings.PAGINATE_BY
 
 
-class SubjectUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class SubjectUpdateView(LoginRequiredMixin, UserIsCourseCoordinatorTestMixin, SuccessMessageMixin, UpdateView):
     model = Subject
     form_class = SubjectForm
     success_message = _("Disciplina atualizada com sucesso!")
@@ -48,8 +49,23 @@ class SubjectDetailView(LoginRequiredMixin, DetailView):
     context_object_name = "subject"
 
 
-class SubjectDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+class SubjectDeleteView(LoginRequiredMixin, UserIsCourseCoordinatorTestMixin, SuccessMessageMixin, DeleteView):
     model = Subject
     template_name = "academics/coordinators/subject_check_delete.html"
     success_url = reverse_lazy("academics:subjects_list")
     success_message = _("Disciplina deletada com sucesso!")
+
+
+class SelectSubjectForCommitteeListView(LoginRequiredMixin, UserIsCourseCoordinatorTestMixin, FilteredListView):
+    model = Subject
+    template_name = "academics/coordinators/subject_for_committee_filter.html"
+    filterset_class = SubjectFilterSet
+    paginate_by = settings.PAGINATE_BY
+
+
+class CommitteeCreateView(LoginRequiredMixin, UserIsCourseCoordinatorTestMixin, SuccessMessageMixin, CreateView):
+    form_class = CommitteeForm
+    model = Committee
+    template_name = "academics/coordinators/committee_form.html"
+    success_url = reverse_lazy("people:coordinators:home")
+    success_message = _("Banca para disciplina criada com sucesso!")
