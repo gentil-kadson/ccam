@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
+from django.core.paginator import Paginator
 from django.db import transaction
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
@@ -56,16 +57,40 @@ class SubjectDeleteView(LoginRequiredMixin, UserIsCourseCoordinatorTestMixin, Su
     success_message = _("Disciplina deletada com sucesso!")
 
 
-class SelectSubjectForCommitteeListView(LoginRequiredMixin, UserIsCourseCoordinatorTestMixin, FilteredListView):
-    model = Subject
-    template_name = "academics/coordinators/subject_for_committee_filter.html"
-    filterset_class = SubjectFilterSet
-    paginate_by = settings.PAGINATE_BY
-
-
 class CommitteeCreateView(LoginRequiredMixin, UserIsCourseCoordinatorTestMixin, SuccessMessageMixin, CreateView):
-    form_class = CommitteeForm
     model = Committee
+    form_class = CommitteeForm
     template_name = "academics/coordinators/committee_form.html"
-    success_url = reverse_lazy("people:coordinators:home")
-    success_message = _("Banca para disciplina criada com sucesso!")
+    success_message = _("Banca criada com sucesso! Escolha os professores que irão fazer parte dela")
+    success_url = None
+    paginate_courses_by = settings.PAGINATE_BY
+
+    def get_course_subjects_filterset(self):
+        coordinator_course = self.request.user.person.coordinator_person.course
+        course_subjects = Subject.objects.filter(course=coordinator_course)
+        return SubjectFilterSet(data=self.request.GET, queryset=course_subjects)
+
+    def get_paginated_subjects(self):
+        filtered_courses_queryset = self.get_course_subjects_filterset().qs
+        return Paginator(object_list=filtered_courses_queryset, per_page=self.paginate_courses_by)
+
+    def get_current_subjects_page(self):
+        currnet_page = self.request.GET.get("page", 1)
+        paginator = self.get_paginated_subjects()
+        return paginator.page(currnet_page)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["filter"] = self.get_course_subjects_filterset()
+        context["paginator"] = self.get_paginated_subjects()
+        context["current_page"] = self.get_current_subjects_page().number
+        context["page_obj"] = self.get_current_subjects_page()
+        context["object_list"] = context["paginator"].object_list
+        return context
+
+    def get_success_url(self):
+        return super().get_success_url()
+
+
+class CommitteeUpdateView(LoginRequiredMixin, UserIsCourseCoordinatorTestMixin, SuccessMessageMixin, DetailView):
+    pass

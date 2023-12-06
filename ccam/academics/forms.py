@@ -44,4 +44,4 @@ class SubjectDispensalForm(forms.ModelForm):
 class CommitteeForm(forms.ModelForm):
     class Meta:
         model = Committee
-        fields = ("teachers",)
+        fields = ("subject",)
