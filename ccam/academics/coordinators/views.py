@@ -61,13 +61,15 @@ class CommitteeCreateView(LoginRequiredMixin, UserIsCourseCoordinatorTestMixin, 
     model = Committee
     form_class = CommitteeForm
     template_name = "academics/coordinators/committee_form.html"
-    success_message = _("Banca criada com sucesso! Escolha os professores que irão fazer parte dela")
-    success_url = None
+    success_message = _(
+        "Banca criada com sucesso! Você pode adicionar os professores que irão compô-la na página de listagem"
+    )
+    success_url = reverse_lazy("people:coordinators:home")
     paginate_courses_by = settings.PAGINATE_BY
 
     def get_course_subjects_filterset(self):
         coordinator_course = self.request.user.person.coordinator_person.course
-        course_subjects = Subject.objects.filter(course=coordinator_course)
+        course_subjects = Subject.objects.filter(course=coordinator_course, committee_subject=None)
         return SubjectFilterSet(data=self.request.GET, queryset=course_subjects)
 
     def get_paginated_subjects(self):
@@ -88,8 +90,13 @@ class CommitteeCreateView(LoginRequiredMixin, UserIsCourseCoordinatorTestMixin, 
         context["object_list"] = context["paginator"].object_list
         return context
 
-    def get_success_url(self):
-        return super().get_success_url()
+    @transaction.atomic
+    def form_valid(self, form):
+        committee = form.save(commit=False)
+        committee.created_by = self.request.user
+        committee.updated_by = self.request.user
+        committee.coordinator = self.request.user.person.coordinator_person
+        return super().form_valid(form)
 
 
 class CommitteeUpdateView(LoginRequiredMixin, UserIsCourseCoordinatorTestMixin, SuccessMessageMixin, DetailView):
