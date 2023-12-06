@@ -176,7 +176,7 @@ class Committee(BaseModel):
     coordinator = models.ForeignKey(
         "coordinators.Coordinator", on_delete=models.CASCADE, related_name="committee_coordinator"
     )
-    teachers = models.ManyToManyField("teachers.Teacher", related_name="committee_teachers")
+    teachers = models.ManyToManyField("teachers.Teacher", related_name="committee_teachers", blank=True)
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name="committee_subject")
 
     class Meta:
