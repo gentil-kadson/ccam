@@ -6,7 +6,7 @@ from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import CreateView
 
-from ccam.academics.filters import KnowledgeCertificateFilterSet
+from ccam.academics.filters import KnowledgeCertificateFilterSet, SubjectDispensalFilterSet
 from ccam.academics.forms import KnowledgeCertificateForm, SubjectDispensalForm
 from ccam.academics.models import KnowledgeCertificate, SubjectDispensal
 from ccam.core.mixins import UniqueConstraintErrorMessageMixin
@@ -42,6 +42,13 @@ class SubjectDispensalCreateView(
     success_message = _("Aproveitamento de Disciplina cadastrado com sucesso!")
     success_url = reverse_lazy("people:students:home")
     unique_constraint_error_msg = _("Você já possui uma solicitação pendente")
+
+
+class SubjectDispensalListView(LoginRequiredMixin, FilteredListView):
+    template_name = "academics/students/subject_dispensal_filter.html"
+    model = SubjectDispensal
+    filterset_class = SubjectDispensalFilterSet
+    paginate_by = settings.PAGINATE_BY
 
 
 class KnowledgeCertificateCreateView(

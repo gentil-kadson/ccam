@@ -5,7 +5,7 @@
 
 {% block breadcrumb_items %}
   {% breadcrumb_item text="Home" icon="home" href='people:students:home' %}
-  {% breadcrumb_item text="Acompanhar Solicitações de Certificação de Conhecimento" icon="query_stats" active=True last_item=True %}
+  {% breadcrumb_item text="Acompanhar Solicitações de Aproveitamento de Disciplina" icon="query_stats" active=True last_item=True %}
 {% endblock breadcrumb_items %}
 
 {% block content %}
@@ -57,12 +57,12 @@
           </tr>
         </thead>
         <tbody>
-          {% for knowledge_certificate in object_list %}
+          {% for subject_dispensal in object_list %}
             <tr>
-                <td>{{ knowledge_certificate.get_status_display }}</td>
-                <td>{{ knowledge_certificate.get_subjects_names }}</td>
+                <td>{{ subject_dispensal.get_status_display }}</td>
+                <td>{{ subject_dispensal.get_subjects_names }}</td>
                 <td>
-                    {% if not knowledge_certificate.justification %}
+                    {% if not subject_dispensal.justification %}
                         -----------
                     {% else %}
                         {% include "core/_table_button.html" with color_class="green-svg" icon_path='people/images/icons/detailsIcon.svg' alt_text="A green eye" button_text="Visualizar" %}

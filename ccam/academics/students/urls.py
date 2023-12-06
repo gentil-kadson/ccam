@@ -14,4 +14,5 @@ urlpatterns = [
         name="knowledge_certificates_list",
     ),
     path("subject-dispensals/create/", views.SubjectDispensalCreateView.as_view(), name="subject_dispensals_create"),
+    path("subject-dispensals/list/", views.SubjectDispensalListView.as_view(), name="subject_dispensals_list"),
 ]

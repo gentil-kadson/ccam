@@ -145,6 +145,11 @@ class SubjectDispensal(BaseModel):
     def __str__(self):
         return f"{self.subjects}, {self.student.person.name} - {self.student.person.registration}"
 
+    def get_subjects_names(self):
+        subjects_names_list = list(self.subjects.values_list("name", flat=True))
+        subjects_names = get_text_list(subjects_names_list, "e")
+        return subjects_names
+
 
 class SubjectDGrades(models.Model):
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name="subject_dispensal_subject")
