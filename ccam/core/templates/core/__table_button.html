@@ -1,7 +1,7 @@
 {% load static %}
 
 <a href="{% if href %}{% url href %}{% elif abs_url %}{{ abs_url }}{% endif %}" class="button-with-link">
-  <button class="ccam-table-button {{ custom_class }}" type="submit">
+  <button name="{{ name }}" value="{{ value }}" class="ccam-table-button {{ custom_class }}" type="submit">
     {{ button_text }}
     {% if bootstrap_icon %}
         <i class="{{ icon }} pe-2 {{ color_class }}"></i>

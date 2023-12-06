@@ -60,68 +60,70 @@
       <h2>Disciplinas</h2>
     </header>
     <section>
-      <table class="ccam-table">
-        <thead>
-          <tr>
-            <th>
-              <div>
-                <span class="material-symbols-outlined">
-                    school
-                </span>
-                Nome
-              </div>
-            </th>
-            <th>
-              <div>
-                <span class="material-symbols-outlined">
-                    history_edu
-                </span>
-                Curso
-              </div>
-            </th>
-            <th>
-              <div>
-                <span class="material-symbols-outlined">
-                    upgrade
-                </span>
-              </div>
-              Nível
-            </th>
-            <th>
-              <div>
-                <span class="material-symbols-outlined">
-                    tag
-                </span>
-              </div>
-              Ano/Período
-            </th>
-            <th>
-                <div>
-                    <span class="material-symbols-outlined">
-                        tune
-                    </span>
-                </div>
-                Ações
-              </th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for subject in object_list %}
-            <tr>
-                <td>{{ subject.name }}</td>
-                <td>{{ subject.get_courses_names }}</td>
-                <td>{{ subject.get_educational_level_display }}</td>
-                <td>{{ subject.grade_semester_availability }}º</td>
-                <td>
-                <div class="d-flex justify-content-around">
-                  {% url "academics:committee_create" subject.pk as subject_committee_create_url %}
-                  {% table_button button_text="Adicionar professores" icon="person_add" abs_url=subject_committee_create_url %}
-                </div>
-                </td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+        <form method="post">
+            <table class="ccam-table">
+                <thead>
+                <tr>
+                    <th>
+                    <div>
+                        <span class="material-symbols-outlined">
+                            school
+                        </span>
+                        Nome
+                    </div>
+                    </th>
+                    <th>
+                    <div>
+                        <span class="material-symbols-outlined">
+                            history_edu
+                        </span>
+                        Curso
+                    </div>
+                    </th>
+                    <th>
+                    <div>
+                        <span class="material-symbols-outlined">
+                            upgrade
+                        </span>
+                    </div>
+                    Nível
+                    </th>
+                    <th>
+                    <div>
+                        <span class="material-symbols-outlined">
+                            tag
+                        </span>
+                    </div>
+                    Ano/Período
+                    </th>
+                    <th>
+                        <div>
+                            <span class="material-symbols-outlined">
+                                tune
+                            </span>
+                        </div>
+                        Ações
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for subject in object_list %}
+                    <tr>
+                        <td>{{ subject.name }}</td>
+                        <td>{{ subject.get_courses_names }}</td>
+                        <td>{{ subject.get_educational_level_display }}</td>
+                        <td>{{ subject.grade_semester_availability }}º</td>
+                        <td>
+                        <div class="d-flex justify-content-around">
+                        {% url "academics:committee_create" subject.pk as subject_committee_create_url %}
+                        {% table_button button_text="Criar banca" icon="gavel" abs_url=subject_committee_create_url name=form.subject.html_name value=subject.pk %}
+                        </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </form>
     </section>
     {% include "core/_confirmation_modal.html" %}
     {% include "core/_table_pagination.html" %}

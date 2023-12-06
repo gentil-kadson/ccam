@@ -15,6 +15,8 @@ def table_button(
     icon_style="outlined",
     icon_path="",
     abs_url="",
+    value="",
+    name="",
 ):
     return {
         "button_text": button_text,
@@ -27,4 +29,6 @@ def table_button(
         "icon_style": icon_style,
         "icon_path": icon_path,
         "abs_url": abs_url,
+        "name": name,
+        "value": value,
     }
