@@ -5,7 +5,7 @@ register = template.Library()
 
 @register.inclusion_tag("core/__table_button.html")
 def table_button(
-    button_text,
+    button_text="",
     icon="",
     href="",
     custom_class="",

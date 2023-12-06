@@ -3,15 +3,17 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.paginator import Paginator
 from django.db import transaction
-from django.urls import reverse_lazy
+from django.urls import reverse, reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
 
 from ccam.academics.filters import CommitteeFilterSet, SubjectFilterSet
-from ccam.academics.forms import CommitteeForm, SubjectForm
+from ccam.academics.forms import AddTeachersToCommitteeForm, CommitteeForm, SubjectForm
 from ccam.academics.models import Committee, Subject
 from ccam.core.views import FilteredListView
 from ccam.people.mixins import UserIsCourseCoordinatorTestMixin
+from ccam.people.teachers.filters import TeacherFilterSet
+from ccam.people.teachers.models import Teacher
 
 
 class SubjectCreateView(LoginRequiredMixin, UserIsCourseCoordinatorTestMixin, SuccessMessageMixin, CreateView):
@@ -95,7 +97,7 @@ class CommitteeCreateView(LoginRequiredMixin, UserIsCourseCoordinatorTestMixin, 
         committee = form.save(commit=False)
         committee.created_by = self.request.user
         committee.updated_by = self.request.user
-        committee.coordinator = self.request.user.person.coordinator_person
+        committee.coordinator = self.request.user.person.coordinator_person.course
         return super().form_valid(form)
 
 
@@ -105,9 +107,45 @@ class CommitteeListView(LoginRequiredMixin, UserIsCourseCoordinatorTestMixin, Fi
     filterset_class = CommitteeFilterSet
     paginate_by = settings.PAGINATE_BY
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        coordinator_course = self.request.user.person.coordinator_person.course
+        return queryset.filter(subject__course__in=[coordinator_course])
 
-class CommitteeUpdateView(LoginRequiredMixin, UserIsCourseCoordinatorTestMixin, SuccessMessageMixin, DetailView):
-    pass
+
+class CommitteAddTeachersView(LoginRequiredMixin, UserIsCourseCoordinatorTestMixin, SuccessMessageMixin, UpdateView):
+    template_name = "academics/coordinators/add_teachers_to_committee.html"
+    form_class = AddTeachersToCommitteeForm
+    model = Committee
+    success_message = _("Professor adicionado com sucesso!")
+    success_url = None
+    paginate_teachers_by = settings.PAGINATE_BY
+
+    def get_success_url(self):
+        return reverse("academics:committees_add_teachers", kwargs={"pk": self.object.pk})
+
+    def get_subject_teachers_filterset(self):
+        committee_subject = self.get_object().subject
+        teachers = Teacher.objects.filter(subjects__in=[committee_subject])
+        return TeacherFilterSet(data=self.request.GET, queryset=teachers)
+
+    def get_paginated_teachers(self):
+        filtered_teachers_queryset = self.get_subject_teachers_filterset().qs
+        return Paginator(object_list=filtered_teachers_queryset, per_page=self.paginate_teachers_by)
+
+    def get_current_teachers_page(self):
+        currnet_page = self.request.GET.get("page", 1)
+        paginator = self.get_paginated_teachers()
+        return paginator.page(currnet_page)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["filter"] = self.get_subject_teachers_filterset()
+        context["paginator"] = self.get_paginated_teachers()
+        context["current_page"] = self.get_current_teachers_page().number
+        context["page_obj"] = self.get_current_teachers_page()
+        context["object_list"] = context["paginator"].object_list
+        return context
 
 
 class CommitteeDeleteView(LoginRequiredMixin, UserIsCourseCoordinatorTestMixin, SuccessMessageMixin, DeleteView):

@@ -11,4 +11,5 @@ urlpatterns = [
     path("committees/create/", views.CommitteeCreateView.as_view(), name="committees_create"),
     path("committees/list/", views.CommitteeListView.as_view(), name="committees_list"),
     path("committees/delete/<int:pk>/", views.CommitteeDeleteView.as_view(), name="committees_delete"),
+    path("committees/add-teachers/<int:pk>/", views.CommitteAddTeachersView.as_view(), name="committees_add_teachers"),
 ]

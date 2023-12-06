@@ -45,3 +45,9 @@ class CommitteeForm(forms.ModelForm):
     class Meta:
         model = Committee
         fields = ("subject",)
+
+
+class AddTeachersToCommitteeForm(forms.ModelForm):
+    class Meta:
+        model = Committee
+        fields = ("teachers",)
