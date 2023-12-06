@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
 
-from ccam.academics.filters import SubjectFilterSet
+from ccam.academics.filters import CommitteeFilterSet, SubjectFilterSet
 from ccam.academics.forms import CommitteeForm, SubjectForm
 from ccam.academics.models import Committee, Subject
 from ccam.core.views import FilteredListView
@@ -99,5 +99,16 @@ class CommitteeCreateView(LoginRequiredMixin, UserIsCourseCoordinatorTestMixin, 
         return super().form_valid(form)
 
 
+class CommitteeListView(LoginRequiredMixin, UserIsCourseCoordinatorTestMixin, FilteredListView):
+    model = Committee
+    template_name = "academics/coordinators/committee_filter.html"
+    filterset_class = CommitteeFilterSet
+    paginate_by = settings.PAGINATE_BY
+
+
 class CommitteeUpdateView(LoginRequiredMixin, UserIsCourseCoordinatorTestMixin, SuccessMessageMixin, DetailView):
+    pass
+
+
+class CommitteeDeleteView(LoginRequiredMixin, UserIsCourseCoordinatorTestMixin, SuccessMessageMixin, DeleteView):
     pass
