@@ -97,7 +97,7 @@ class CommitteeCreateView(LoginRequiredMixin, UserIsCourseCoordinatorTestMixin, 
         committee = form.save(commit=False)
         committee.created_by = self.request.user
         committee.updated_by = self.request.user
-        committee.coordinator = self.request.user.person.coordinator_person.course
+        committee.coordinator = self.request.user.person.coordinator_person
         return super().form_valid(form)
 
 

@@ -38,6 +38,7 @@
 </header>
 <section>
     <form method="post">
+     {% csrf_token %}
     <table class="ccam-table">
         <thead>
         <tr>
@@ -70,7 +71,6 @@
             <td>{{ teacher.get_subjects_names }}</td>
             <td>
                 <div class="d-flex justify-content-around">
-                    {% simple_table_button color_class='green-text' icon='delete' href='people:teachers:list' %}
                     {% simple_table_button color_class='green-text' icon='person_add' name=form.teachers.html_name value=teacher.pk %}
                 </div>
             </td>
