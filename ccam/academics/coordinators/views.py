@@ -126,8 +126,12 @@ class CommitteAddTeachersView(LoginRequiredMixin, UserIsCourseCoordinatorTestMix
 
     def get_subject_teachers_filterset(self):
         committee_subject = self.get_object().subject
-        teachers = Teacher.objects.filter(subjects__in=[committee_subject])
+        teachers = Teacher.objects.filter(subjects__in=[committee_subject]).filter(committee_teachers__isnull=True)
         return TeacherFilterSet(data=self.request.GET, queryset=teachers)
+
+    def get_already_added_teachers(self):
+        committee = self.get_object()
+        return Teacher.objects.filter(committee_teachers__in=[committee])
 
     def get_paginated_teachers(self):
         filtered_teachers_queryset = self.get_subject_teachers_filterset().qs
@@ -145,6 +149,7 @@ class CommitteAddTeachersView(LoginRequiredMixin, UserIsCourseCoordinatorTestMix
         context["current_page"] = self.get_current_teachers_page().number
         context["page_obj"] = self.get_current_teachers_page()
         context["object_list"] = context["paginator"].object_list
+        context["added_teachers"] = self.get_already_added_teachers()
         return context
 
 
