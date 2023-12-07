@@ -117,7 +117,7 @@ class CommitteAddTeachersView(LoginRequiredMixin, UserIsCourseCoordinatorTestMix
     template_name = "academics/coordinators/add_teachers_to_committee.html"
     form_class = AddTeachersToCommitteeForm
     model = Committee
-    success_message = _("Professor adicionado com sucesso!")
+    success_message = _("Banca atualizada com sucesso!")
     success_url = None
     paginate_teachers_by = settings.PAGINATE_BY
 
