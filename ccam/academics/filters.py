@@ -18,9 +18,10 @@ class SubjectFilterSet(django_filters.FilterSet):
 class KnowledgeCertificateFilterSet(django_filters.FilterSet):
     class Meta:
         model = KnowledgeCertificate
-        fields = ("student",)
+        fields = ("student", "status",)
+
 
 class SubjectDispensalFilterSet(django_filters.FilterSet):
     class Meta:
         model = SubjectDispensal
-        fields = ("student",)
+        fields = ("student", "status",)

@@ -1,5 +1,7 @@
 from django.urls import path
 
+from ccam.academics.coordinators.urls import urlpatterns as coordinators_urls
+from ccam.academics.students.urls import urlpatterns as students_urls
 from ccam.academics.views import (
     CoordinatorsCommittee,
     CoordinatorsCourseProgressComittee,
@@ -7,28 +9,19 @@ from ccam.academics.views import (
     CoordinatorsSubjectList,
     CourseProgressCreateView,
     CourseSubjects,
-    KnowledgeCertificateCreateView,
     SeacCoursesDispensalStudentDetails,
     SeacKnowledgeCertificatesStudentDetails,
     SeacSubjectDispensalListView,
     SeacKnowledgeCertificatesListView,
     SubjectCourseProgressAssessView,
     SubjectCourseProgressListView,
-    SubjectCreateView,
-    SubjectDeleteView,
-    SubjectDetailView,
     SubjectKnowledgeCertificateAssessView,
-    SubjectListView,
-    SubjectUpdateView,
     TrackProcessesListView,
 )
 
 app_name = "academics"
 
 urlpatterns = [
-    path(
-        "knowledge-certificate/create/", KnowledgeCertificateCreateView.as_view(), name="create_knowledge_certificate"
-    ),
     path("course-progress/create/", CourseProgressCreateView.as_view(), name="create_course_progress"),
     path("knowledge-certificates/list", SeacKnowledgeCertificatesListView.as_view(), name="knowledge_certificates"),
     path("courses-dispensal/list", SeacSubjectDispensalListView.as_view(), name="courses_dispensal"),
@@ -77,10 +70,8 @@ urlpatterns = [
     ),
     path("processes/list/", TrackProcessesListView.as_view(), name="processes_list"),
     path("course-subjects/", CourseSubjects.as_view(), name="course_subjects"),
-    # Coordinator urls
-    path("subjects/create/", SubjectCreateView.as_view(), name="subjects_create"),
-    path("subjects/list/", SubjectListView.as_view(), name="subjects_list"),
-    path("subjects/update/<int:pk>/", SubjectUpdateView.as_view(), name="subjects_update"),
-    path("subjects/detail/<int:pk>/", SubjectDetailView.as_view(), name="subjects_detail"),
-    path("subjects/delete/<int:pk>/", SubjectDeleteView.as_view(), name="subjects_delete"),
+    # Students URLs
 ]
+
+urlpatterns += coordinators_urls
+urlpatterns += students_urls

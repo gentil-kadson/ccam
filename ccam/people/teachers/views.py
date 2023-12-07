@@ -8,6 +8,7 @@ from django.views.generic import CreateView, DetailView, TemplateView
 
 from ccam.academics.models import Course
 from ccam.core.views import FilteredListView
+from ccam.people.mixins import UserIsSeacCoordinatorTestMixin
 from ccam.people.teachers.models import Teacher
 
 from .filters import TeacherFilterSet
@@ -18,7 +19,7 @@ class TeacherHomeView(TemplateView):
     template_name = "teachers/home.html"
 
 
-class TeacherListView(LoginRequiredMixin, FilteredListView):
+class TeacherListView(LoginRequiredMixin, UserIsSeacCoordinatorTestMixin, FilteredListView):
     model = Teacher
     filterset_class = TeacherFilterSet
     template_name = "teachers/teacher_filter.html"
@@ -30,7 +31,7 @@ class TeacherListView(LoginRequiredMixin, FilteredListView):
         return context
 
 
-class TeacherCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+class TeacherCreateView(LoginRequiredMixin, UserIsSeacCoordinatorTestMixin, SuccessMessageMixin, CreateView):
     template_name = "teachers/teacher_form.html"
     model = Teacher
     form_class = TeacherPersonMultiForm
@@ -49,7 +50,7 @@ class TeacherCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         return super().form_valid(form)
 
 
-class TeacherDetailView(DetailView):
+class TeacherDetailView(LoginRequiredMixin, UserIsSeacCoordinatorTestMixin, DetailView):
     model = Teacher
     template_name = "teachers/teacher_detail.html"
     context_object_name = "teacher"

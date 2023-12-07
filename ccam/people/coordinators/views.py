@@ -6,22 +6,21 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.db import transaction
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
-from django.views.generic import CreateView, DetailView, TemplateView, UpdateView, DeleteView
+from django.views.generic import CreateView, DeleteView, DetailView, TemplateView, UpdateView
 
 from ccam.core.views import FilteredListView
 from ccam.people.coordinators.forms import CoordinatorsMultiForm
 from ccam.people.coordinators.models import Coordinator
+from ccam.people.mixins import UserIsSeacCoordinatorTestMixin
 
 from .filters import CoordinatorsFilterSet
 
-# Create your views here.
 
-
-class CoordinatorsHomeView(TemplateView):
+class CoordinatorsHomeView(LoginRequiredMixin, TemplateView):
     template_name = "coordinators/home.html"
 
 
-class CoordinatorsDetailView(DetailView):
+class CoordinatorsDetailView(LoginRequiredMixin, UserIsSeacCoordinatorTestMixin, DetailView):
     model = Coordinator
     template_name = "coordinators/coordinators_detail.html"
     context_object_name = "coordinator"
@@ -30,14 +29,14 @@ class CoordinatorsDetailView(DetailView):
         return super().get_context_data(**kwargs)
 
 
-class CoordinatorsListView(LoginRequiredMixin, FilteredListView):
+class CoordinatorsListView(LoginRequiredMixin, UserIsSeacCoordinatorTestMixin, FilteredListView):
     model = Coordinator
     filterset_class = CoordinatorsFilterSet
     template_name = "coordinators/coordinators_list.html"
     paginate_by = settings.PAGINATE_BY
 
 
-class CoordinatorsCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+class CoordinatorsCreateView(LoginRequiredMixin, UserIsSeacCoordinatorTestMixin, SuccessMessageMixin, CreateView):
     form_class = CoordinatorsMultiForm
     template_name = "coordinators/coordinators_form.html"
     model = Coordinator
@@ -56,7 +55,7 @@ class CoordinatorsCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView
         return super().form_valid(form)
 
 
-class CoordinatorsUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class CoordinatorsUpdateView(LoginRequiredMixin, UserIsSeacCoordinatorTestMixin, SuccessMessageMixin, UpdateView):
     model = Coordinator
     form_class = CoordinatorsMultiForm
     template_name = "coordinators/coordinators_form.html"
@@ -69,7 +68,7 @@ class CoordinatorsUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView
         return kwargs
 
 
-class CoordinatorsDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+class CoordinatorsDeleteView(LoginRequiredMixin, UserIsSeacCoordinatorTestMixin, SuccessMessageMixin, DeleteView):
     model = Coordinator
     success_url = reverse_lazy("people:coordinators:list")
     success_message = _("Coordenador de curso excluído com sucesso!")

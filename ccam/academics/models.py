@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.utils.text import get_text_list
 from django.utils.translation import gettext_lazy as _
 
+from ccam.academics.utils import get_subject_dispensal_files_dir
 from ccam.core.models import BaseModel, EducationalLevel, GradeSemester
 
 
@@ -62,18 +63,28 @@ class KnowledgeCertificate(BaseModel):
         REJECTED = "ERR", _("Recusado")
 
     assessed_by = models.ForeignKey(
-        "seac.SEACStaff", on_delete=models.CASCADE, related_name="knowledge_certificate_assessor"
+        "seac.SEACStaff", on_delete=models.CASCADE, related_name="assessor", blank=True, null=True
     )
     student = models.ForeignKey(
-        "students.Student", on_delete=models.CASCADE, related_name="knowledge_certificate_student"
+        "students.Student", on_delete=models.CASCADE, related_name="student_knowledge_certificates"
     )
-    subjects = models.ManyToManyField(
-        Subject, related_name="knowledge_certifiace_subjects", through="KnowledgeCGrades"
-    )
+    subjects = models.ManyToManyField(Subject, related_name="knowledge_certificates", through="KnowledgeCGrades")
+    status = models.CharField(max_length=3, choices=Status.choices, default=Status.ANALYZING, verbose_name=_("Status"))
+    justification = models.TextField(blank=True)
 
     class Meta:
         verbose_name = _("Certificação de Conhecimento")
         verbose_name_plural = _("Certificação de Conhecimentos")
+        constraints = [
+            models.UniqueConstraint(
+                fields=["student", "status"], condition=models.Q(status="PR"), name="one-pending-request-per-student"
+            )
+        ]
+
+    def get_subjects_names(self):
+        subjects_names = list(self.subjects.values_list("name", flat=True))
+        subjects_names = get_text_list(subjects_names, "e")
+        return subjects_names
 
     def __str__(self):
         return f"{self.subjects}, {self.student.person.name} - {self.student.person.registration}"
@@ -82,12 +93,14 @@ class KnowledgeCertificate(BaseModel):
         return reverse("academics:knowledge_certificate_detail", kwargs={"pk": self.pk})
 
 
-class KnowledgeCGrades(BaseModel):
+class KnowledgeCGrades(models.Model):
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name="knowledge_certificate_subject")
     knowledge_certificate = models.ForeignKey(
         KnowledgeCertificate, on_delete=models.CASCADE, related_name="specific_knowledge_certificate"
     )
-    grade = models.PositiveSmallIntegerField(verbose_name=_("Nota"), validators=[MaxValueValidator(100)])
+    grade = models.PositiveSmallIntegerField(
+        verbose_name=_("Nota"), validators=[MaxValueValidator(100)], blank=True, null=True
+    )
 
     class Meta:
         verbose_name = _("CertificaçãoCNotas")
@@ -108,26 +121,48 @@ class SubjectDispensal(BaseModel):
         REJECTED = "ERR", _("Recusado")
 
     assessed_by = models.ForeignKey(
-        "seac.SEACStaff", on_delete=models.CASCADE, related_name="subject_dispensal_assessor"
+        "seac.SEACStaff", on_delete=models.CASCADE, related_name="subject_dispensal_assessor", blank=True, null=True
     )
     student = models.ForeignKey("students.Student", on_delete=models.CASCADE, related_name="subject_dispensal_student")
-    subjects = models.ManyToManyField(Subject, related_name="subject_dispensal_subjects", through="SubjectDGrades")
+    subjects = models.ManyToManyField(
+        Subject, related_name="subject_dispensal_subjects", through="SubjectDGrades", verbose_name=_("Disciplinas")
+    )
+    justification = models.TextField(blank=True)
+    status = models.CharField(max_length=3, choices=Status.choices, default=Status.ANALYZING, verbose_name=_("Status"))
+    previous_university_ppc = models.FileField(
+        upload_to=get_subject_dispensal_files_dir, verbose_name=_("PPC da Antiga Universidade")
+    )
+    previous_university_grades = models.FileField(
+        upload_to=get_subject_dispensal_files_dir, verbose_name=_("Histórico da Antiga Universidade")
+    )
 
     class Meta:
         verbose_name = _("Aproveitamento de Disciplina")
         verbose_name_plural = _("Aproveitamento de Disciplinas")
+        constraints = [
+            models.UniqueConstraint(
+                fields=["student", "status"],
+                condition=models.Q(status="PR"),
+                name="one-pending-subject-dispensal-request-per-student",
+            )
+        ]
 
     def __str__(self):
         return f"{self.subjects}, {self.student.person.name} - {self.student.person.registration}"
 
+    def get_subjects_names(self):
+        subjects_names_list = list(self.subjects.values_list("name", flat=True))
+        subjects_names = get_text_list(subjects_names_list, "e")
+        return subjects_names
 
-class SubjectDGrades(BaseModel):
+
+class SubjectDGrades(models.Model):
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name="subject_dispensal_subject")
     subject_dispensal = models.ForeignKey(
         SubjectDispensal, on_delete=models.CASCADE, related_name="specific_subject_dispensal"
     )
     compatibility = models.PositiveSmallIntegerField(
-        verbose_name=_("Compatibilidade"), validators=[MaxValueValidator(100)]
+        verbose_name=_("Compatibilidade"), validators=[MaxValueValidator(100)], blank=True, null=True
     )
 
     class Meta:

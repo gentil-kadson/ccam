@@ -7,16 +7,18 @@ from django.utils.translation import gettext_lazy as _
 from django.views.generic import CreateView, DeleteView, DetailView, TemplateView, UpdateView
 from django_filters.views import FilterView
 
+from ccam.people.mixins import UserIsSeacCoordinatorTestMixin
+
 from .filters import SEACStaffFilterSet
 from .forms import SEACStaffPersonMultiForm
 from .models import SEACStaff
 
 
-class SeacHomeView(TemplateView):
+class SeacHomeView(LoginRequiredMixin, TemplateView):
     template_name = "seac/home.html"
 
 
-class SeacStaffListView(LoginRequiredMixin, FilterView):
+class SeacStaffListView(LoginRequiredMixin, UserIsSeacCoordinatorTestMixin, FilterView):
     model = SEACStaff
     filterset_class = SEACStaffFilterSet
     template_name = "seac/seac_staff_filter.html"
@@ -29,7 +31,7 @@ class SeacStaffListView(LoginRequiredMixin, FilterView):
         return context
 
 
-class SeacStaffCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+class SeacStaffCreateView(LoginRequiredMixin, UserIsSeacCoordinatorTestMixin, SuccessMessageMixin, CreateView):
     form_class = SEACStaffPersonMultiForm
     template_name = "seac/seac_staff_form.html"
     model = SEACStaff
@@ -48,7 +50,7 @@ class SeacStaffCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         return super().form_valid(form)
 
 
-class SeacStaffUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class SeacStaffUpdateView(LoginRequiredMixin, UserIsSeacCoordinatorTestMixin, SuccessMessageMixin, UpdateView):
     model = SEACStaff
     form_class = SEACStaffPersonMultiForm
     template_name = "seac/seac_staff_form.html"
@@ -61,13 +63,13 @@ class SeacStaffUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
         return kwargs
 
 
-class SeacStaffDetailView(DetailView):
+class SeacStaffDetailView(LoginRequiredMixin, UserIsSeacCoordinatorTestMixin, DetailView):
     model = SEACStaff
     template_name = "seac/seac_detail.html"
     context_object_name = "seacstaff"
 
 
-class SeacStaffDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+class SeacStaffDeleteView(LoginRequiredMixin, UserIsSeacCoordinatorTestMixin, SuccessMessageMixin, DeleteView):
     model = SEACStaff
     success_url = reverse_lazy("people:seac:list")
     success_message = _("Funcionário da SEAC deletado com sucesso")

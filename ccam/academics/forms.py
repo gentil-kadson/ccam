@@ -1,5 +1,7 @@
 from django import forms
-from ccam.academics.models import Subject, KnowledgeCertificate
+
+from ccam.academics.models import KnowledgeCertificate, Subject, SubjectDispensal
+from ccam.core.widgets import CCAMFileWidget
 
 
 class SubjectForm(forms.ModelForm):
@@ -12,9 +14,28 @@ class KnowledgeCertificateForm(forms.ModelForm):
     class Meta:
         model = KnowledgeCertificate
         fields = ("subjects",)
+        widgets = {"subjects": forms.widgets.CheckboxSelectMultiple()}
 
     def __init__(self, *args, **kwargs):
         student = kwargs.pop("student")
         super().__init__(*args, **kwargs)
         self.fields["subjects"].queryset = Subject.objects.filter(
-            grade_semester_availability=student.current_grade_semester, course=student.course)
+            grade_semester_availability=student.current_grade_semester, course=student.course
+        )
+
+
+class SubjectDispensalForm(forms.ModelForm):
+    class Meta:
+        model = SubjectDispensal
+        fields = ("subjects", "previous_university_ppc", "previous_university_grades")
+        widgets = {
+            "previous_university_ppc": CCAMFileWidget(attrs={"label": "Histórico escolar da antiga universidade"}),
+            "previous_university_grades": CCAMFileWidget(attrs={"label": "PPC da antiga universidade"}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        student = kwargs.pop("student")
+        super().__init__(*args, **kwargs)
+        self.fields["subjects"].queryset = Subject.objects.filter(
+            grade_semester_availability=student.current_grade_semester, course=student.course
+        )
