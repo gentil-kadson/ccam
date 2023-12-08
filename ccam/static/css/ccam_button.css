@@ -35,3 +35,11 @@
     border-radius: 8px;
     padding: 7px 12px;
 }
+
+.ccam-simple-table-button button {
+    display: flex;
+    background-color: inherit;
+    border: none;
+    height: fit-content;
+    width: fit-content;
+}

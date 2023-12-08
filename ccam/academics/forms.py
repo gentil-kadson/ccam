@@ -1,6 +1,6 @@
 from django import forms
 
-from ccam.academics.models import KnowledgeCertificate, Subject, SubjectDispensal
+from ccam.academics.models import Committee, KnowledgeCertificate, Subject, SubjectDispensal
 from ccam.core.widgets import CCAMFileWidget
 
 
@@ -39,3 +39,23 @@ class SubjectDispensalForm(forms.ModelForm):
         self.fields["subjects"].queryset = Subject.objects.filter(
             grade_semester_availability=student.current_grade_semester, course=student.course
         )
+
+
+class CommitteeForm(forms.ModelForm):
+    class Meta:
+        model = Committee
+        fields = ("subject",)
+
+
+class AddTeachersToCommitteeForm(forms.ModelForm):
+    class Meta:
+        model = Committee
+        fields = ("teachers",)
+
+    def clean_teachers(self):
+        current_teachers = self.instance.teachers.all()
+        incoming_teacher = self.cleaned_data["teachers"]
+        incoming_teacher_id = incoming_teacher[0].id
+        if current_teachers.filter(id=incoming_teacher_id).exists():
+            return current_teachers.exclude(id=incoming_teacher_id)
+        return current_teachers.union(incoming_teacher)

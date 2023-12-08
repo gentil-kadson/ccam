@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load breadcrumb_item %}
+{% load table_button %}
+{% load button %}
+
+{% block breadcrumb_items %}
+  {% breadcrumb_item text="Home" icon="home" href='people:coordinators:home' %}
+  {% breadcrumb_item text="Seleção de disciplina para banca" icon="school" active=True last_item=True %}
+{% endblock breadcrumb_items %}
+
+{% block content %}
+  <main id="container" class="view-table-section">
+    <header class="header-with-icon">
+      <span class="material-symbols-outlined green-text fs-2">
+        filter_alt
+      </span>
+      <h2>Filtros</h2>
+    </header>
+    <form method="get" class="filter-section">
+      <div class="fields-container">
+        <div class="ccam-input">
+          {{ filter.form.course.label_tag }}
+          <div class="ccam-select">
+            {{ filter.form.course }}
+          </div>
+        </div>
+
+      <div class="ccam-input">
+        {{ filter.form.name.label_tag }}
+        {{ filter.form.name }}
+      </div>
+
+      <div class="ccam-input">
+        {{ filter.form.grade_semester_availability.label_tag }}
+        <div class="ccam-select">
+            {{ filter.form.grade_semester_availability }}
+        </div>
+      </div>
+
+        <div class="ccam-radio-input d-flex flex-column">
+            <p class="m-0 p-0 green-text fw-bold">{{ filter.form.educational_level.label }}</p>
+            <div class="d-flex" id="radio-group">
+                {% for value, educational_level in filter.form.educational_level.field.choices %}
+                        <div class="d-flex">
+                            <input type="radio" name="{{ filter.form.educational_level.html_name }}" {% if request.GET.educational_level == value %} checked {% endif %} id="{{ filter.form.educational_level.id_for_label }}" value="{{ value }}" />
+                            <label class="fw-bold" for="{{ filter.form.educational_level.id_for_label }}">{{ educational_level }}</label>
+                        </div>
+                {% endfor %}
+            </div>
+        </div>
+      </div>
+      {% button button_text="Filtrar" icon="filter_alt" %}
+    </form>
+    <header class="header-with-icon padding-from-content">
+      <span class="material-symbols-outlined green-text fs-2">
+        data_table
+      </span>
+      <h2>Disciplinas</h2>
+    </header>
+    <section>
+        <form method="post">
+            {% csrf_token %}
+            <table class="ccam-table">
+                <thead>
+                <tr>
+                    <th>
+                    <div>
+                        <span class="material-symbols-outlined">
+                            school
+                        </span>
+                        Nome
+                    </div>
+                    </th>
+                    <th>
+                    <div>
+                        <span class="material-symbols-outlined">
+                            history_edu
+                        </span>
+                        Curso
+                    </div>
+                    </th>
+                    <th>
+                    <div>
+                        <span class="material-symbols-outlined">
+                            upgrade
+                        </span>
+                    </div>
+                    Nível
+                    </th>
+                    <th>
+                    <div>
+                        <span class="material-symbols-outlined">
+                            tag
+                        </span>
+                    </div>
+                    Ano/Período
+                    </th>
+                    <th>
+                        <div>
+                            <span class="material-symbols-outlined">
+                                tune
+                            </span>
+                        </div>
+                        Ações
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for subject in object_list %}
+                    <tr>
+                        <td>{{ subject.name }}</td>
+                        <td>{{ subject.get_courses_names }}</td>
+                        <td>{{ subject.get_educational_level_display }}</td>
+                        <td>{{ subject.grade_semester_availability }}º</td>
+                        <td>
+                        <div class="d-flex justify-content-around">
+                        {% url "academics:committee_create" subject.pk as subject_committee_create_url %}
+                        {% table_button button_text="Criar banca" icon="gavel" abs_url=subject_committee_create_url name=form.subject.html_name value=subject.pk %}
+                        </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </form>
+    </section>
+    {% include "core/_confirmation_modal.html" %}
+    {% include "core/_table_pagination.html" %}
+  </main>
+{% endblock content %}

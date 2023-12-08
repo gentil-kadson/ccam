@@ -4,25 +4,13 @@
 <section id="coordinators-section">
   <div class="coordinators-action-container">
     <div>
-      <img class="green-svg"
-           src="{% static 'people/images/icons/diploma.svg' %}"
-           alt="A green coloured diploma."
-           width="35"
-           height="35" />
-      <h2>Certificação de Conhecimentos</h2>
+      <span class="material-symbols-outlined green-text fs-2">
+        gavel
+      </span>
+      <h2>Bancas</h2>
     </div>
-    {% include "core/_anchor.html" with anchor_text="Disciplinas" color_class="green-svg" icon_path='people/images/icons/cap.svg' alt_text="A green graduation cap" href='academics:subjects_list' %}
-  </div>
-  <div class="coordinators-action-container">
-    <div>
-      <img class="green-svg"
-           src="{% static 'people/images/icons/exportNote.svg' %}"
-           alt="A green green note with an outgoing arrow inside a box located at the note's lower right."
-           width="35"
-           height="35" />
-      <h2>Aproveitamento de Disciplinas</h2>
-    </div>
-    {% include "core/_anchor.html" with anchor_text="Disciplinas" color_class="green-svg" icon_path='people/images/icons/cap.svg' alt_text="A green graduation cap" href='academics:cd_coordinators_subjects_list' %}
+    {% anchor anchor_text="Cadastrar Banca" color_class="green-svg" icon="add_circle" href='academics:committees_create' %}
+    {% anchor anchor_text="Listagem" color_class="green-svg" icon="list" href="academics:committees_list" %}
   </div>
   <div class="coordinators-action-container">
     <div>

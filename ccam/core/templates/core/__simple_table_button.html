@@ -1,12 +1,14 @@
 {% load static %}
 {% load bootstrap_icons %}
 
-<a class="d-flex align-items-center ccam-simple-table-button {{ custom_class }}" href="{% if abs_url %}{{ abs_url }}{% else %}{% url href %}{% endif %}" {% if id %}id="{{ id }}"{% endif %}>
-  {% if bootstrap_icon %}
-    {% bs_icon icon color='#0bda51' %}
-  {% else %}
-    <span class="material-symbols-outlined {{ color_class }}">
-        {{ icon }}
-    </span>
-  {% endif %}
+<a class="d-flex align-items-center ccam-simple-table-button {{ custom_class }}" href="{% if abs_url %}{{ abs_url }}{% elif href %}{% url href %}{% endif %}" {% if id %}id="{{ id }}"{% endif %}>
+  <button name="{{ name }}" value="{{ value }}" type="submit">
+    {% if bootstrap_icon %}
+      {% bs_icon icon color='#0bda51' %}
+    {% else %}
+      <span class="material-symbols-outlined {{ color_class }}">
+          {{ icon }}
+      </span>
+    {% endif %}
+  </button>
 </a>

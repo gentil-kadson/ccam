@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load breadcrumb_item %}
+{% load button %}
+{% load simple_table_button %}
+{% load table_button %}
+
+{% block breadcrumb_items %}
+  {% breadcrumb_item text="Home" icon="home" href='people:coordinators:home' %}
+  {% breadcrumb_item text="Bancas" icon="gavel" href="academics:committees_list" %}
+  {% breadcrumb_item text="Adicionar professores" icon="person_add" active=True last_item=True %}
+{% endblock breadcrumb_items %}
+
+{% block content %}
+  <main id="container" class="view-table-section">
+    <header class="header-with-icon">
+      <img src="{% static 'people/images/icons/filter.svg' %}"
+           alt="A classic, green filter icon"
+           width="35"
+           height="35"
+           class="green-svg" />
+      <h2>Filtros</h2>
+    </header>
+    <form method="get" class="filter-section" id="teacher-filter-form">
+      <div class="fields-container">
+        {% include "people/person_filter.html" %}
+      </div>
+      {% button button_text="Filtrar" color_class="green-svg" icon="filter_alt" form_id="teacher-filter-form" %}
+    </form>
+<header class="header-with-icon padding-from-content">
+  <img src="{% static 'people/images/icons/teacher.svg' %}"
+       alt="A green person on the side of a chalkboard"
+       width="35"
+       height="35"
+       class="green-svg" />
+  <h2>Adicionar Professores</h2>
+</header>
+<section>
+    <form method="post">
+     {% csrf_token %}
+    <table class="ccam-table">
+        <thead>
+        <tr>
+            {% include "people/person_table_header.html" %}
+            <th>
+            <div>
+                <span class="material-symbols-outlined">
+                    school
+                </span>
+                Matérias
+            </div>
+            </th>
+            <th>
+            <div>
+                <span class="material-symbols-outlined">
+                tune
+                </span>
+                Ações
+            </div>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for teacher in object_list %}
+            <tr>
+            <td>{{ teacher.person.name }}</td>
+            <td>{{ teacher.person.cpf }}</td>
+            <td>{{ teacher.person.registration }}</td>
+            <td>{{ teacher.person.email }}</td>
+            <td>{{ teacher.get_subjects_names }}</td>
+            <td>
+                <div class="d-flex justify-content-around">
+                    {% simple_table_button color_class='green-text' icon='person_add' name=form.teachers.html_name value=teacher.pk %}
+                </div>
+            </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </form>
+</section>
+<header class="header-with-icon padding-from-content">
+  <img src="{% static 'people/images/icons/teacher.svg' %}"
+       alt="A green person on the side of a chalkboard"
+       width="35"
+       height="35"
+       class="green-svg" />
+  <h2>Remover Professores</h2>
+</header>
+<section>
+  <form method="post">
+    {% csrf_token %}
+    <table class="ccam-table">
+      <thead>
+      <tr>
+        {% include "people/person_table_header.html" %}
+        <th>
+          <div>
+              <span class="material-symbols-outlined">
+                  school
+              </span>
+              Matérias
+          </div>
+          </th>
+          <th>
+          <div>
+              <span class="material-symbols-outlined">
+              tune
+              </span>
+              Ações
+          </div>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for teacher in added_teachers %}
+          <tr>
+          <td>{{ teacher.person.name }}</td>
+          <td>{{ teacher.person.cpf }}</td>
+          <td>{{ teacher.person.registration }}</td>
+          <td>{{ teacher.person.email }}</td>
+          <td>{{ teacher.get_subjects_names }}</td>
+          <td>
+              <div class="d-flex justify-content-around">
+                  {% simple_table_button color_class='green-text' icon='person_remove' name=form.teachers.html_name value=teacher.pk %}
+              </div>
+          </td>
+          </tr>
+      {% endfor %}
+    </tbody>
+    </table>
+  </form>
+</section>
+{% include "core/_table_pagination.html" %}
+{% include "core/_confirmation_modal.html" with text="Tem certeza que deseja excluir o docente" highlighted_text="Ernie and Bert (123.456.789-10)" %}
+</main>
+{% endblock content %}

@@ -181,8 +181,10 @@ class Committee(BaseModel):
     coordinator = models.ForeignKey(
         "coordinators.Coordinator", on_delete=models.CASCADE, related_name="committee_coordinator"
     )
-    teachers = models.ManyToManyField("teachers.Teacher", related_name="committee_teachers")
-    subject = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name="committee_subject")
+    teachers = models.ManyToManyField("teachers.Teacher", related_name="committee_teachers", blank=True)
+    subject = models.ForeignKey(
+        Subject, on_delete=models.CASCADE, related_name="committee_subject", verbose_name="Disciplina"
+    )
 
     class Meta:
         verbose_name = _("Banca")
@@ -190,3 +192,8 @@ class Committee(BaseModel):
 
     def __str__(self):
         return f"{self.subject.name}"
+
+    def get_teachers_names(self):
+        teachers_names = list(self.teachers.values_list("person__name", flat=True))
+        teachers_names = get_text_list(teachers_names, "e")
+        return teachers_names
