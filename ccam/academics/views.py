@@ -1,7 +1,9 @@
 from typing import Any
 from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import TemplateView, DetailView
+from django.forms.models import BaseModelForm
+from django.http import HttpResponse
+from django.views.generic import TemplateView, DetailView, UpdateView
 
 from ccam.academics.filters import KnowledgeCertificateFilterSet, SubjectFilterSet, SubjectDispensalFilterSet
 from ccam.academics.forms import KnowledgeCertificateForm, SubjectForm
@@ -56,8 +58,9 @@ class SeacSubjectDispensalListView(LoginRequiredMixin, FilteredListView):
     paginate_by = settings.PAGINATE_BY
 
 
-class SeacKnowledgeCertificatesStudentDetails(LoginRequiredMixin, DetailView):
+class SeacKnowledgeCertificatesStudentDetails(LoginRequiredMixin, UpdateView):
     model = KnowledgeCertificate
+    fields = ["status", "justification"]
     template_name = "academics/seac_academics/knowledge_certificates_student_details.html"
     context_object_name = "knowledge_certificate"
 
@@ -66,6 +69,10 @@ class SeacKnowledgeCertificatesStudentDetails(LoginRequiredMixin, DetailView):
         context["subjects"] = context["knowledge_certificate"].subjects.all()
 
         return context
+
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        knowledge_certificate = form.save(commit=False)
+        
 
 
 class SeacCoursesDispensalStudentDetails(LoginRequiredMixin, DetailView):

@@ -20,7 +20,7 @@
           height="151" />
       <span>{{ knowledge_certificate.student.person.name }}</span>
     </section>
-    <section class="student-info">
+    <section class="person-info">
       <div>
         <span><b>Matrícula:</b> {{ knowledge_certificate.student.person.registration }}</span>
         <span><b>Curso:</b> {{ knowledge_certificate.student.course.name }}</span>
@@ -37,9 +37,9 @@
         <span><b>Status: </b>{{ knowledge_certificate.status }}</span>
       </div>
     </section>
-    <section class="assessment-buttons">
-      {% include "core/_button.html" with button_text="Aprovar" color_class="green-svg" icon_path='core/images/icons/doneAllIcon.svg' alt_text="A double tick symbol used for approval of something." %}
-      {% include "core/_button.html" with button_text="Reprovar" color_class="red-svg" icon_path='core/images/icons/cancel.svg' alt_text="A red circle with the letter x on it." %}
-    </section>
+      <form action="{% url 'academics:knowledge_certificates' %}" class="assessment-buttons">
+        {% button button_text="Aprovar" color_class="green-svg" icon="done_all" type="submit" name="form.status.html_name" value="AP" %}
+        {% button button_text="Reprovar" color_class="red-svg" icon="cancel" type="submit" name="form.status.html_name" value="ERR" %}
+    </form>
   </main>
 {% endblock content %}

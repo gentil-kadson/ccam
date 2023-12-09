@@ -4,6 +4,8 @@
         type="{{ type }}"
         {% if form_id %}form="{{ form_id }}"{% endif %}
         {% if id %}id="{{ id }}"{% endif %}
+        {% if name %}name="{{ name }}"{% endif %}
+        {% if value %}value="{{ value }}"{% endif %}
         onclick="if (event.currentTarget.getAttribute('id') == 'close-modal-button') { const modal = document.getElementById('confirmation-modal'); modal.close() }"
         >
   {{ button_text }}
