@@ -1,5 +1,9 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+
+{% load static %}
 {% load breadcrumb_item %}
+{% load simple_table_button %}
+{% load button %}
 
 {% block breadcrumb_items %}
   {% breadcrumb_item text="Home" icon="home" href='people:seac:home' %}
@@ -8,6 +12,90 @@
 
 {% block content %}
   <main id="container" class="left-aligned-content">
-    {% include 'academics/seac_academics/_seac_view_courses_dispensal.html' %}
+    <main class="view-table-section">
+      <header class="header-with-icon">
+        <img src="{% static 'people/images/icons/filter.svg' %}"
+            alt="A classic, green filter icon"
+            width="35"
+            height="35"
+            class="green-svg" />
+        <h2>Filtros</h2>
+      </header>
+      <section class="filter-section">
+        <div class="fields-container">
+          <div class="ccam-input">
+            <label for="student-id">Matrícula</label>
+            <input type="text" name="student-id" id="student-id" />
+          </div>
+          <div class="ccam-input">
+            <label for="request-submission-date">Data de Submissão</label>
+            <input type="date"
+                  name="request-submission-date"
+                  id="request-submission-date" />
+          </div>
+          <div class="ccam-input">
+            <label for="student-name">Nome do aluno</label>
+            <input type="text" name="student-name" id="student-name" />
+          </div>
+        </div>
+        {% include "core/_button.html" with button_text="Filtrar" color_class="green-svg" icon_path='people/images/icons/filter.svg' alt_text="A classic green filter object" href='seac:home' %}
+      </section>
+      <header class="header-with-icon padding-from-content">
+        <img src="{% static 'people/images/icons/dataTable.svg' %}"
+            alt="A green icon representation of a table with data on it."
+            width="35"
+            height="35"
+            class="green-svg" />
+        <h2>Solicitações</h2>
+      </header>
+      <section>
+        <table class="ccam-table">
+          <thead>
+            <tr>
+              <th>
+                <img width="30"
+                    height="30"
+                    src="{% static 'people/images/icons/signatureIcon.svg' %}"
+                    alt="A green signature icon" />
+                Nome
+              </th>
+              <th>
+                <img width="30"
+                    height="30"
+                    src="{% static 'people/images/icons/personVCard.svg' %}"
+                    alt="A green verification card containing a person" />
+                Matrícula
+              </th>
+              <th>
+                <img width="30"
+                    height="30"
+                    src="{% static 'people/images/icons/calendarIcon.svg' %}"
+                    alt="A green and simple calendar that marks an event." />
+                Data de Submissão
+              </th>
+              <th>
+                <img width="30"
+                    height="30"
+                    src="{% static 'people/images/icons/actionIcon.svg' %}"
+                    alt="A green settings icon indicating actions you can take on a specific table." />
+                Ações
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for subject_dispensal in object_list %}
+            <tr>
+              <td>{{ subject_dispensal.student.person.name }}</td>
+              <td>{{ subject_dispensal.student.person.registration }}</td>
+              <td>{{ subject_dispensal.submission_date }}</td>
+              <td>
+                {% include 'core/_table_button.html' with button_text="Vizualizar" color_class="green-svg" icon_path='people/images/icons/detailsIcon.svg' alt_text="A green eye icon" href='academics:courses_dispensal_detail' %}
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </section>
+    </main>
   </main>
 {% endblock content %}

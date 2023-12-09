@@ -1,9 +1,11 @@
+from typing import Any
 from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, DetailView
 
-from ccam.academics.filters import SubjectFilterSet
-from ccam.academics.models import Course, Subject
+from ccam.academics.filters import KnowledgeCertificateFilterSet, SubjectFilterSet, SubjectDispensalFilterSet
+from ccam.academics.forms import KnowledgeCertificateForm, SubjectForm
+from ccam.academics.models import Course, KnowledgeCertificate, Subject, SubjectDispensal, KnowledgeCGrades
 from ccam.core.views import FilteredListView
 
 
@@ -39,16 +41,24 @@ class CourseProgressCreateView(TemplateView):
     template_name = "academics/course_progress_form.html"
 
 
-class SeacViewKnowledgeCertificates(TemplateView):
+class SeacKnowledgeCertificatesListView(LoginRequiredMixin, FilteredListView):
+    model = KnowledgeCertificate
+    filterset_class = KnowledgeCertificateFilterSet
     template_name = "academics/seac_academics/seac_view_knowledge_certificates.html"
+    paginate_by = settings.PAGINATE_BY
 
 
-class SeacViewCoursesDispensal(TemplateView):
+class SeacSubjectDispensalListView(LoginRequiredMixin, FilteredListView):
+    model = SubjectDispensal
+    filterset_class = SubjectDispensalFilterSet
     template_name = "academics/seac_academics/seac_view_courses_dispensal.html"
+    paginate_by = settings.PAGINATE_BY
 
 
-class SeacKnowledgeCertificatesStudentDetails(TemplateView):
+class SeacKnowledgeCertificatesStudentDetails(LoginRequiredMixin, DetailView):
+    model = KnowledgeCertificate
     template_name = "academics/seac_academics/knowledge_certificates_student_details.html"
+    context_object_name = "knowledge_certificate"
 
 
 class SeacCoursesDispensalStudentDetails(TemplateView):
