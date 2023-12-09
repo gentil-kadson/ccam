@@ -52,6 +52,7 @@ class SeacSubjectDispensalListView(LoginRequiredMixin, FilteredListView):
     model = SubjectDispensal
     filterset_class = SubjectDispensalFilterSet
     template_name = "academics/seac_academics/seac_view_courses_dispensal.html"
+    context_object_name = "subject_dispensal"
     paginate_by = settings.PAGINATE_BY
 
 
@@ -67,9 +68,10 @@ class SeacKnowledgeCertificatesStudentDetails(LoginRequiredMixin, DetailView):
         return context
 
 
-class SeacCoursesDispensalStudentDetails(TemplateView):
+class SeacCoursesDispensalStudentDetails(LoginRequiredMixin, DetailView):
+    model = SubjectDispensal
     template_name = "academics/seac_academics/courses_dispensal_student_details.html"
-
+    context_object_name = "course_dispensal"
 
 class CoordinatorsCommittee(TemplateView):
     template_name = "academics/coordinators_academics/committee.html"

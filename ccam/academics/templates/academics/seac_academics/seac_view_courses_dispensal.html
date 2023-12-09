@@ -87,9 +87,9 @@
             <tr>
               <td>{{ subject_dispensal.student.person.name }}</td>
               <td>{{ subject_dispensal.student.person.registration }}</td>
-              <td>{{ subject_dispensal.submission_date }}</td>
+              <td>{{ subject_dispensal.created_at }}</td>
               <td>
-                {% include 'core/_table_button.html' with button_text="Vizualizar" color_class="green-svg" icon_path='people/images/icons/detailsIcon.svg' alt_text="A green eye icon" href='academics:courses_dispensal_detail' %}
+                {% simple_table_button color_class='green-text' icon='visibility' abs_url=subject_dispensal.get_absolute_url %}
               </td>
             </tr>
             {% endfor %}

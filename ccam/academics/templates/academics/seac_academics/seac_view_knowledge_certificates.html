@@ -83,7 +83,7 @@
               <tr>
                 <td>{{ knowledge_certificate.student.person.name }}</td>
                 <td>{{ knowledge_certificate.student.person.registration }}</td>
-                <td>{{ knowledge_certificate.submission_date }}</td>
+                <td>{{ knowledge_certificate.created_at }}</td>
                 <td>
                   {% simple_table_button color_class='green-text' icon='visibility' abs_url=knowledge_certificate.get_absolute_url %}
                 </td>

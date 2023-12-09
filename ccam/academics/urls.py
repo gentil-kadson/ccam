@@ -31,7 +31,7 @@ urlpatterns = [
         name="knowledge_certificate_detail",
     ),
     path(
-        "courses-dispensal/detail/",
+        "courses-dispensal/detail/<int:pk>",
         SeacCoursesDispensalStudentDetails.as_view(),
         name="courses_dispensal_detail",
     ),

@@ -155,6 +155,9 @@ class SubjectDispensal(BaseModel):
         subjects_names = get_text_list(subjects_names_list, "e")
         return subjects_names
 
+    def get_absolute_url(self):
+        return reverse("academics:courses_dispensal_detail", kwargs={"pk": self.pk})
+
 
 class SubjectDGrades(models.Model):
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name="subject_dispensal_subject")

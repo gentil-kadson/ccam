@@ -1,7 +1,7 @@
 {% load static %}
 
 <section class="prof-pic-and-name">
-  <img src="{% static 'images/ernieAndBert.jpg' %}"
+  <img src="{{ course_dispensal.student.person.profile_picture }}"
        alt="Ernie and Bert from Sesame Street"
        width="150"
        height="151" />
@@ -9,16 +9,15 @@
 </section>
 <section class="student-info">
   <div>
-    <span><b>Matrícula:</b> 20231094030008</span>
-    <span><b>Curso:</b> Identid@des.com</span>
-    <span><b>Período:</b> 4º</span>
-    <span><b>Disciplinas IFRN:</b> O Que Rola Por Aí; Joga Fora Não: Água Velha Vira Sabão; Micromundos.</span>
-    <span><b>Disciplinas Para Aprov.:</b> O Que Rola Por Aí; Joga Fora Não: Água Velha Vira Sabão; Micromundos.</span>
+    <span><b>Matrícula:</b> {{ course_dispensal.student.person.registration }}</span>
+    <span><b>Curso:</b> {{ course_dispensal.student.course.name }}</span>
+    <span><b>Período:</b> {{ course_dispensal.student.current_grade_semester }}</span>
+    <span><b>Disciplinas IFRN:</b> {{ course_dispensal.get_subjects_names }}</span>
   </div>
   <div>
-    <span><b>Fone: </b>(84) 99999-9999</span>
-    <span><b>E-mail: </b>ernie.and.bert@sesame.com</span>
-    <span><b>Status: </b>Em análise</span>
+    <span><b>Fone: </b>{{ course_dispensal.student.person.phone_number }}</span>
+    <span><b>E-mail: </b>{{ course_dispensal.student.person.email }}</span>
+    <span><b>Status: </b>{{ course_dispensal.status }}</span>
   </div>
 </section>
 <section class="assessment-buttons">
