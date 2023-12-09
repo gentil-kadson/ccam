@@ -4,6 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms.models import BaseModelForm
 from django.http import HttpResponse
 from django.views.generic import TemplateView, DetailView, UpdateView
+from django.urls import reverse_lazy
 
 from ccam.academics.filters import KnowledgeCertificateFilterSet, SubjectFilterSet, SubjectDispensalFilterSet
 from ccam.academics.forms import KnowledgeCertificateForm, SubjectForm
@@ -63,16 +64,14 @@ class SeacKnowledgeCertificatesStudentDetails(LoginRequiredMixin, UpdateView):
     fields = ["status", "justification"]
     template_name = "academics/seac_academics/knowledge_certificates_student_details.html"
     context_object_name = "knowledge_certificate"
+    success_url = reverse_lazy("academics:knowledge_certificates")
+    
 
     def get_context_data(self, **kwargs: Any):
         context = super().get_context_data(**kwargs)
         context["subjects"] = context["knowledge_certificate"].subjects.all()
 
-        return context
-
-    def form_valid(self, form: BaseModelForm) -> HttpResponse:
-        knowledge_certificate = form.save(commit=False)
-        
+        return context     
 
 
 class SeacCoursesDispensalStudentDetails(LoginRequiredMixin, DetailView):

@@ -37,9 +37,12 @@
         <span><b>Status: </b>{{ knowledge_certificate.status }}</span>
       </div>
     </section>
-      <form action="{% url 'academics:knowledge_certificates' %}" class="assessment-buttons">
-        {% button button_text="Aprovar" color_class="green-svg" icon="done_all" type="submit" name="form.status.html_name" value="AP" %}
-        {% button button_text="Reprovar" color_class="red-svg" icon="cancel" type="submit" name="form.status.html_name" value="ERR" %}
-    </form>
+      <form action="{% url 'academics:knowledge_certificates' %}" method="post" class="assessment-buttons">
+        {% csrf_token %}
+        {% button button_text="Aprovar" color_class="green-svg" icon="done_all" type="submit" name="new_status" value="AP" %}
+      </form>
+      <form action="{% url 'academics:knowledge_certificates' %}" method="post" class="assessment-buttons">
+        {% button button_text="Reprovar" color_class="red-svg" icon="cancel" type="submit" name="new_status" value="ERR" %}
+      </form>
   </main>
 {% endblock content %}
