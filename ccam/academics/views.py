@@ -60,6 +60,12 @@ class SeacKnowledgeCertificatesStudentDetails(LoginRequiredMixin, DetailView):
     template_name = "academics/seac_academics/knowledge_certificates_student_details.html"
     context_object_name = "knowledge_certificate"
 
+    def get_context_data(self, **kwargs: Any):
+        context = super().get_context_data(**kwargs)
+        context["subjects"] = context["knowledge_certificate"].subjects.all()
+
+        return context
+
 
 class SeacCoursesDispensalStudentDetails(TemplateView):
     template_name = "academics/seac_academics/courses_dispensal_student_details.html"

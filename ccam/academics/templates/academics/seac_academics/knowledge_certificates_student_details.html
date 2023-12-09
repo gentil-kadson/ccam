@@ -14,7 +14,7 @@
   <main id="container"
         class="centered-content student-details-center-vertical">
     <section class="prof-pic-and-name">
-      <img src="{% static 'images/ernieAndBert.jpg' %}"
+      <img src="{{ knowledge_certificate.student.person.profile_picture.url }}"
           alt="Ernie and Bert from Sesame Street"
           width="150"
           height="151" />
@@ -24,15 +24,17 @@
       <div>
         <span><b>Matrícula:</b> {{ knowledge_certificate.student.person.registration }}</span>
         <span><b>Curso:</b> {{ knowledge_certificate.student.course.name }}</span>
-        <span><b>Período:</b> {{ knowledge_certificate.student.current_grade_semester }}</span>
+        <span><b>Período:</b> {{ knowledge_certificate.student.current_grade_semester }}º</span>
         <span><b>Disciplinas:</b> 
-          Teste
+          {% for subject in subjects %}
+            {{ subject.name }},
+          {% endfor %}
         </span>
       </div>
       <div>
-        <span><b>Fone: </b>(84) 99999-9999</span>
-        <span><b>E-mail: </b>ernie.and.bert@sesame.com</span>
-        <span><b>Status: </b>Em análise</span>
+        <span><b>Fone: </b>{{ knowledge_certificate.student.person.phone_number }}</span>
+        <span><b>E-mail: </b>{{ knowledge_certificate.student.person.email }}</span>
+        <span><b>Status: </b>{{ knowledge_certificate.status }}</span>
       </div>
     </section>
     <section class="assessment-buttons">
