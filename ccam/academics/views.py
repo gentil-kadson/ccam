@@ -7,7 +7,7 @@ from django.views.generic import TemplateView, DetailView, UpdateView
 from django.urls import reverse_lazy
 
 from ccam.academics.filters import KnowledgeCertificateFilterSet, SubjectFilterSet, SubjectDispensalFilterSet
-from ccam.academics.forms import KnowledgeCertificateForm, SubjectForm
+from ccam.academics.forms import KnowledgeCertificateAssessmentForm
 from ccam.academics.models import Course, KnowledgeCertificate, Subject, SubjectDispensal, KnowledgeCGrades
 from ccam.core.views import FilteredListView
 
@@ -59,9 +59,9 @@ class SeacSubjectDispensalListView(LoginRequiredMixin, FilteredListView):
     paginate_by = settings.PAGINATE_BY
 
 
-class SeacKnowledgeCertificatesStudentDetails(LoginRequiredMixin, UpdateView):
+class SeacKnowledgeCertificateUpdateView(LoginRequiredMixin, UpdateView):
     model = KnowledgeCertificate
-    fields = ["status", "justification"]
+    form_class = KnowledgeCertificateAssessmentForm
     template_name = "academics/seac_academics/knowledge_certificates_student_details.html"
     context_object_name = "knowledge_certificate"
     success_url = reverse_lazy("academics:knowledge_certificates")
@@ -70,10 +70,8 @@ class SeacKnowledgeCertificatesStudentDetails(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs: Any):
         context = super().get_context_data(**kwargs)
         context["subjects"] = context["knowledge_certificate"].subjects.all()
-
-        return context     
-
-
+        return context
+    
 class SeacCoursesDispensalStudentDetails(LoginRequiredMixin, DetailView):
     model = SubjectDispensal
     template_name = "academics/seac_academics/courses_dispensal_student_details.html"
