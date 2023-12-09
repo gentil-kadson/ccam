@@ -9,6 +9,7 @@ from .models import Committee, Course, KnowledgeCertificate, Subject, SubjectDis
 class SubjectFilterSet(django_filters.FilterSet):
     course = django_filters.ModelChoiceFilter(queryset=Course.objects.all())
     educational_level = django_filters.ChoiceFilter(empty_label=_("Todos"), choices=EducationalLevel.choices)
+    name = django_filters.CharFilter(field_name="name", lookup_expr="icontains")
 
     class Meta:
         model = Subject
