@@ -1,7 +1,12 @@
 from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
+from django.urls import reverse
+from django.utils.translation import gettext_lazy as _
+from django.views.generic import UpdateView
 
 from ccam.academics.filters import CommitteeFilterSet, KnowledgeCertificateGradesFilterSet
+from ccam.academics.forms import KnowledgeCertificateAssessmentForm
 from ccam.academics.models import Committee, KnowledgeCGrades, Subject
 from ccam.core.views import FilteredListView
 from ccam.people.mixins import UserIsTeacherTestMixin
@@ -43,3 +48,15 @@ class KnowledgeCertificateGradesListView(LoginRequiredMixin, UserIsTeacherTestMi
         context = super().get_context_data(**kwargs)
         context["subject_name"] = self.committee_subject.name
         return context
+
+
+class KnowledgeCertificateGradesUpdateView(
+    LoginRequiredMixin, UserIsTeacherTestMixin, SuccessMessageMixin, UpdateView
+):
+    model = KnowledgeCGrades
+    form_class = KnowledgeCertificateAssessmentForm
+    template_name = "academics/teachers/_knowledge_certificate_assessment_form.html"
+    success_message = _("Aluno avaliado com sucesso!")
+
+    def get_success_url(self):
+        return reverse("academics:knowledge_certificate_assessments_list", kwargs={"pk": self.object.subject.pk})

@@ -68,6 +68,14 @@
               Curso
             </th>
             <th>
+              <div>
+                <span class="material-symbols-outlined green-text fs-1">
+                  123
+                </span>
+                Nota
+              </div>
+            </th>
+            <th>
               <img src="{% static 'people/images/icons/actionIcon.svg' %}"
                    alt="A green settings icon indicating actions you can take on a specific table" />
               Ações
@@ -82,10 +90,11 @@
             <td>{{ assessment.knowledge_certificate.student.person.registration }}</td>
             <td>{{ assessment.knowledge_certificate.student.person.email }}</td>
             <td>{{ assessment.knowledge_certificate.student.course.name }}</td>
+            <td>{{ assessment.grade|default:"Avaliação pendente" }}</td>
             <td>
               <div class="d-flex justify-content-around">
-                {% url 'people:students:delete' pk=student.id as student_delete_url %}
-                {% include 'academics/teachers/_student_assessment_modal.html' %}
+                {% url 'academics:knowledge_certificate_assessments_update' pk=assessment.pk as assessment_update_url %}
+                {% include 'academics/teachers/_student_assessment_modal.html' with form_url=assessment_update_url %}
               </div>
             </td>
           </tr>
