@@ -90,10 +90,8 @@
                         <td>{{ committee.get_teachers_names|default:"------" }}</td>
                         <td>
                             <div class="d-flex justify-content-around">
-                                {% url "academics:committees_add_teachers" committee.pk as add_teachers_to_committee_url %}
-                                {% simple_table_button icon="person_add" color_class="green-text" abs_url=add_teachers_to_committee_url %}
-                                {% url "academics:committees_delete" committee.pk as committee_delete_url %}
-                                {% include 'core/_table_delete_button.html' with delete_url=committee_delete_url %}
+                                {% url "academics:knowledge_certificate_assessments_list" committee.subject.pk as knowledge_certificate_assessments_url %}
+                                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='people/images/icons/diploma.svg' alt_text="A green diploma paper" abs_url=knowledge_certificate_assessments_url %}
                             </div>
                         </td>
                     </tr>

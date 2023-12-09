@@ -3,7 +3,7 @@ from django.utils.translation import gettext_lazy as _
 
 from ccam.core.models import EducationalLevel
 
-from .models import Committee, Course, KnowledgeCertificate, Subject, SubjectDispensal
+from .models import Committee, Course, KnowledgeCertificate, KnowledgeCGrades, Subject, SubjectDispensal
 
 
 class SubjectFilterSet(django_filters.FilterSet):
@@ -22,6 +22,21 @@ class KnowledgeCertificateFilterSet(django_filters.FilterSet):
         fields = ("status",)
 
 
+class KnowledgeCertificateGradesFilterSet(django_filters.FilterSet):
+    student = django_filters.CharFilter(
+        field_name="knowledge_certificate__student__person__name", lookup_expr="icontains", label=_("Nome do discente")
+    )
+    registration = django_filters.CharFilter(
+        field_name="knowledge_certificate__student__person__registration",
+        lookup_expr="icontains",
+        label=_("Matrícula do discente"),
+    )
+
+    class Meta:
+        model = KnowledgeCGrades
+        exclude = ("student", "knowledge_certificate", "grade")
+
+
 class SubjectDispensalFilterSet(django_filters.FilterSet):
     class Meta:
         model = SubjectDispensal
@@ -30,7 +45,7 @@ class SubjectDispensalFilterSet(django_filters.FilterSet):
 
 class CommitteeFilterSet(django_filters.FilterSet):
     teacher_registration = django_filters.CharFilter(
-        field_name="teachers__person__registration", lookup_expr="icontains", label="Matrícula do professor"
+        field_name="teachers__person__registration", lookup_expr="icontains", label=_("Matrícula do professor")
     )
 
     class Meta:
