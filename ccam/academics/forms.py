@@ -7,7 +7,7 @@ from ccam.core.widgets import CCAMFileWidget
 class SubjectForm(forms.ModelForm):
     class Meta:
         model = Subject
-        fields = ("name", "course", "grade_semester_availability", "educational_level")
+        fields = ("name", "grade_semester_availability", "educational_level")
 
 
 class KnowledgeCertificateForm(forms.ModelForm):
