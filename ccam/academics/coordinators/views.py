@@ -126,7 +126,9 @@ class CommitteAddTeachersView(LoginRequiredMixin, UserIsCourseCoordinatorTestMix
 
     def get_subject_teachers_filterset(self):
         committee_subject = self.get_object().subject
-        teachers = Teacher.objects.filter(subjects__in=[committee_subject]).filter(committee_teachers__isnull=True)
+        teachers = Teacher.objects.filter(subjects__in=[committee_subject]).exclude(
+            committee_teachers__in=[self.object]
+        )
         return TeacherFilterSet(data=self.request.GET, queryset=teachers)
 
     def get_already_added_teachers(self):
