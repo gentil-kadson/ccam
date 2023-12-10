@@ -76,13 +76,13 @@ class SeacCoursesDispensalUpdateView(LoginRequiredMixin, UserIsSeacEmployeeTestM
 
 class RejectStudentKnowledgeCertificateFormView(LoginRequiredMixin, UserIsSeacEmployeeTestMixin, UpdateView):
     model = KnowledgeCertificate
-    template_name = "academics/seac_academics/rejected_modal.html"
+    template_name = "academics/seac_academics/rejected_kc_modal.html"
     form_class = RejectStudentKnowledgeCertificateForm
     success_url = reverse_lazy("people:seac:home")
 
 class RejectStudentSubjectDispensalFormView(LoginRequiredMixin, UserIsSeacEmployeeTestMixin, UpdateView):
     model = SubjectDispensal
-    template_name = "academics/seac_academics/rejected_modal.html"
+    template_name = "academics/seac_academics/rejected_cd_modal.html"
     form_class = RejectStudentSubjectDispensalForm
     success_url = reverse_lazy("people:seac:home")
 

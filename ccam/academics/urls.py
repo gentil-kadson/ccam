@@ -34,7 +34,9 @@ urlpatterns = [
         SeacCoursesDispensalUpdateView.as_view(),
         name="courses_dispensal_detail",
     ),
-    path("knowledge-certificate-rejection/<int:pk>/", RejectStudentKnowledgeCertificateFormView.as_view(), name="reject_knowledge_certificate"),
+    path("knowledge-certificate-rejection/<int:pk>/", RejectStudentKnowledgeCertificateFormView.as_view(),
+     name="reject_knowledge_certificate"),
+     path("subject-dispensal-rejection/<int:pk>/", RejectStudentSubjectDispensalFormView.as_view(), name="reject_subject_dispensal"),
     path(
         "coordinators/knowledge-certificates/subject/committee/",
         CoordinatorsCommittee.as_view(),

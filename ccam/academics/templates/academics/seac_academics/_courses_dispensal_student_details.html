@@ -25,5 +25,11 @@
   {% csrf_token %}
   {% button button_text="Aprovar" color_class="green-svg" icon="done_all" name=form.status.html_name value=form.status.field.choices.0.0 type="submit" %}
 </form>
+<button hx-get="{% url 'academics:reject_subject_dispensal' course_dispensal.pk %}" hx-swap="innerHTML" hx-target="#confirmation-modal" hx-trigger="click" class="ccam-button confirmation-modal-trigger">
+  Rejeitar
+  <span class="material-symbols-outlined red-svg">
+    cancel
+  </span>
+</button>
 
-{% _include "core/_confirmation_modal.html" %}
+{% include "core/_confirmation_modal.html" %}

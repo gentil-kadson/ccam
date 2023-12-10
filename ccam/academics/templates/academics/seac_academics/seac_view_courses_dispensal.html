@@ -84,6 +84,7 @@
           </thead>
           <tbody>
             {% for subject_dispensal in object_list %}
+            {% if subject_dispensal.status == "PR" %}
             <tr>
               <td>{{ subject_dispensal.student.person.name }}</td>
               <td>{{ subject_dispensal.student.person.registration }}</td>
@@ -92,6 +93,7 @@
                 {% simple_table_button color_class='green-text' icon='visibility' abs_url=subject_dispensal.get_absolute_url %}
               </td>
             </tr>
+            {% endif %}
             {% endfor %}
           </tbody>
         </table>

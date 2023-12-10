@@ -1,9 +1,9 @@
 {% load button %}
-<form action="{% url 'academics:reject_knowledge_certificate' object.pk %}" method="post">
+<form action="{% url 'academics:reject_subject_dispensal' object.pk %}" method="post">
     {% csrf_token %}
     <h1>Escreva o motivo da reprovação</h1>
     <span>Reprovar a solicitação irá enviar um e-mail para o estudante para que ele possa fazer uma nova soliticação com os dados corrigidos.</span>
-    <textarea name="justification" id="justification" cols="30" rows="10" placeholder="O fone está incorreto..."></textarea>
+    <textarea name="justification" id="justification" cols="30" rows="10" placeholder="O fone está incorreto..." style="resize: none;" ></textarea>
     <div class="assessment-buttons">
         {% button button_text="Enviar" color_class="green-svg" icon="done_all" name=form.status.html_name value=form.status.field.choices.2.0 type="submit" %}
         <button class="ccam-button" id="close-modal-button">
