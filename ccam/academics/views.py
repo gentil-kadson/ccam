@@ -71,10 +71,12 @@ class SeacKnowledgeCertificateUpdateView(LoginRequiredMixin, UpdateView):
         context["subjects"] = context["knowledge_certificate"].subjects.all()
         return context
     
-class SeacCoursesDispensalStudentDetails(LoginRequiredMixin, DetailView):
+class SeacCoursesDispensalUpdateView(LoginRequiredMixin, UpdateView):
     model = SubjectDispensal
+    fields = ("status", "justification")
     template_name = "academics/seac_academics/courses_dispensal_student_details.html"
     context_object_name = "course_dispensal"
+    success_url = reverse_lazy("academics:courses_dispensal")
 
 class CoordinatorsCommittee(TemplateView):
     template_name = "academics/coordinators_academics/committee.html"

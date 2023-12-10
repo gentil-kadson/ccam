@@ -1,4 +1,5 @@
 {% load static %}
+{% load button %}
 
 <section class="prof-pic-and-name">
   <img src="{{ course_dispensal.student.person.profile_picture }}"
@@ -20,7 +21,8 @@
     <span><b>Status: </b>{{ course_dispensal.status }}</span>
   </div>
 </section>
-<section class="assessment-buttons">
-  {% include "core/_button.html" with button_text="Aprovar" color_class="green-svg" icon_path='core/images/icons/doneAllIcon.svg' alt_text="A double tick symbol used for approval of something." %}
-  {% include "core/_button.html" with button_text="Reprovar" color_class="red-svg" icon_path='core/images/icons/cancel.svg' alt_text="A red circle with the letter x on it." %}
-</section>
+<form method="post" class="assessment-buttons">
+  {% csrf_token %}
+  {% button button_text="Aprovar" color_class="green-svg" icon="done_all" name=form.status.html_name value=form.status.field.choices.0.0 type="submit" %}
+  {% button button_text="Reprovar" color_class="red-svg" icon="cancel" name=form.status.html_name type="submit" value=form.status.field.choices.2.0 %}
+</form>

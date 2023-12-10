@@ -9,7 +9,7 @@ from ccam.academics.views import (
     CoordinatorsSubjectList,
     CourseProgressCreateView,
     CourseSubjects,
-    SeacCoursesDispensalStudentDetails,
+    SeacCoursesDispensalUpdateView,
     SeacKnowledgeCertificateUpdateView,
     SeacSubjectDispensalListView,
     SeacKnowledgeCertificatesListView,
@@ -32,7 +32,7 @@ urlpatterns = [
     ),
     path(
         "courses-dispensal/detail/<int:pk>",
-        SeacCoursesDispensalStudentDetails.as_view(),
+        SeacCoursesDispensalUpdateView.as_view(),
         name="courses_dispensal_detail",
     ),
     path(
