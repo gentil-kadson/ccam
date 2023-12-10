@@ -1,0 +1,15 @@
+{% load button %}
+<div>
+    <h1>Escreva o motivo da reprovação</h1>
+    <span>Reprovar a solicitação irá enviar um e-mail para o estudante para que ele possa fazer uma nova soliticação com os dados corrigidos.</span>
+    <textarea name="justification" id="justification" cols="30" rows="10" placeholder="O fone está incorreto..."></textarea>
+    <div class="assessment-buttons">
+        {% button button_text="Enviar" color_class="green-svg" icon="done_all" name=form.status.html_name value=form.status.field.choices.2.0 type="submit" %}
+        <button>
+            Cancelar
+            <span class="material-symbols-outlined red-svg">
+                cancel
+            </span>
+        </button>
+    </div>
+</div>

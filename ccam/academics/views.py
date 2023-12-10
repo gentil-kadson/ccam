@@ -3,9 +3,9 @@ from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms.models import BaseModelForm
 from django.http import HttpResponse
-from django.views.generic import TemplateView, DetailView, UpdateView
+from django.views.generic import TemplateView, DetailView, UpdateView, FormView
 from django.urls import reverse_lazy
-
+from ccam.academics.forms import RejectStudentKnowledgeCertificateForm, RejectStudentSubjectDispensalForm
 from ccam.academics.filters import KnowledgeCertificateFilterSet, SubjectFilterSet, SubjectDispensalFilterSet
 from ccam.academics.models import Course, KnowledgeCertificate, Subject, SubjectDispensal, KnowledgeCGrades
 from ccam.core.views import FilteredListView
@@ -72,6 +72,16 @@ class SeacCoursesDispensalUpdateView(LoginRequiredMixin, UpdateView):
     template_name = "academics/seac_academics/courses_dispensal_student_details.html"
     context_object_name = "course_dispensal"
     success_url = reverse_lazy("academics:courses_dispensal")
+
+class RejectStudentKnowledgeCertificateFormView(FormView):
+    template_name = "academics/seac_academics/rejected_modal.html"
+    form_class = RejectStudentKnowledgeCertificateForm
+    success_url = reverse_lazy("people:seac:home")
+
+class RejectStudentSubjectDispensalFormView(FormView):
+    template_name = "academics/seac_academics/rejected_modal.html"
+    form_class = RejectStudentSubjectDispensalForm
+    success_url = reverse_lazy("people:seac:home")
 
 class CoordinatorsCommittee(TemplateView):
     template_name = "academics/coordinators_academics/committee.html"

@@ -13,9 +13,10 @@ from ccam.academics.views import (
     SeacKnowledgeCertificateUpdateView,
     SeacSubjectDispensalListView,
     SeacKnowledgeCertificatesListView,
-    SubjectCourseProgressAssessView,
     SubjectCourseProgressListView,
     TrackProcessesListView,
+    RejectStudentSubjectDispensalFormView,
+    RejectStudentKnowledgeCertificateFormView
 )
 
 app_name = "academics"
@@ -33,6 +34,7 @@ urlpatterns = [
         SeacCoursesDispensalUpdateView.as_view(),
         name="courses_dispensal_detail",
     ),
+    path("knowledge-certificate-rejection/<int:pk>/", RejectStudentKnowledgeCertificateFormView.as_view(), name="reject_knowledge_certificate"),
     path(
         "coordinators/knowledge-certificates/subject/committee/",
         CoordinatorsCommittee.as_view(),
