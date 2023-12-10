@@ -92,6 +92,9 @@
                             <div class="d-flex justify-content-around">
                                 {% url "academics:knowledge_certificate_assessments_list" committee.subject.pk as knowledge_certificate_assessments_url %}
                                 {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='people/images/icons/diploma.svg' alt_text="A green diploma paper" abs_url=knowledge_certificate_assessments_url %}
+                                
+                                {% url "academics:subject_dispensal_assessments_list" committee.subject.pk as subject_dispensal_assessments_url %}
+                                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='people/images/icons/exportNotes.svg' alt_text="A paper with an export icon on its lower right part" abs_url=subject_dispensal_assessments_url %}
                             </div>
                         </td>
                     </tr>
