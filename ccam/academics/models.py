@@ -1,3 +1,5 @@
+from datetime import date
+
 from django.core.validators import MaxValueValidator
 from django.db import models
 from django.urls import reverse
@@ -87,6 +89,9 @@ class KnowledgeCertificate(BaseModel):
     def __str__(self):
         return f"{self.subjects}, {self.student.person.name} - {self.student.person.registration}"
 
+    def get_absolute_url(self):
+        return reverse("academics:knowledge_certificate_detail", kwargs={"pk": self.pk})
+
 
 class KnowledgeCGrades(models.Model):
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name="knowledge_certificate_subject")
@@ -149,6 +154,9 @@ class SubjectDispensal(BaseModel):
         subjects_names_list = list(self.subjects.values_list("name", flat=True))
         subjects_names = get_text_list(subjects_names_list, "e")
         return subjects_names
+
+    def get_absolute_url(self):
+        return reverse("academics:courses_dispensal_detail", kwargs={"pk": self.pk})
 
 
 class SubjectDGrades(models.Model):

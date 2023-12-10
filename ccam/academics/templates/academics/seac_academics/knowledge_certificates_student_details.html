@@ -1,5 +1,8 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+
+{% load static %}
 {% load breadcrumb_item %}
+{% load button %}
 
 {% block breadcrumb_items %}
   {% breadcrumb_item text="Home" icon="home" href='people:seac:home' %}
@@ -10,6 +13,41 @@
 {% block content %}
   <main id="container"
         class="centered-content student-details-center-vertical">
-    {% include 'academics/seac_academics/_knowledge_certificates_student_details.html' %}
-  </main>
+    <section class="prof-pic-and-name">
+      <img src="{{ knowledge_certificate.student.person.profile_picture.url }}"
+          alt="Ernie and Bert from Sesame Street"
+          width="150"
+          height="151" />
+      <span>{{ knowledge_certificate.student.person.name }}</span>
+    </section>
+    <section class="person-info">
+      <div>
+        <span><b>Matrícula:</b> {{ knowledge_certificate.student.person.registration }}</span>
+        <span><b>Curso:</b> {{ knowledge_certificate.student.course.name }}</span>
+        <span><b>Período:</b> {{ knowledge_certificate.student.current_grade_semester }}º</span>
+        <span><b>Disciplinas:</b> 
+          {% for subject in subjects %}
+            {{ subject.name }},
+          {% endfor %}
+        </span>
+      </div>
+      <div>
+        <span><b>Fone: </b>{{ knowledge_certificate.student.person.phone_number }}</span>
+        <span><b>E-mail: </b>{{ knowledge_certificate.student.person.email }}</span>
+        <span><b>Status: </b>{{ knowledge_certificate.status }}</span>
+      </div>
+    </section>
+      <form method="post" class="assessment-buttons">
+        {% csrf_token %}
+        {% button button_text="Aprovar" color_class="green-svg" icon="done_all" name=form.status.html_name value=form.status.field.choices.0.0 type="submit" %}
+      </form>
+      <button hx-get="{% url 'academics:reject_knowledge_certificate' knowledge_certificate.pk %}" hx-swap="innerHTML" hx-target="#confirmation-modal" hx-trigger="click" class="ccam-button confirmation-modal-trigger">
+        Rejeitar
+        <span class="material-symbols-outlined red-svg">
+          cancel
+        </span>
+      </button>
+    </main>
+
+    {% include "core/_confirmation_modal.html" %}
 {% endblock content %}

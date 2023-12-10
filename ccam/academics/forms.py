@@ -65,3 +65,13 @@ class KnowledgeCertificateAssessmentForm(forms.ModelForm):
     class Meta:
         model = KnowledgeCGrades
         fields = ("grade",)
+
+class RejectStudentKnowledgeCertificateForm(forms.ModelForm):
+    class Meta:
+        model = KnowledgeCertificate
+        fields = ("status", "justification")
+
+class RejectStudentSubjectDispensalForm(forms.ModelForm):
+    class Meta:
+        model = SubjectDispensal
+        fields = ("status", "justification")

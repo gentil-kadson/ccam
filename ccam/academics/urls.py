@@ -9,27 +9,32 @@ from ccam.academics.views import (
     CoordinatorsCourseProgressSubjectList,
     CoordinatorsSubjectList,
     CourseSubjects,
-    SeacCoursesDispensalStudentDetails,
-    SeacKnowledgeCertificatesStudentDetails,
-    SeacViewCoursesDispensal,
+    SeacCoursesDispensalUpdateView,
+    SeacKnowledgeCertificateUpdateView,
+    SeacSubjectDispensalListView,
+    SeacKnowledgeCertificatesListView,
     SubjectCourseProgressListView,
     TrackProcessesListView,
+    RejectStudentSubjectDispensalFormView,
+    RejectStudentKnowledgeCertificateFormView
 )
 
 app_name = "academics"
 
 urlpatterns = [
-    path("courses-dispensal/list", SeacViewCoursesDispensal.as_view(), name="courses_dispensal"),
+    path("knowledge-certificates/list", SeacKnowledgeCertificatesListView.as_view(), name="knowledge_certificates"),
+    path("courses-dispensal/list", SeacSubjectDispensalListView.as_view(), name="courses_dispensal"),
     path(
-        "knowledge-certificates/detail/",
-        SeacKnowledgeCertificatesStudentDetails.as_view(),
+        "knowledge-certificates/detail/<int:pk>/",
+        SeacKnowledgeCertificateUpdateView.as_view(),
         name="knowledge_certificate_detail",
     ),
     path(
-        "courses-dispensal/detail/",
-        SeacCoursesDispensalStudentDetails.as_view(),
+        "courses-dispensal/detail/<int:pk>",
+        SeacCoursesDispensalUpdateView.as_view(),
         name="courses_dispensal_detail",
     ),
+    path("knowledge-certificate-rejection/<int:pk>/", RejectStudentKnowledgeCertificateFormView.as_view(), name="reject_knowledge_certificate"),
     path(
         "coordinators/knowledge-certificates/subject/committee/",
         CoordinatorsCommittee.as_view(),

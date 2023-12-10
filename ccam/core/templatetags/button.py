@@ -16,6 +16,8 @@ def button(
     icon_style="outlined",
     icon="",
     color_class="green-svg",
+    name="",
+    value=""
 ):
     return {
         "button_text": button_text,
@@ -29,4 +31,6 @@ def button(
         "form_id": form_id,
         "id": id,
         "color_class": color_class,
+        "name": name,
+        "value": value
     }

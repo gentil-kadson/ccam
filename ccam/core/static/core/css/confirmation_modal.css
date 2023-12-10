@@ -23,6 +23,18 @@
   gap: 30px;
 }
 
+textarea {
+  background-color: var(--element-dark);
+  border: none;
+  border-radius: 10px;
+  color: #FFF;
+  width: 100%;
+}
+
+textarea:focus {
+  outline: none;
+}
+
 @media (max-width: 431px) {
   #confirmation-modal {
     max-width: 100%;
