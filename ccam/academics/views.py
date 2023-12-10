@@ -9,6 +9,7 @@ from ccam.academics.forms import RejectStudentKnowledgeCertificateForm, RejectSt
 from ccam.academics.filters import KnowledgeCertificateFilterSet, SubjectFilterSet, SubjectDispensalFilterSet
 from ccam.academics.models import Course, KnowledgeCertificate, Subject, SubjectDispensal, KnowledgeCGrades
 from ccam.core.views import FilteredListView
+from ccam.people.mixins import UserIsSeacEmployeeTestMixin
 
 
 class CourseSubjects(TemplateView):
@@ -32,20 +33,20 @@ class CourseSubjects(TemplateView):
         return context
 
 
-class KnowledgeCertificateSubjectList(LoginRequiredMixin, FilteredListView):
+class KnowledgeCertificateSubjectList(LoginRequiredMixin, UserIsSeacEmployeeTestMixin, FilteredListView):
     model = Subject
     filterset_class = SubjectFilterSet
     template_name = "academics/coordinators/subject_list.html"
     paginate_by = settings.PAGINATE_BY
 
-class SeacKnowledgeCertificatesListView(LoginRequiredMixin, FilteredListView):
+class SeacKnowledgeCertificatesListView(LoginRequiredMixin, UserIsSeacEmployeeTestMixin, FilteredListView):
     model = KnowledgeCertificate
     filterset_class = KnowledgeCertificateFilterSet
     template_name = "academics/seac_academics/seac_view_knowledge_certificates.html"
     paginate_by = settings.PAGINATE_BY
 
 
-class SeacSubjectDispensalListView(LoginRequiredMixin, FilteredListView):
+class SeacSubjectDispensalListView(LoginRequiredMixin, UserIsSeacEmployeeTestMixin, FilteredListView):
     model = SubjectDispensal
     filterset_class = SubjectDispensalFilterSet
     template_name = "academics/seac_academics/seac_view_courses_dispensal.html"
@@ -53,7 +54,7 @@ class SeacSubjectDispensalListView(LoginRequiredMixin, FilteredListView):
     paginate_by = settings.PAGINATE_BY
 
 
-class SeacKnowledgeCertificateUpdateView(LoginRequiredMixin, UpdateView):
+class SeacKnowledgeCertificateUpdateView(LoginRequiredMixin, UserIsSeacEmployeeTestMixin, UpdateView):
     model = KnowledgeCertificate
     fields = ("status", "justification")
     template_name = "academics/seac_academics/knowledge_certificates_student_details.html"
@@ -66,19 +67,21 @@ class SeacKnowledgeCertificateUpdateView(LoginRequiredMixin, UpdateView):
         context["subjects"] = context["knowledge_certificate"].subjects.all()
         return context
     
-class SeacCoursesDispensalUpdateView(LoginRequiredMixin, UpdateView):
+class SeacCoursesDispensalUpdateView(LoginRequiredMixin, UserIsSeacEmployeeTestMixin, UpdateView):
     model = SubjectDispensal
     fields = ("status", "justification")
     template_name = "academics/seac_academics/courses_dispensal_student_details.html"
     context_object_name = "course_dispensal"
     success_url = reverse_lazy("academics:courses_dispensal")
 
-class RejectStudentKnowledgeCertificateFormView(FormView):
+class RejectStudentKnowledgeCertificateFormView(LoginRequiredMixin, UserIsSeacEmployeeTestMixin, UpdateView):
+    model = KnowledgeCertificate
     template_name = "academics/seac_academics/rejected_modal.html"
     form_class = RejectStudentKnowledgeCertificateForm
     success_url = reverse_lazy("people:seac:home")
 
-class RejectStudentSubjectDispensalFormView(FormView):
+class RejectStudentSubjectDispensalFormView(LoginRequiredMixin, UserIsSeacEmployeeTestMixin, UpdateView):
+    model = SubjectDispensal
     template_name = "academics/seac_academics/rejected_modal.html"
     form_class = RejectStudentSubjectDispensalForm
     success_url = reverse_lazy("people:seac:home")

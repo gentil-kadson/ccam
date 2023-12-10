@@ -40,8 +40,13 @@
       <form method="post" class="assessment-buttons">
         {% csrf_token %}
         {% button button_text="Aprovar" color_class="green-svg" icon="done_all" name=form.status.html_name value=form.status.field.choices.0.0 type="submit" %}
-        <button hx-get="{% url 'academics:reject_knowledge_certificate' knowledge_certificate.id %}" hx-target="#confirmation-modal" hx-trigger="click" hx-swap="innerHTML" class="ccam-button">Reprovar <span class="material-symbols-outlined red-svg">cancel</span></button>
       </form>
+      <button hx-get="{% url 'academics:reject_knowledge_certificate' knowledge_certificate.pk %}" hx-swap="innerHTML" hx-target="#confirmation-modal" hx-trigger="click" class="ccam-button confirmation-modal-trigger">
+        Rejeitar
+        <span class="material-symbols-outlined red-svg">
+          cancel
+        </span>
+      </button>
     </main>
 
     {% include "core/_confirmation_modal.html" %}
