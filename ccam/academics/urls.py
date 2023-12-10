@@ -2,12 +2,12 @@ from django.urls import path
 
 from ccam.academics.coordinators.urls import urlpatterns as coordinators_urls
 from ccam.academics.students.urls import urlpatterns as students_urls
+from ccam.academics.teachers.urls import urlpatterns as teachers_urls
 from ccam.academics.views import (
     CoordinatorsCommittee,
     CoordinatorsCourseProgressComittee,
     CoordinatorsCourseProgressSubjectList,
     CoordinatorsSubjectList,
-    CourseProgressCreateView,
     CourseSubjects,
     SeacCoursesDispensalUpdateView,
     SeacKnowledgeCertificateUpdateView,
@@ -15,14 +15,12 @@ from ccam.academics.views import (
     SeacKnowledgeCertificatesListView,
     SubjectCourseProgressAssessView,
     SubjectCourseProgressListView,
-    SubjectKnowledgeCertificateAssessView,
     TrackProcessesListView,
 )
 
 app_name = "academics"
 
 urlpatterns = [
-    path("course-progress/create/", CourseProgressCreateView.as_view(), name="create_course_progress"),
     path("knowledge-certificates/list", SeacKnowledgeCertificatesListView.as_view(), name="knowledge_certificates"),
     path("courses-dispensal/list", SeacSubjectDispensalListView.as_view(), name="courses_dispensal"),
     path(
@@ -58,16 +56,6 @@ urlpatterns = [
     path(
         "subjects/course-progress/list/", SubjectCourseProgressListView.as_view(), name="subject_course_progress_list"
     ),
-    path(
-        "subjects/1/knowledge-certificate-assessments/",
-        SubjectKnowledgeCertificateAssessView.as_view(),
-        name="knowledge_certificate_assessments",
-    ),
-    path(
-        "subjects/1/course-progress-assessments/",
-        SubjectCourseProgressAssessView.as_view(),
-        name="course_progress_assessments",
-    ),
     path("processes/list/", TrackProcessesListView.as_view(), name="processes_list"),
     path("course-subjects/", CourseSubjects.as_view(), name="course_subjects"),
     # Students URLs
@@ -75,3 +63,4 @@ urlpatterns = [
 
 urlpatterns += coordinators_urls
 urlpatterns += students_urls
+urlpatterns += teachers_urls

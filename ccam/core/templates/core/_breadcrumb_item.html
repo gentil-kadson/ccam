@@ -1,7 +1,7 @@
 {% load static %}
 
 <a
-    {% if href %} href="{% url href %}" {% endif %}
+    href="{% if href %}{% url href %}{% else %}{{ abs_url }}{% endif %}"
     class="d-flex align-items-center fw-bold {% if active %} green-text active {% endif %} ccam-breadcrumb-item" >
 
     {% if bootstrap_icon %}

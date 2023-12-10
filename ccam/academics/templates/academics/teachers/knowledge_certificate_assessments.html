@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load breadcrumb_item %}
+{% load bootstrap_icons %}
+{% load button %}
+{% load simple_table_button %}
+
+{% block breadcrumb_items %}
+  {% breadcrumb_item text="Home" icon="home" href='people:teachers:home' %}
+  {% url "academics:teacher_committees" request.user.person.teacher_person.pk as teacher_committees_url %}
+  {% breadcrumb_item text="Bancas" icon="gavel" abs_url=teacher_committees_url %}
+  {% breadcrumb_item text=subject_name icon="school" last_item=True active=True %}
+{% endblock breadcrumb_items %}
+
+{% block content %}
+  <main id="container" class="view-table-section">
+    <header class="header-with-icon">
+      <span class="material-symbols-outlined green-text">
+        filter_alt
+      </span>
+      <h2>Filtros</h2>
+    </header>
+    <form method="get" id="students-filter" class="filter-section">
+      <div class="fields-container">
+        <div class="ccam-input">
+            {{ filter.form.student.label_tag }}
+            {{ filter.form.student }}
+        </div>
+      </div>
+      {% button button_text="Filtrar" color_class="green-svg" icon="filter_alt" form_id="students-filter" %}
+    </form>
+    <header class="header-with-icon padding-from-content">
+      <img src="{% static 'people/images/icons/backpack-fill.svg' %}"
+           alt="A green school backpack"
+           width="35"
+           height="35"
+           class="green-svg" />
+      <h2>Alunos</h2>
+    </header>
+    <section>
+      <table class="ccam-table">
+        <thead>
+          <tr>
+            <th>
+              <img src="{% static 'people/images/icons/signatureIcon.svg' %}"
+                   alt="A handwritten signature" />
+              Nome
+            </th>
+            <th>
+              <img src="{% static 'people/images/icons/personVCard.svg' %}"
+                   alt="A VCard" />
+              CPF
+            </th>
+            <th>
+              <img src="{% static 'people/images/icons/badge.svg' %}"
+                   alt="A badge containing ID information" />
+              Matrícula
+            </th>
+            <th>
+              <img src="{% static 'images/icons/email.svg' %}"
+                   alt="A mail letter envelope" />
+              Email
+            </th>
+            <th>
+              <img src="{% static 'images/icons/course.svg' %}"
+                   alt="A feather pen writing on a scroll" />
+              Curso
+            </th>
+            <th>
+              <div>
+                <span class="material-symbols-outlined green-text fs-1">
+                  123
+                </span>
+                Nota
+              </div>
+            </th>
+            <th>
+              <img src="{% static 'people/images/icons/actionIcon.svg' %}"
+                   alt="A green settings icon indicating actions you can take on a specific table" />
+              Ações
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for assessment in object_list %}
+          <tr>
+            <td>{{ assessment.knowledge_certificate.student.person.name }}</td>
+            <td>{{ assessment.knowledge_certificate.student.person.cpf }}</td>
+            <td>{{ assessment.knowledge_certificate.student.person.registration }}</td>
+            <td>{{ assessment.knowledge_certificate.student.person.email }}</td>
+            <td>{{ assessment.knowledge_certificate.student.course.name }}</td>
+            <td>{{ assessment.grade|default:"Avaliação pendente" }}</td>
+            <td>
+              <div class="d-flex justify-content-around">
+                {% url 'academics:knowledge_certificate_assessments_update' pk=assessment.pk as assessment_update_url %}
+                {% include 'academics/teachers/_student_assessment_modal.html' with form_url=assessment_update_url %}
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+    {% include "core/_table_pagination.html" %}
+    {% include "core/_confirmation_modal.html" %}
+  </main>
+{% endblock content %}

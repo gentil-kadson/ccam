@@ -28,7 +28,9 @@ class SubjectCreateView(LoginRequiredMixin, UserIsCourseCoordinatorTestMixin, Su
         subject = form.save(commit=False)
         subject.created_by = self.request.user
         subject.updated_by = self.request.user
-        return super().form_valid(form)
+        response = super().form_valid(form)
+        subject.course.add(self.request.user.person.coordinator_person.course)
+        return response
 
 
 class SubjectListView(LoginRequiredMixin, UserIsCourseCoordinatorTestMixin, FilteredListView):
@@ -36,6 +38,10 @@ class SubjectListView(LoginRequiredMixin, UserIsCourseCoordinatorTestMixin, Filt
     filterset_class = SubjectFilterSet
     template_name = "academics/coordinators/subject_list.html"
     paginate_by = settings.PAGINATE_BY
+
+    def get_queryset(self):
+        coordinator_course = self.request.user.person.coordinator_person.course
+        return Subject.objects.filter(course__in=[coordinator_course])
 
 
 class SubjectUpdateView(LoginRequiredMixin, UserIsCourseCoordinatorTestMixin, SuccessMessageMixin, UpdateView):
@@ -126,7 +132,9 @@ class CommitteAddTeachersView(LoginRequiredMixin, UserIsCourseCoordinatorTestMix
 
     def get_subject_teachers_filterset(self):
         committee_subject = self.get_object().subject
-        teachers = Teacher.objects.filter(subjects__in=[committee_subject]).filter(committee_teachers__isnull=True)
+        teachers = Teacher.objects.filter(subjects__in=[committee_subject]).exclude(
+            committee_teachers__in=[self.object]
+        )
         return TeacherFilterSet(data=self.request.GET, queryset=teachers)
 
     def get_already_added_teachers(self):

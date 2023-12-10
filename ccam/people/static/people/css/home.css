@@ -5,6 +5,10 @@
     align-items: center;
 }
 
+.home-card > span.material-symbols-outlined {
+    font-size: 120px;
+}
+
 .home-card h2 {
     font-size: 20px;
 }

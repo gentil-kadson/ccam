@@ -38,11 +38,6 @@ class KnowledgeCertificateSubjectList(LoginRequiredMixin, FilteredListView):
     template_name = "academics/coordinators/subject_list.html"
     paginate_by = settings.PAGINATE_BY
 
-
-class CourseProgressCreateView(TemplateView):
-    template_name = "academics/course_progress_form.html"
-
-
 class SeacKnowledgeCertificatesListView(LoginRequiredMixin, FilteredListView):
     model = KnowledgeCertificate
     filterset_class = KnowledgeCertificateFilterSet

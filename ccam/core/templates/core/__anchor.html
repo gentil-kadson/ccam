@@ -2,7 +2,7 @@
 {% load bootstrap_icons %}
 
 <a class="ccam-button anchor-button d-flex justify-content-center mt-2 {{ custom_class }}"
-   href="{% url href %}">
+   href="{% if href %}{% url href %}{% else %}{{ abs_url }}{% endif %}">
   {{ anchor_text }}
   {% if bootstrap_icon %}
     {% bs_icon icon color=color_class %}

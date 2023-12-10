@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% load breadcrumb_item %}
+{% load static %}
+{% load anchor %}
 
 {% block breadcrumb_items %}
   {% breadcrumb_item text="Home" icon="home" active=True last_item=True %}
@@ -10,6 +12,15 @@
         <header>
             <h1 class="fw-bold">Minhas Bancas</h1>
         </header>
-        {% include "teachers/_teachers_home_menu.html" %}
+        <section id="home-nav">
+            <div class="home-card">
+              <span class="material-symbols-outlined green-text">
+                gavel
+              </span>
+              <h2 class="fw-bold text-center">Bancas</h2>
+              {% url "academics:teacher_committees" request.user.person.teacher_person.pk as teacher_committees_url %}
+              {% anchor anchor_text="Listagem" color_class="green-svg" icon="list" abs_url=teacher_committees_url %}
+            </div>
+        </section>
     </main>
 {% endblock content %}

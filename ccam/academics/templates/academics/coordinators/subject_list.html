@@ -21,34 +21,15 @@
     <form method="get" class="filter-section">
       <div class="fields-container">
         <div class="ccam-input">
-          {{ filter.form.course.label_tag }}
+          {{ filter.form.name.label_tag }}
+          {{ filter.form.name }}
+        </div>
+
+        <div class="ccam-input">
+          {{ filter.form.grade_semester_availability.label_tag }}
           <div class="ccam-select">
-            {{ filter.form.course }}
+              {{ filter.form.grade_semester_availability }}
           </div>
-        </div>
-
-      <div class="ccam-input">
-        {{ filter.form.name.label_tag }}
-        {{ filter.form.name }}
-      </div>
-
-      <div class="ccam-input">
-        {{ filter.form.grade_semester_availability.label_tag }}
-        <div class="ccam-select">
-            {{ filter.form.grade_semester_availability }}
-        </div>
-      </div>
-
-        <div class="ccam-radio-input d-flex flex-column">
-            <p class="m-0 p-0 green-text fw-bold">{{ filter.form.educational_level.label }}</p>
-            <div class="d-flex" id="radio-group">
-                {% for value, educational_level in filter.form.educational_level.field.choices %}
-                        <div class="d-flex">
-                            <input type="radio" name="{{ filter.form.educational_level.html_name }}" {% if request.GET.educational_level == value %} checked {% endif %} id="{{ filter.form.educational_level.id_for_label }}" value="{{ value }}" />
-                            <label class="fw-bold" for="{{ filter.form.educational_level.id_for_label }}">{{ educational_level }}</label>
-                        </div>
-                {% endfor %}
-            </div>
         </div>
       </div>
       {% button button_text="Filtrar" icon="filter_alt" %}

@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load button %}
+{% load simple_table_button %}
+{% load breadcrumb_item %}
+
+{% block breadcrumb_items %}
+    {% breadcrumb_item text="Home" icon="home" href='people:teachers:home' %}
+    {% breadcrumb_item text="Minhas bancas" icon="gavel" active=True last_item=True %}
+{% endblock breadcrumb_items %}
+
+{% block content %}
+    <main id="container" class="view-table-section">
+        <header class="header-with-icon">
+        <span class="material-symbols-outlined green-text fs-2">
+            filter_alt
+        </span>
+        <h2>Filtros</h2>
+        </header>
+        <form method="get" class="filter-section">
+        <div class="fields-container">
+            <div class="ccam-input">
+            {{ filter.form.subject.label_tag }}
+                <div class="ccam-select">
+                    {{ filter.form.subject }}
+                </div>
+            </div>
+        </div>
+        {% button button_text="Filtrar" icon="filter_alt" %}
+        </form>
+        <header class="header-with-icon padding-from-content">
+        <span class="material-symbols-outlined green-text fs-2">
+            gavel
+        </span>
+        <h2>Bancas</h2>
+        </header>
+        <section>
+        <table class="ccam-table">
+            <thead>
+            <tr>
+                <th>
+                <div>
+                    <span class="material-symbols-outlined">
+                        school
+                    </span>
+                    Disciplina
+                </div>
+                </th>
+                <th>
+                <div>
+                    <span class="material-symbols-outlined">
+                        upgrade
+                    </span>
+                    Nível
+                </div>
+                </th>
+                <th>
+                <div>
+                    <span class="material-symbols-outlined">
+                        tag
+                    </span>
+                    Ano/Período
+                </div>
+                </th>
+                <th>
+                    <div>
+                        <span class="material-symbols-outlined">
+                            person
+                        </span>
+                        Professores
+                    </div>
+                </th>
+                <th>
+                    <div>
+                        <span class="material-symbols-outlined">
+                            tune
+                        </span>
+                        Ações
+                    </div>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for committee in object_list %}
+                    <tr>
+                        <td>{{ committee.subject.name }}</td>
+                        <td>{{ committee.subject.get_educational_level_display }}</td>
+                        <td>{{ committee.subject.grade_semester_availability }}º</td>
+                        <td>{{ committee.get_teachers_names|default:"------" }}</td>
+                        <td>
+                            <div class="d-flex justify-content-around">
+                                {% url "academics:knowledge_certificate_assessments_list" committee.subject.pk as knowledge_certificate_assessments_url %}
+                                {% include "core/_simple_table_button.html" with color_class="green-svg" icon_path='people/images/icons/diploma.svg' alt_text="A green diploma paper" abs_url=knowledge_certificate_assessments_url %}
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        </section>
+        {% include "core/_confirmation_modal.html" %}
+        {% include "core/_table_pagination.html" %}
+    </main>
+{% endblock content %}

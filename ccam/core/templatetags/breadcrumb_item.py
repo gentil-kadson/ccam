@@ -14,6 +14,7 @@ def breadcrumb_item(
     last_item=False,
     image_icon=False,
     icon_path="",
+    abs_url="",
 ):
     return {
         "text": text,
@@ -25,4 +26,5 @@ def breadcrumb_item(
         "href": href,
         "image_icon": image_icon,
         "icon_path": icon_path,
+        "abs_url": abs_url,
     }
