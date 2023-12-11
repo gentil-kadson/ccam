@@ -1,6 +1,6 @@
 from django import forms
 
-from ccam.academics.models import Committee, KnowledgeCertificate, KnowledgeCGrades, Subject, SubjectDispensal
+from ccam.academics.models import Committee, KnowledgeCertificate, KnowledgeCGrades, Subject, SubjectDispensal, SubjectDGrades
 from ccam.core.widgets import CCAMFileWidget
 
 
@@ -65,6 +65,11 @@ class KnowledgeCertificateAssessmentForm(forms.ModelForm):
     class Meta:
         model = KnowledgeCGrades
         fields = ("grade",)
+
+class SubjectDispensalAssessmentForm(forms.ModelForm):
+    class Meta:
+        model = SubjectDGrades
+        fields = ("compatibility",)
 
 class RejectStudentKnowledgeCertificateForm(forms.ModelForm):
     class Meta:

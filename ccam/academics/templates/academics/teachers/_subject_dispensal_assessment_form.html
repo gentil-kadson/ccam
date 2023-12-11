@@ -1,0 +1,15 @@
+{% load button %}
+
+<form action="{% url 'academics:subject_dispensal_assessments_update' object.pk %}" method="post" id="update-subject-dispensal-assessment">
+    {% csrf_token %}
+    <p>
+        Digite a <span class="green-text">compatibilidade (%)</span> obtida pelo aluno no aproveitamento de disciplina
+    </p>
+    <div class="ccam-input text-center">
+        {{ form.compatibility }}
+    </div>
+    <footer class="d-flex w-100 close-modal-buttons-container">
+        {% button button_text="Avaliar" color_class="green-svg" icon="gavel" id="submit-modal-button" form_id="update-subject-dispensal-assessment" %}
+        {% button button_text="Cancelar" color_class="red-svg" icon="cancel" id="close-modal-button" type="button" %}
+    </footer>
+</form>
