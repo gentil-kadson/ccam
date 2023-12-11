@@ -9,7 +9,7 @@
 
 {% block content %}
 <main id="container">
-  <h1 class="green-text fw-bold">Certificação de Conhecimentos</h1>
+  <h1 class="green-text fw-bold">Aproveitamento de Disciplinas</h1>
   <form method="post" id="knowledge-certificate-form" class="pt-4" enctype="multipart/form-data">
     {% include "core/_form_errors.html" with form=form %}
     {% csrf_token %}
@@ -33,13 +33,13 @@
       {% endfor %}
     </fieldset>
 
-    <h2 class="text-start fw-bold pt-3">
+    <h2 class="text-start fw-bold">
       <span class="material-symbols-outlined green-text fs-2">
         attach_file
       </span>
       Anexe os <span class="green-text pl-2">documentos</span>
     </h2>
-    <fieldset class="d-flex gap-3">
+    <fieldset class="d-flex" id="subject-dispensal-docs">
       <div class="ccam-file-input">
         {{ form.previous_university_ppc }}
       </div>

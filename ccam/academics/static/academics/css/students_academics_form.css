@@ -63,7 +63,15 @@
     #knowledge-certificate-form, #student-data, #course-progress-form {
         display: flex;
         flex-direction: column;
-        align-items: center;
+        gap: 1.25rem;
+    }
+
+    #knowledge-certificate-form h2:nth-of-type(2) {
+        padding-top: 3rem;
+    }
+
+    #knowledge-certificate-form h2:nth-of-type(1) {
+        gap: .8rem;
     }
 
     #course-progress-file-inputs, #course-progress-file-inputs .ccam-file-input {
@@ -73,7 +81,8 @@
 
     #knowledge-certificate-form + button {
         align-self: center !important;
-        margin-top: 40px;
+        margin-top: 180px;
+        width: 100%;
     }
 
     #course-progress-file-inputs {
@@ -84,4 +93,14 @@
         margin-top: 30px;
         align-self: center !important;
     }
+
+    #subject-dispensal-docs {
+        flex-direction: column;
+        gap: 2.5rem;
+    }
+
+    #subject-dispensal-docs .ccam-file-input, #subject-dispensal-docs label, #subject-dispensal-docs button {
+        width: 100%;
+    }
+
 }
