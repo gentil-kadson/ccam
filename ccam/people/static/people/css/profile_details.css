@@ -1,7 +1,7 @@
 .prof-pic-and-name {
     align-self: center;
     display: flex;
-    width: 1240px;
+    width: 100%;
     justify-content: flex-start;
     gap: 1.43rem;
     align-items: center;
@@ -22,11 +22,10 @@
     border-radius: 10px;
     background-color: var(--element-dark);
     margin-top: 3rem;
-    max-width: 1240px;
+    width: 100%;
     padding: 40px 0px;
 
     display: flex;
-    flex-direction: column;
     gap: 1.5rem;
     flex-wrap: wrap;
 }
@@ -66,6 +65,11 @@
         width: 100%;
         flex-direction: column;
         gap: 2rem;
+
+    }
+
+    .assessment-buttons form button.ccam-button {
+        margin-top: 10px;
     }
 
     .assessment-buttons form, .assessment-buttons button {
