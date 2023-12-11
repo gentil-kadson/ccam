@@ -105,4 +105,33 @@ header.breadcrumbs {
   main#container {
     padding: 30px 24px;
   }
+
+  #seac-form fieldset .ccam-input, #seac-form fieldset .ccam-file-input, #seac-form fieldset .ccam-file-input label, #seac-form fieldset .ccam-file-input label button  {
+    width: 100%;
+  }
+
+  #student-form fieldset .ccam-input, #student-form fieldset .ccam-file-input, #student-form fieldset .ccam-file-input label, #student-form fieldset .ccam-file-input label button  {
+    width: 100%;
+  }
+
+  #teachers-form fieldset .ccam-input, #teachers-form fieldset .ccam-file-input, #teachers-form fieldset .ccam-file-input label, #teachers-form fieldset .ccam-file-input label button  {
+    width: 100%;
+  }
+
+  #coordinator-form fieldset .ccam-input, #coordinator-form fieldset .ccam-file-input, #coordinator-form fieldset .ccam-file-input label, #coordinator-form fieldset .ccam-file-input label button  {
+    width: 100%;
+  }
+
+  #seac-form fieldset, #student-form fieldset, #teachers-form fieldset, #coordinator-form fieldset {
+    gap: 1.3rem;
+  }
+
+  #seac-form, #student-form, #teachers-form, #coordinator-form {
+    gap: 3rem;
+  }
+
+  button[form="seac-form"], button[form="student-form"], button[form="teachers-form"], button[form="coordinator-form"] {
+    width: 100%;
+    margin-top: 4rem;
+  }
 }
