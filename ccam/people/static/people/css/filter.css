@@ -29,6 +29,7 @@
 
   .ccam-select {
     width: 100%;
+    position: relative;
   }
 
   .filter-section button {
@@ -39,14 +40,6 @@
 
   .filter-section .ccam-input {
     width: 100%;
-  }
-
-  .ccam-select select {
-    width: 100%;
-  }
-
-  .ccam-input > .ccam-select::after {
-    transform: translateY(-100%) translateX(1300%);
   }
 
   .fields-container {

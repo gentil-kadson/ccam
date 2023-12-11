@@ -33,11 +33,22 @@
 
 .ccam-input > .ccam-select::after {
     position: absolute;
-    transform: translateY(-100%) translateX(1100%);
+    /* transform: translateY(-100%) translateX(1100%); */
     content: url("../images/icons/checkBoxArrowDown.svg");
     filter: var(--green-svg);
 }
 
 .ccam-input > input:focus {
     outline: solid 0.125rem var(--green);
+}
+
+@media (max-width: 431px) {
+    .ccam-input select {
+        width: 100%;
+    }
+
+    .ccam-input > .ccam-select::after {
+        right: 2%;
+        bottom: 4%;
+    }
 }
