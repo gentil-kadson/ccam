@@ -16,5 +16,19 @@
     grid-template-columns: 1fr 7fr;
     column-gap: 3.5rem;
     row-gap: 2.5rem;
+}
 
+@media (max-width: 431px) {
+    #subject-data {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #subject-data .ccam-input {
+        width: 100%;
+    }
+
+    #add-subject-section button.ccam-button {
+        margin-top: 7rem;
+    }
 }
