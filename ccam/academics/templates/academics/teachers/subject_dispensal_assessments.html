@@ -90,10 +90,10 @@
             <td>{{ assessment.subject_dispensal.student.person.registration }}</td>
             <td>{{ assessment.subject_dispensal.student.person.email }}</td>
             <td>{{ assessment.subject_dispensal.student.course.name }}</td>
-            <td>{{ assessment.grade|default:"Avaliação pendente" }}</td>
+            <td>{{ assessment.compatibility|default:"Avaliação pendente" }}</td>
             <td>
               <div class="d-flex justify-content-around">
-                {% url 'academics:knowledge_certificate_assessments_update' pk=assessment.pk as assessment_update_url %}
+                {% url 'academics:subject_dispensal_assessments_update' pk=assessment.pk as assessment_update_url %}
                 {% include 'academics/teachers/_student_assessment_modal.html' with form_url=assessment_update_url %}
               </div>
             </td>
