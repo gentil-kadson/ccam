@@ -16,11 +16,11 @@
       <h1 class="fw-bold green-text">Cadastrar Funcionário da SEAC</h1>
     </header>
     <form method="post" enctype="multipart/form-data"
-          class="w-100 d-flex flex-column justify-content-evenly"
+          class="w-100 d-flex flex-column"
           id="seac-form">
       {% csrf_token %}
       {% include "people/person_form.html" with person_form=form.person %}
-        <fieldset class="row align-items-center mt-4">
+        <fieldset class="row align-items-center">
             <div class="ccam-input">
                 {{ form.seacstaff.phone_line.label_tag }}
                 {{ form.seacstaff.phone_line }}

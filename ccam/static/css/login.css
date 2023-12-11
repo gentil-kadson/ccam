@@ -34,3 +34,38 @@
     right: 0.2rem;
     z-index: 0;
 }
+
+@media (max-width: 431px) {
+    #filing-system-img {
+        display: none;
+    }
+
+    #login-form {
+        gap: 1.5rem;
+        align-self: flex-start;
+        width: 100%;
+    }
+
+    form.login .ccam-input > input {
+        width: auto;
+    }
+
+    form.login .ccam-input {
+        width: 100%;
+    }
+
+    #login-form-header img {
+        width: 10rem;
+    }
+
+    #login-form-header p {
+        /* width: 100%; */
+        text-align: left;
+        font-size: .7rem;
+    }
+
+    .login .ccam-button {
+        width: 100%;
+        margin-top: 3rem;
+    }
+}

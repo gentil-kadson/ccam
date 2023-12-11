@@ -37,7 +37,8 @@
         <span><b>Status: </b>{{ knowledge_certificate.status }}</span>
       </div>
     </section>
-      <form method="post" class="assessment-buttons">
+    <div class="assessment-buttons">
+      <form method="post">
         {% csrf_token %}
         {% button button_text="Aprovar" color_class="green-svg" icon="done_all" name=form.status.html_name value=form.status.field.choices.0.0 type="submit" %}
       </form>
@@ -47,6 +48,7 @@
           cancel
         </span>
       </button>
+    </div>
     </main>
 
     {% include "core/_confirmation_modal.html" %}

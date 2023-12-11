@@ -1,7 +1,7 @@
 .prof-pic-and-name {
     align-self: center;
     display: flex;
-    width: 1240px;
+    width: 100%;
     justify-content: flex-start;
     gap: 1.43rem;
     align-items: center;
@@ -22,16 +22,18 @@
     border-radius: 10px;
     background-color: var(--element-dark);
     margin-top: 3rem;
-    max-width: 1240px;
+    width: 100%;
     padding: 40px 0px;
 
     display: flex;
-    flex-direction: column;
+    gap: 1.5rem;
     flex-wrap: wrap;
 }
 
 .person-info div {
     display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
     justify-content: space-between;
     padding: 0.2rem 3rem;
 }
@@ -46,9 +48,32 @@
 
 @media (max-width: 431px) {
     .person-info {
+        display: flex;
         flex-direction: column;
-        padding: 40px 15px;
+        gap: 1.5rem;
+        padding: 40px 10px;
         width: fit-content;
+    }
+
+    .person-info div {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .assessment-buttons {
+        width: 100%;
+        flex-direction: column;
+        gap: 2rem;
+
+    }
+
+    .assessment-buttons form button.ccam-button {
+        margin-top: 10px;
+    }
+
+    .assessment-buttons form, .assessment-buttons button {
+        width: 100%;
     }
 }
 

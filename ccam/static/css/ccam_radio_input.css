@@ -38,3 +38,10 @@
     gap: 20px;
     padding-top: 10px;
 }
+
+@media (max-width: 431px) {
+    #radio-group {
+        display: flex;
+        flex-direction: column;
+    }
+}

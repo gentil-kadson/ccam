@@ -27,14 +27,25 @@
     align-items: center;
   }
 
+  .ccam-select {
+    width: 100%;
+    position: relative;
+  }
+
   .filter-section button {
     align-self: center;
     margin-top: 1rem;
-    width: 18.75rem;
+    width: 100%;
+  }
+
+  .filter-section .ccam-input {
+    width: 100%;
   }
 
   .fields-container {
     flex-direction: column;
     justify-content: center;
+    align-items: stretch;
+    width: 100%;
   }
 }

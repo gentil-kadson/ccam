@@ -41,3 +41,14 @@
 .ccam-input > input:focus {
     outline: solid 0.125rem var(--green);
 }
+
+@media (max-width: 431px) {
+    .ccam-input select, .ccam-input > input {
+        width: 100%;
+    }
+
+    .ccam-input > .ccam-select::after {
+        right: 2%;
+        bottom: 4%;
+    }
+}

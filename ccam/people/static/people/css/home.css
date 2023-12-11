@@ -25,6 +25,11 @@
         flex-direction: column;
         justify-content: center;
         gap: 3rem;
+        padding-top: 85px;
         margin-bottom: 10px;
+    }
+
+    .home-card {
+        gap: 2rem;
     }
 }
