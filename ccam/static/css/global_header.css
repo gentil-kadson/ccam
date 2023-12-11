@@ -5,12 +5,6 @@
   background-color: var(--bg-color);
 }
 
-@media (max-width: 431px) {
-  #global-header {
-    display: none;
-  }
-}
-
 #global-header > #user-profile {
   display: flex;
   gap: 1.875rem;
@@ -34,4 +28,28 @@
 #global-header > #user-profile > span {
   font-size: 1.6875rem;
   font-weight: bold;
+}
+
+@media (max-width: 431px) {
+  #user-profile span {
+    display: none;
+  }
+
+  #global-header {
+    padding: 0.25rem 1rem;
+  }
+
+  img[alt="CCAM logo"] {
+    display: none;
+  }
+
+  img[alt="CCAM logo sem texto"] {
+    width: 4rem;
+    height: 4rem;
+    filter: invert(64%) sepia(25%) saturate(4115%) hue-rotate(92deg) brightness(103%) contrast(92%);
+  }
+
+  #global-header > #user-profile {
+    gap: 1rem;
+  }
 }
