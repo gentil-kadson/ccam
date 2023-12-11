@@ -107,4 +107,8 @@ div.anchors {
     width: 100%;
     overflow-x: scroll;
   }
+
+  #table-section {
+    overflow-x: scroll;
+  }
 }

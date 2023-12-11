@@ -61,6 +61,16 @@
         flex-direction: column;
         gap: 1.5rem;
     }
+
+    .assessment-buttons {
+        width: 100%;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .assessment-buttons form, .assessment-buttons button {
+        width: 100%;
+    }
 }
 
 @media (min-width: 1441px) {
