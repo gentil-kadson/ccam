@@ -31,7 +31,7 @@
 
 @media (max-width: 431px) {
   #coordinators-section {
-    width: fit-content;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -40,11 +40,16 @@
 
   .coordinators-action-container {
     align-items: center;
+    width: inherit;
   }
 
   .coordinators-action-container div:first-of-type {
     flex-direction: column;
     align-items: center;
+  }
+
+  .coordinators-action-container div:first-of-type .material-symbols-outlined {
+    font-size: 4rem !important;
   }
 
   .coordinators-action-container h2 {

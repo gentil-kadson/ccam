@@ -30,6 +30,10 @@
   font-weight: bold;
 }
 
+img[alt="CCAM logo sem texto"] {
+  display: none;
+}
+
 @media (max-width: 431px) {
   #user-profile span {
     display: none;
@@ -49,6 +53,7 @@
   }
 
   img[alt="CCAM logo sem texto"] {
+    display: block;
     width: 2.8rem;
     height: 2.8rem;
     filter: invert(64%) sepia(25%) saturate(4115%) hue-rotate(92deg) brightness(103%) contrast(92%);
