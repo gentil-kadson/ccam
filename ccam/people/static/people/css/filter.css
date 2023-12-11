@@ -27,14 +27,32 @@
     align-items: center;
   }
 
+  .ccam-select {
+    width: 100%;
+  }
+
   .filter-section button {
     align-self: center;
     margin-top: 1rem;
-    width: 18.75rem;
+    width: 100%;
+  }
+
+  .filter-section .ccam-input {
+    width: 100%;
+  }
+
+  .ccam-select select {
+    width: 100%;
+  }
+
+  .ccam-input > .ccam-select::after {
+    transform: translateY(-100%) translateX(1300%);
   }
 
   .fields-container {
     flex-direction: column;
     justify-content: center;
+    align-items: stretch;
+    width: 100%;
   }
 }
