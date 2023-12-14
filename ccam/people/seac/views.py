@@ -7,14 +7,14 @@ from django.utils.translation import gettext_lazy as _
 from django.views.generic import CreateView, DeleteView, DetailView, TemplateView, UpdateView
 from django_filters.views import FilterView
 
-from ccam.people.mixins import UserIsSeacCoordinatorTestMixin
+from ccam.people.mixins import UserIsSeacCoordinatorTestMixin, UserIsSeacEmployeeTestMixin
 
 from .filters import SEACStaffFilterSet
 from .forms import SEACStaffPersonMultiForm
 from .models import SEACStaff
 
 
-class SeacHomeView(LoginRequiredMixin, TemplateView):
+class SeacHomeView(LoginRequiredMixin, UserIsSeacEmployeeTestMixin, TemplateView):
     template_name = "seac/home.html"
 
 

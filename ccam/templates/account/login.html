@@ -9,6 +9,7 @@
   {% translate "Entrar" %}
 {% endblock head_title %}
 {% block inner %}
+  {% include "core/_form_errors.html" %}
   <header id="login-form-header">
     <img src="{% static 'images/icons/logoNav.svg' %}"
          alt="CCAM Logo"

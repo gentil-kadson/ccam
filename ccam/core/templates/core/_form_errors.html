@@ -11,3 +11,13 @@
       </div>
     {% endfor %}
 {% endfor %}
+
+    {% for error in form.non_field_errors %}
+      <div class="alert alert-dismissible bg-form-warning {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+     {% translate error %}
+        <button type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"></button>
+      </div>
+    {% endfor %}

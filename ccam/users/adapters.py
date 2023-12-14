@@ -11,6 +11,7 @@ from django.urls import reverse_lazy
 from ccam.core.constants import (
     COURSE_COORDINATOR_GROUP_NAME,
     SEAC_COORDINATOR_GROUP_NAME,
+    SEAC_EMPLOYEE_GROUP_NAME,
     STUDENT_GROUP_NAME,
     TEACHER_GROUP_NAME,
 )
@@ -52,6 +53,7 @@ class PeopleAccountAdapter(AccountAdapter):
         COURSE_COORDINATOR_GROUP_NAME: reverse_lazy("people:coordinators:home"),
         STUDENT_GROUP_NAME: reverse_lazy("people:students:home"),
         TEACHER_GROUP_NAME: reverse_lazy("people:teachers:home"),
+        SEAC_EMPLOYEE_GROUP_NAME: reverse_lazy("people:seac:home")
     }
 
     def get_login_redirect_url(self, request):
