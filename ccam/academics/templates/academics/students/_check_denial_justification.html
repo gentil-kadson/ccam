@@ -1,0 +1,14 @@
+{% load button %}
+
+<section id="denial-justification-container">
+    <h2><strong>Motivos Para Reprovação da Solicitação</strong></h2>
+    <p>
+        Não se assuste. Isso significa que algum dado veio errado ou que você já
+        reprovou na disciplina. Caso seja válido, você pode realizar uma nova solicitação.
+    </p>
+
+    <div>
+        {{ object.justification }}
+    </div>
+    {% button button_text="Fechar" color_class="red-svg" icon="cancel" id="close-modal-button" type="button" %}
+</section>

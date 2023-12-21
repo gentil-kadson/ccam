@@ -4,7 +4,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.db import transaction
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DetailView
 
 from ccam.academics.filters import KnowledgeCertificateFilterSet, SubjectDispensalFilterSet
 from ccam.academics.forms import KnowledgeCertificateForm, SubjectDispensalForm
@@ -86,3 +86,13 @@ class KnowledgeCertificateListView(LoginRequiredMixin, UserIsStudentTestMixin, F
     model = KnowledgeCertificate
     paginate_by = settings.PAGINATE_BY
     filterset_class = KnowledgeCertificateFilterSet
+
+
+class SubjectDispensalApprovalCheckView(LoginRequiredMixin, UserIsStudentTestMixin, DetailView):
+    model = SubjectDispensal
+    template_name = "academics/students/_check_denial_justification.html"
+
+
+class KnowledgeCertificateApprovalCheckView(LoginRequiredMixin, UserIsStudentTestMixin, DetailView):
+    model = KnowledgeCertificate
+    template_name = "academics/students/_check_denial_justification.html"

@@ -62,17 +62,25 @@
                 <td>{{ knowledge_certificate.get_status_display }}</td>
                 <td>{{ knowledge_certificate.get_subjects_names }}</td>
                 <td>
-                    {% if not knowledge_certificate.justification %}
-                        -----------
-                    {% else %}
-                        {% include "core/_table_button.html" with color_class="green-svg" icon_path='people/images/icons/detailsIcon.svg' alt_text="A green eye" button_text="Visualizar" %}
-                    {% endif %}
-                </td>
+                  {% if not knowledge_certificate.justification %}
+                      -----------
+                  {% else %}
+                  <a class="button-with-link confirmation-modal-trigger" hx-get={% url "academics:knowledge_certificate_denial_check" knowledge_certificate.pk %} hx-trigger="click" hx-target="#confirmation-modal" hx-swap="innerHTML">
+                    <button class="ccam-table-button" type="submit">
+                      Visualizar
+                      <span class="material-symbols-outlined green-text">
+                        visibility
+                      </span>
+                    </button>
+                  </a>
+                  {% endif %}
+              </td>
             </tr>
           {% endfor %}
         </tbody>
       </table>
     </section>
+    {% include "core/_confirmation_modal.html" %}
     {% include "core/_table_pagination.html" %}
   </main>
 {% endblock content %}
