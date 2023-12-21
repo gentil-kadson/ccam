@@ -6,11 +6,6 @@
     <textarea name="justification" id="justification" cols="30" rows="10" placeholder="O fone está incorreto..." style="resize: none;"></textarea>
     <div class="assessment-buttons">
         {% button button_text="Enviar" color_class="green-svg" icon="done_all" name=form.status.html_name value=form.status.field.choices.2.0 type="submit" %}
-        <button class="ccam-button" id="close-modal-button">
-            Cancelar
-            <span class="material-symbols-outlined red-svg">
-                cancel
-            </span>
-        </button>
+        {% button button_text="Cancelar" color_class="red-svg" icon="cancel" id="close-modal-button" type="button" %}
     </div>
 </form>

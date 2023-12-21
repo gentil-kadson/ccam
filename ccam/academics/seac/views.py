@@ -1,6 +1,8 @@
 from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
+from django.utils.translation import gettext_lazy as _
 from django.views.generic import UpdateView
 
 from ccam.academics.filters import KnowledgeCertificateFilterSet, SubjectDispensalFilterSet
@@ -25,11 +27,14 @@ class SeacSubjectDispensalListView(LoginRequiredMixin, UserIsSeacEmployeeTestMix
     paginate_by = settings.PAGINATE_BY
 
 
-class SeacKnowledgeCertificateUpdateView(LoginRequiredMixin, UserIsSeacEmployeeTestMixin, UpdateView):
+class SeacKnowledgeCertificateUpdateView(
+    LoginRequiredMixin, UserIsSeacEmployeeTestMixin, SuccessMessageMixin, UpdateView
+):
     model = KnowledgeCertificate
     fields = ("status", "justification")
     template_name = "academics/seac_academics/knowledge_certificates_student_details.html"
     context_object_name = "knowledge_certificate"
+    success_message = _("Solicitação atualizada com sucesso")
     success_url = reverse_lazy("academics:knowledge_certificates")
 
     def get_context_data(self, **kwargs):
@@ -38,11 +43,12 @@ class SeacKnowledgeCertificateUpdateView(LoginRequiredMixin, UserIsSeacEmployeeT
         return context
 
 
-class SeacCoursesDispensalUpdateView(LoginRequiredMixin, UserIsSeacEmployeeTestMixin, UpdateView):
+class SeacCoursesDispensalUpdateView(LoginRequiredMixin, UserIsSeacEmployeeTestMixin, SuccessMessageMixin, UpdateView):
     model = SubjectDispensal
     fields = ("status", "justification")
     template_name = "academics/seac_academics/courses_dispensal_student_details.html"
     context_object_name = "course_dispensal"
+    success_message = _("Solicitação atualizada com sucesso")
     success_url = reverse_lazy("academics:courses_dispensal")
 
 
