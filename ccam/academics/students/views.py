@@ -52,6 +52,9 @@ class SubjectDispensalListView(LoginRequiredMixin, UserIsStudentTestMixin, Filte
     filterset_class = SubjectDispensalFilterSet
     paginate_by = settings.PAGINATE_BY
 
+    def get_queryset(self):
+        return SubjectDispensal.objects.filter(student=self.request.user.person.student_person)
+
 
 class KnowledgeCertificateCreateView(
     LoginRequiredMixin,
@@ -86,6 +89,9 @@ class KnowledgeCertificateListView(LoginRequiredMixin, UserIsStudentTestMixin, F
     model = KnowledgeCertificate
     paginate_by = settings.PAGINATE_BY
     filterset_class = KnowledgeCertificateFilterSet
+
+    def get_queryset(self):
+        return KnowledgeCertificate.objects.filter(student=self.request.user.person.student_person)
 
 
 class SubjectDispensalApprovalCheckView(LoginRequiredMixin, UserIsStudentTestMixin, DetailView):
