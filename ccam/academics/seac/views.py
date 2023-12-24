@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import UpdateView
 
-from ccam.academics.filters import KnowledgeCertificateFilterSet, SubjectDispensalFilterSet
+from ccam.academics.filters import SeacKnowledgeCertificateFilterSet, SubjectDispensalFilterSet
 from ccam.academics.forms import RejectStudentKnowledgeCertificateForm, RejectStudentSubjectDispensalForm
 from ccam.academics.models import KnowledgeCertificate, SubjectDispensal
 from ccam.core.views import FilteredListView
@@ -14,7 +14,7 @@ from ccam.people.mixins import UserIsSeacEmployeeTestMixin
 
 class SeacKnowledgeCertificatesListView(LoginRequiredMixin, UserIsSeacEmployeeTestMixin, FilteredListView):
     model = KnowledgeCertificate
-    filterset_class = KnowledgeCertificateFilterSet
+    filterset_class = SeacKnowledgeCertificateFilterSet
     template_name = "academics/seac_academics/seac_view_knowledge_certificates.html"
     paginate_by = settings.PAGINATE_BY
 

@@ -24,16 +24,22 @@
       <form method="get" class="filter-section">
         <div class="fields-container">
           <div class="ccam-input">
-            {{ filter.form.knowledge_certificate.student.person.registration.label_tag }}
-            {{ filter.form.knowledge_certificate.student.person.registration }}
+            {{ filter.form.registration.label_tag }}
+            {{ filter.form.registration }}
           </div>
-          <!-- <div class="ccam-input">
-            {{ filter.form.knowledge_certificate.submisstion_date.label_tag }}
-            {{ filter.form.knowledge_certificate.submission_date }}
-          </div> -->
           <div class="ccam-input">
-            {{ filter.form.knowledge_certificate.student.person.name.label_tag }}
-            {{ filter.form.knowledge_certificate.student.person.name }}
+            {{ filter.form.created_at.label_tag }}
+            <input type="date" name="{{ filter.form.created_at.html_name }}" id="{{ filter.form.created_at.id_for_label }}"/>
+          </div>
+          <div class="ccam-input">
+            {{ filter.form.student_name.label_tag }}
+            {{ filter.form.student_name }}
+          </div>
+          <div class="ccam-input">
+            {{ filter.form.status.label_tag }}
+            <div class="ccam-select">
+              {{ filter.form.status }}
+            </div>
           </div>
         </div>
         {% button button_text="Filtrar" icon="filter_alt" %}
@@ -80,7 +86,6 @@
           </thead>
           <tbody>
             {% for knowledge_certificate in object_list %}
-              {% if knowledge_certificate.status == "PR" %}
               <tr>
                 <td>{{ knowledge_certificate.student.person.name }}</td>
                 <td>{{ knowledge_certificate.student.person.registration }}</td>
@@ -89,7 +94,6 @@
                   {% simple_table_button color_class='green-text' icon='visibility' abs_url=knowledge_certificate.get_absolute_url %}
                 </td>
               </tr>
-              {% endif %}
             {% endfor %}
           </tbody>
         </table>

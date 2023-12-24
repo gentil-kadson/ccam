@@ -19,7 +19,10 @@ class SubjectFilterSet(django_filters.FilterSet):
 class KnowledgeCertificateFilterSet(django_filters.FilterSet):
     class Meta:
         model = KnowledgeCertificate
-        fields = ("student", "status",)
+        fields = (
+            "student",
+            "status",
+        )
 
 
 class KnowledgeCertificateGradesFilterSet(django_filters.FilterSet):
@@ -36,20 +39,21 @@ class KnowledgeCertificateGradesFilterSet(django_filters.FilterSet):
         model = KnowledgeCGrades
         exclude = ("student", "knowledge_certificate", "grade")
 
+
 class SubjectDispensalGradesFilterSet(django_filters.FilterSet):
     student = django_filters.CharFilter(
-        field_name="subject_dispensal__student__person__name", lookup_expr="icontains",
-        label=_("Nome do discente")
+        field_name="subject_dispensal__student__person__name", lookup_expr="icontains", label=_("Nome do discente")
     )
     registration = django_filters.CharFilter(
         field_name="subject_dispensal__student__person__registration",
         lookup_expr="icontains",
-        label=_("Matrícula do discente")
+        label=_("Matrícula do discente"),
     )
 
     class Meta:
         model = KnowledgeCGrades
         exclude = ("student", "subject_dispensal", "grade")
+
 
 class SubjectDispensalFilterSet(django_filters.FilterSet):
     class Meta:
@@ -65,3 +69,17 @@ class CommitteeFilterSet(django_filters.FilterSet):
     class Meta:
         model = Committee
         fields = ("subject",)
+
+
+class SeacKnowledgeCertificateFilterSet(django_filters.FilterSet):
+    registration = django_filters.CharFilter(
+        field_name="student__person__registration", lookup_expr="icontains", label=_("Matrícula")
+    )
+    student_name = django_filters.CharFilter(
+        field_name="student__person__name", lookup_expr="icontains", label=_("Nome do Discente")
+    )
+    created_at = django_filters.DateTimeFilter(field_name="created_at", label=_("Data de Submissão"))
+
+    class Meta:
+        model = KnowledgeCertificate
+        fields = ("status",)
