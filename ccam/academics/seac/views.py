@@ -55,6 +55,7 @@ class RejectStudentKnowledgeCertificateFormView(LoginRequiredMixin, UserIsSeacEm
     model = KnowledgeCertificate
     template_name = "academics/seac_academics/rejected_kc_modal.html"
     form_class = RejectStudentKnowledgeCertificateForm
+    success_message = _("Solicitação atualizada com sucesso")
     success_url = reverse_lazy("people:seac:home")
 
 
@@ -62,4 +63,5 @@ class RejectStudentSubjectDispensalFormView(LoginRequiredMixin, UserIsSeacEmploy
     model = SubjectDispensal
     template_name = "academics/seac_academics/rejected_cd_modal.html"
     form_class = RejectStudentSubjectDispensalForm
+    success_message = _("Solicitação atualizada com sucesso")
     success_url = reverse_lazy("people:seac:home")
