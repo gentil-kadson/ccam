@@ -91,4 +91,4 @@ class SeacKnowledgeCertificateFilterSet(django_filters.FilterSet):
 
     class Meta:
         model = KnowledgeCertificate
-        fields = ("status",)
+        exclude = ("status",)

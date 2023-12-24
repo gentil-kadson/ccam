@@ -35,12 +35,6 @@
             {{ filter.form.student_name.label_tag }}
             {{ filter.form.student_name }}
           </div>
-          <div class="ccam-input">
-            {{ filter.form.status.label_tag }}
-            <div class="ccam-select">
-              {{ filter.form.status }}
-            </div>
-          </div>
         </div>
         {% button button_text="Filtrar" icon="filter_alt" %}
       </form>
@@ -86,14 +80,16 @@
           </thead>
           <tbody>
             {% for knowledge_certificate in object_list %}
-              <tr>
-                <td>{{ knowledge_certificate.student.person.name }}</td>
-                <td>{{ knowledge_certificate.student.person.registration }}</td>
-                <td>{{ knowledge_certificate.created_at }}</td>
-                <td>
-                  {% simple_table_button color_class='green-text' icon='visibility' abs_url=knowledge_certificate.get_absolute_url %}
-                </td>
-              </tr>
+              {% if subject_dispensal.status == "PR" %}
+                <tr>
+                  <td>{{ knowledge_certificate.student.person.name }}</td>
+                  <td>{{ knowledge_certificate.student.person.registration }}</td>
+                  <td>{{ knowledge_certificate.created_at }}</td>
+                  <td>
+                    {% simple_table_button color_class='green-text' icon='visibility' abs_url=knowledge_certificate.get_absolute_url %}
+                  </td>
+                </tr>
+              {% endif %}
             {% endfor %}
           </tbody>
         </table>
