@@ -20,6 +20,7 @@
           {% include "people/person_detail.html" with person=student.person only %}
           <div>
             <span><b>Curso:</b> {{ student.course.name }}</span>
+            <span><b>Período ou ano letivo:</b> {{ student.current_grade_semester }}º</span>
           </div>
         </section>
     </main>
