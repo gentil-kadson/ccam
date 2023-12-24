@@ -88,7 +88,8 @@
             <div class="d-flex justify-content-around">
               {% simple_table_button color_class='green-text' icon='visibility' abs_url=teacher.get_absolute_url %}
               {% simple_table_button color_class='green-text' icon='edit' abs_url=teacher.get_update_url %}
-              {% simple_table_button color_class='green-text' icon='delete' href='people:teachers:list' %}
+              {% url 'people:teachers:delete' teacher.pk as teacher_delete_url %}
+                {% include "core/_table_delete_button.html" with delete_url=teacher_delete_url %}
             </div>
           </td>
         </tr>
@@ -97,6 +98,6 @@
   </table>
 </section>
 {% include "core/_table_pagination.html" %}
-{% include "core/_confirmation_modal.html" with text="Tem certeza que deseja excluir o docente" highlighted_text="Ernie and Bert (123.456.789-10)" %}
+{% include "core/_confirmation_modal.html" %}
 </main>
 {% endblock content %}

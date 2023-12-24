@@ -4,7 +4,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.db import transaction
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
-from django.views.generic import CreateView, DetailView, TemplateView, UpdateView
+from django.views.generic import CreateView, DeleteView, DetailView, TemplateView, UpdateView
 
 from ccam.academics.models import Course
 from ccam.core.views import FilteredListView
@@ -69,3 +69,10 @@ class TeacherUpdateView(LoginRequiredMixin, UserIsSeacCoordinatorTestMixin, Succ
         kwargs = super().get_form_kwargs()
         kwargs.update(instance={"person": self.object.person, "teacher": self.object})
         return kwargs
+
+
+class TeacherDeleteView(LoginRequiredMixin, UserIsSeacCoordinatorTestMixin, SuccessMessageMixin, DeleteView):
+    model = Teacher
+    template_name = "teachers/teacher_check_delete.html"
+    success_message = _("Professor removido com sucesso")
+    success_url = reverse_lazy("people:teachers:list")
