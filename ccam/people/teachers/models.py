@@ -22,6 +22,9 @@ class Teacher(BaseModel):
     def get_absolute_url(self):
         return reverse("people:teachers:detail", kwargs={"pk": self.pk})
 
+    def get_update_url(self):
+        return reverse("people:teachers:update", kwargs={"pk": self.pk})
+
     def get_subjects_names(self):
         teacher_subjects = list(self.subjects.values_list("name", flat=True))
         teacher_subjects = get_text_list(teacher_subjects, "e")

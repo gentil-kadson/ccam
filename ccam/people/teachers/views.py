@@ -4,7 +4,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.db import transaction
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
-from django.views.generic import CreateView, DetailView, TemplateView
+from django.views.generic import CreateView, DetailView, TemplateView, UpdateView
 
 from ccam.academics.models import Course
 from ccam.core.views import FilteredListView
@@ -54,3 +54,18 @@ class TeacherDetailView(LoginRequiredMixin, UserIsSeacCoordinatorTestMixin, Deta
     model = Teacher
     template_name = "teachers/teacher_detail.html"
     context_object_name = "teacher"
+
+
+class TeacherUpdateView(LoginRequiredMixin, UserIsSeacCoordinatorTestMixin, SuccessMessageMixin, UpdateView):
+    model = Teacher
+    form_class = TeacherPersonMultiForm
+    template_name = "teachers/teacher_form.html"
+    context_object_name = "teacher"
+    success_message = _("Professor atualizado com sucesso")
+    success_url = reverse_lazy("people:teachers:list")
+
+    @transaction.atomic
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update(instance={"person": self.object.person, "teacher": self.object})
+        return kwargs
