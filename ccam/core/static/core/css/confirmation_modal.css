@@ -39,6 +39,18 @@ textarea:focus {
 @media (max-width: 431px) {
   #confirmation-modal {
     max-width: 90%;
+    max-height: 450px;
+  }
 
+  .close-modal-buttons-container {
+    flex-direction: column;
+  }
+
+  #confirmation-modal .ccam-input.text-center {
+    width: 100%;
+  }
+
+  #confirmation-modal .ccam-button {
+    width: 100%;
   }
 }

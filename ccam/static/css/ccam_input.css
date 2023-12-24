@@ -48,6 +48,7 @@
     }
 
     .ccam-input > .ccam-select::after {
+        transform: none;
         right: 2%;
         bottom: 4%;
     }
