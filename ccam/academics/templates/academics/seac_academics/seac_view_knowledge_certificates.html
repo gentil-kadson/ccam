@@ -4,6 +4,7 @@
 {% load breadcrumb_item %}
 {% load simple_table_button %}
 {% load button %}
+{% load l10n %}
 
 {% block breadcrumb_items %}
   {% breadcrumb_item text="Home" icon="home" href='people:seac:home' %}
@@ -80,11 +81,11 @@
           </thead>
           <tbody>
             {% for knowledge_certificate in object_list %}
-              {% if subject_dispensal.status == "PR" %}
+              {% if knowledge_certificate.status == "PR" %}
                 <tr>
                   <td>{{ knowledge_certificate.student.person.name }}</td>
                   <td>{{ knowledge_certificate.student.person.registration }}</td>
-                  <td>{{ knowledge_certificate.created_at }}</td>
+                  <td>{{ knowledge_certificate.created_at|date:"d/m/Y" }}</td>
                   <td>
                     {% simple_table_button color_class='green-text' icon='visibility' abs_url=knowledge_certificate.get_absolute_url %}
                   </td>

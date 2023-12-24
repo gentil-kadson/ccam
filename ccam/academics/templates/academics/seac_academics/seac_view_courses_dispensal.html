@@ -88,7 +88,7 @@
             <tr>
               <td>{{ subject_dispensal.student.person.name }}</td>
               <td>{{ subject_dispensal.student.person.registration }}</td>
-              <td>{{ subject_dispensal.created_at }}</td>
+              <td>{{ subject_dispensal.created_at|date:"d/m/Y" }}</td>
               <td>
                 {% simple_table_button color_class='green-text' icon='visibility' abs_url=subject_dispensal.get_absolute_url %}
               </td>
