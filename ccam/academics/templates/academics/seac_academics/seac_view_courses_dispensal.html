@@ -21,25 +21,29 @@
             class="green-svg" />
         <h2>Filtros</h2>
       </header>
-      <section class="filter-section">
+      <form method="get" class="filter-section">
         <div class="fields-container">
           <div class="ccam-input">
-            <label for="student-id">Matrícula</label>
-            <input type="text" name="student-id" id="student-id" />
+            {{ filter.form.registration.label_tag }}
+            {{ filter.form.registration }}
           </div>
           <div class="ccam-input">
-            <label for="request-submission-date">Data de Submissão</label>
-            <input type="date"
-                  name="request-submission-date"
-                  id="request-submission-date" />
+            {{ filter.form.created_at.label_tag }}
+            <input type="date" name="{{ filter.form.created_at.html_name }}" id="{{ filter.form.created_at.id_for_label }}"/>
           </div>
           <div class="ccam-input">
-            <label for="student-name">Nome do aluno</label>
-            <input type="text" name="student-name" id="student-name" />
+            {{ filter.form.student_name.label_tag }}
+            {{ filter.form.student_name }}
+          </div>
+          <div class="ccam-input">
+            {{ filter.form.status.label_tag }}
+            <div class="ccam-select">
+              {{ filter.form.status }}
+            </div>
           </div>
         </div>
-        {% include "core/_button.html" with button_text="Filtrar" color_class="green-svg" icon_path='people/images/icons/filter.svg' alt_text="A classic green filter object" href='seac:home' %}
-      </section>
+        {% button button_text="Filtrar" icon="filter_alt" %}
+      </form>
       <header class="header-with-icon padding-from-content">
         <img src="{% static 'people/images/icons/dataTable.svg' %}"
             alt="A green icon representation of a table with data on it."
