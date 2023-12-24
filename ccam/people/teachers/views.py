@@ -76,3 +76,8 @@ class TeacherDeleteView(LoginRequiredMixin, UserIsSeacCoordinatorTestMixin, Succ
     template_name = "teachers/teacher_check_delete.html"
     success_message = _("Professor removido com sucesso")
     success_url = reverse_lazy("people:teachers:list")
+
+    @transaction.atomic
+    def form_valid(self, form):
+        self.object.person.delete()
+        return super().form_valid(form)
