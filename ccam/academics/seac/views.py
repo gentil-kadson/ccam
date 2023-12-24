@@ -23,7 +23,6 @@ class SeacSubjectDispensalListView(LoginRequiredMixin, UserIsSeacEmployeeTestMix
     model = SubjectDispensal
     filterset_class = SubjectDispensalFilterSet
     template_name = "academics/seac_academics/seac_view_courses_dispensal.html"
-    context_object_name = "subject_dispensal"
     paginate_by = settings.PAGINATE_BY
 
 

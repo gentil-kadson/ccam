@@ -56,9 +56,18 @@ class SubjectDispensalGradesFilterSet(django_filters.FilterSet):
 
 
 class SubjectDispensalFilterSet(django_filters.FilterSet):
+    registration = django_filters.CharFilter(
+        field_name="student__person_registration", lookup_expr="icontains", label=_("Matrícula")
+    )
+    student_name = django_filters.CharFilter(
+        field_name="student__person__name",
+        lookup_expr="icontains", label=_("Nome do Discente"))
+    created_at = django_filters.DateTimeFilter(
+        field_name="created_at", label=_("Data de Submissão"))
+
     class Meta:
         model = SubjectDispensal
-        fields = ("status", "student")
+        fields = ("status",)
 
 
 class CommitteeFilterSet(django_filters.FilterSet):
